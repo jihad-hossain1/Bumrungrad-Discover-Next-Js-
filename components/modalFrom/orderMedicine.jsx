@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper'
 import { MuiTelInput } from 'mui-tel-input'
 import whatsapp from '../../../assets/Bumrungrad  Hospital_whatsapp.png'
 import { useNavigate } from 'react-router-dom'
+import Image from 'next/image'
 
 const OrderMedicine = () => {
   const userDetails = JSON.parse(localStorage.getItem('User_Details'))
@@ -220,7 +221,9 @@ const OrderMedicine = () => {
           rel='noopener noreferrer'
           className='rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear'
         >
-          <img
+          <Image
+            width={40}
+            height={40}
             src={whatsapp}
             alt='Bumrungrad International Hospital'
             className='h-[40px]'

@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
 import { Divider } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 // import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -11,8 +11,44 @@ import EmailIcon from "@mui/icons-material/Email";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import logo from "@/public/assets/Bumrungrad  Hospital_nav_logo.png";
+import { menuItems } from './menuItems';
+import { useRouter } from 'next/navigation'
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import useAuth from '@/helpers/hooks/useAuth'
 
 const Topbar = () => {
+  const {auth} = useAuth();
+  const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState({
+    status: false,
+    index: "",
+  });
+  const handleDropdown = (id) => {
+    setDropdownOpen({
+      status: !dropdownOpen.status,
+      index: id,
+    });
+  };
+  // Function to handle scroll event
+  const handleScroll = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const navigate = useRouter()
+
+  //sign out user
+  const handleSingnOut = () => {
+    navigate.push("/");
+  };
   return (
     <nav className='bg-cream z-50'>
       <section className='px-3 py-3 relative md:container md:mx-auto flex items-center justify-between'>
@@ -33,7 +69,7 @@ const Topbar = () => {
                 <>
                   <li key={i} className='relative '>
                     <Link
-                      to={mi?.link}
+                      href={mi?.link ? mi.link : "#"}
                       className='flex font-semibold justify-between items-center rounded-xl'
                       onClick={() => handleDropdown(i)}
                     >
@@ -56,7 +92,7 @@ const Topbar = () => {
                           {mi.childs?.map((mc, i) => (
                             <Link
                               key={i}
-                              to={mc.link}
+                              href={mc?.link ? mc.link : "#"}
                               className='flex items-center gap-2'
                               onClick={() => setOpen(false)}
                             >
@@ -78,9 +114,9 @@ const Topbar = () => {
         {/* Desktop View  */}
         <div className='hidden py-3 lg:block'>
           <ul className='flex justify-center gap-5 text-[16px] text-blue'>
-            {MenuItems.map((mi, i) => (
+            {menuItems.map((mi, i) => (
               <li key={i} className='group relative'>
-                <Link className='font-semibold' to={mi?.link}>
+                <Link className='font-semibold' href={mi?.link ? mi.link : "#"}>
                   {mi.header}
                 </Link>
                 {mi.childs && (
@@ -88,7 +124,7 @@ const Topbar = () => {
                     {mi.childs?.map((mc, i) => (
                       <Link
                         key={i}
-                        to={mc.link}
+                       href={mc?.link ? mc.link : "#"}
                         className='flex items-center gap-2'
                       >
                         <div className='h-2 bg-blue w-2 rounded-full'></div>
@@ -113,10 +149,10 @@ const Topbar = () => {
             {/* </Link> */}
             <div className='hidden group-hover:block duration-300 ease-linear bg-white absolute z-50 min-w-[120px] md:min-w-[150px] rounded-xl shadow-xl'>
               <div className='flex flex-col p-2 rounded-xl gap-2 text-sm'>
-                {accessToken !== null ? (
+                {auth  ? (
                   <>
                     <Link
-                      to={'/my-profile'}
+                     href={'/my-profile'}
                       className='hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5'
                     >
                       <PersonIcon
@@ -134,7 +170,7 @@ const Topbar = () => {
                   </>
                 ) : (
                   <Link
-                    to={'/login'}
+                   href={'/login'}
                     className='hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5'
                   >
                     <LoginIcon /> <span>Sign In</span>
@@ -170,9 +206,9 @@ const Topbar = () => {
       {/* Tablet View  */}
       <section className='hidden px-5 py-3 md:block lg:hidden md:container md:mx-auto'>
         <ul className='flex flex-wrap gap-8 text-[16px] text-blue'>
-          {MenuItems.map((mi, i) => (
+          {menuItems.map((mi, i) => (
             <li key={i} className='group relative'>
-              <Link to={mi?.link} className='font-semibold'>
+              <Link href={mi?.link ? mi.link : '#'} className='font-semibold'>
                 {mi.header}
               </Link>
               {mi.childs && (
@@ -180,7 +216,7 @@ const Topbar = () => {
                   {mi.childs?.map((mc, i) => (
                     <Link
                       key={i}
-                      to={mc.link}
+                      href={mc.link ? mc.link : '#'}
                       className='flex items-center gap-2'
                     >
                       <div className='h-2 bg-blue w-2 rounded-full'></div>
