@@ -19,6 +19,14 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "res.cloudinary.com",
             },
+            {
+                protocol: "https",
+                hostname: "api.bumrungraddiscover.com",
+            },
+            {
+                protocol: "https",
+                hostname: "api.discoverinternationalmedicalservice.com",
+            }
         ],
     },
 };
