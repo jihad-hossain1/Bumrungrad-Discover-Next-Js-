@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import careimg from "@/public/assets/about_bumrungrad/bumrungrad_owned.png";
@@ -30,13 +30,13 @@ const Bumrungrad = () => {
           at the heart of Bangkok, Thailand, a thriving city dubbed "The City of
           Angels" and renowned for its delicious cuisine and warm hospitality.
           Internationally accredited multispecialty hospital Bumrungrad has been
-          listed on the Thai Stock Exchange since 1989. At{" "}
+          listed on the Thai Stock Exchange since 1989. At
           <Link
             className="font-semibold text-blue underline"
             href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           , one of the largest private hospitals in Southeast Asia, more than
           1.1 million patients from more than 190 countries are treated
           annually.
@@ -90,17 +90,17 @@ const Bumrungrad = () => {
         <div className="mt-4">
           <p className="text-justify mt-5">
             In order to integrate quality treatment and serve as a one-stop shop
-            for complex care needs,{" "}
+            for complex care needs,
             <Link
               className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
             >
               Bumrungrad International Hospital
-            </Link>{" "}
+            </Link>
             has assembled multidisciplinary teams of skilled medical doctors,
             nurses, pharmacists, physical therapists, nutritionists, and other
             professional staff. More than 4,800 support staff members and more
-            than 1,300 physicians work at{" "}
+            than 1,300 physicians work at
             <Link
               className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
@@ -115,13 +115,12 @@ const Bumrungrad = () => {
             subspecialties.
           </p>
           <div className="ml-4 mt-4">
-                    <Image
-      height={500}
+            <Image
+              height={500}
               width={500}
               className="w-full h-full"
               src={awardimg}
               alt="Bumrungrad International Hospital"
-              
             />
           </div>
         </div>
@@ -137,13 +136,13 @@ const Bumrungrad = () => {
         <div className="mt-4">
           <p className="text-justify mt-5">
             Accredited by the US-based Joint Commission International (JCI) in
-            2002,{" "}
+            2002,
             <Link
               className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
             >
               Bumrungrad International Hospital
-            </Link>{" "}
+            </Link>
             became the first hospital in Asia. Additionally, the hospital has
             received five consecutive accreditations. Also, Bumrungrad became
             the first hospital outside of the United States to receive the
@@ -158,13 +157,12 @@ const Bumrungrad = () => {
             numerous international accreditations.
           </p>
           <div className="ml-4 mt-4">
-                    <Image
+            <Image
               src={specialtiesimg}
               alt="Bumrungrad International Hospital"
               height={500}
               width={500}
               className="w-full h-full"
-              
             />
           </div>
         </div>
@@ -180,13 +178,13 @@ const Bumrungrad = () => {
         <div className="mt-4">
           <p className="text-justify mt-5">
             Medical technology and cutting-edge patient healthcare services are
-            areas in which{" "}
+            areas in which
             <Link
               className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
             >
               Bumrungrad International Hospital
-            </Link>{" "}
+            </Link>
             excels. The Precision Medicine department at Bumrungrad has grown,
             offering the most recent innovative therapies and individualized
             cancer treatments, primarily from the US and Europe. This is one of
@@ -201,13 +199,12 @@ const Bumrungrad = () => {
             machine-learning AI, helps doctors by analyzing patient data.
           </p>
           <div className="ml-4 mt-4">
-                    <Image
-      height={500}
+            <Image
+              height={500}
               width={500}
               className="w-full h-full"
               src={inovationsimg}
               alt="Bumrungrad International Hospital"
-              
             />
           </div>
         </div>
@@ -230,31 +227,36 @@ const Bumrungrad = () => {
             tourism hospital destinations. For patients from almost any country,
             Bumrungrad Hospital has more than 200 translators on staff to assist
             with linguistic issues. Almost all of the hospital's clinicians are
-            fluent in English.Our <Link href="https://discoverims.com/" className="font-semibold underline text-blue">Bumrungrad International</Link> Airport
-            Representative Office at Suvarnabhumi Airport offers patients and
-            their families comprehensive healthcare services, including hotel
-            reservations upon arrival and efficient pick-up and drop-off
-            logistics. Convenience is another important factor at Bumrungrad.
-            Patients from outside can receive the care they require and get back
-            home faster thanks to the hospital's one-stop medical campus, which
-            can offer diagnostic tests, specialized referrals, and treatment in
-            a matter of days rather than weeks.Furthermore, Bumrungrad
-            International Hospital has a one-price policy for all medical
-            services; this means that patients, whether domestic or foreign, pay
-            the same amount for care regardless of their nationality. No matter
-            where they are from, Bumrungrad goes above and beyond to make sure
-            that every patient is treated fairly and with care via compassion,
-            comfort, convenience, and coordination. Bumrungrad means "care for
-            the people" in Thai, for this reason.
+            fluent in English.Our
+            <Link
+              href="https://discoverims.com/"
+              className="font-semibold underline text-blue"
+            >
+              Bumrungrad International
+            </Link>
+            Airport Representative Office at Suvarnabhumi Airport offers
+            patients and their families comprehensive healthcare services,
+            including hotel reservations upon arrival and efficient pick-up and
+            drop-off logistics. Convenience is another important factor at
+            Bumrungrad. Patients from outside can receive the care they require
+            and get back home faster thanks to the hospital's one-stop medical
+            campus, which can offer diagnostic tests, specialized referrals, and
+            treatment in a matter of days rather than weeks.Furthermore,
+            Bumrungrad International Hospital has a one-price policy for all
+            medical services; this means that patients, whether domestic or
+            foreign, pay the same amount for care regardless of their
+            nationality. No matter where they are from, Bumrungrad goes above
+            and beyond to make sure that every patient is treated fairly and
+            with care via compassion, comfort, convenience, and coordination.
+            Bumrungrad means "care for the people" in Thai, for this reason.
           </p>
           <div className="ml-4 mt-4">
-                    <Image
-      height={500}
+            <Image
+              height={500}
               width={500}
               className="w-full h-full"
               src={careingimg}
               alt="Bumrungrad International Hospital"
-              
             />
           </div>
         </div>

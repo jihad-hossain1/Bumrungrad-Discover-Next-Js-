@@ -8,6 +8,7 @@ import techimg from "@/public/assets/about_bumrungrad/FactSheet/International Re
 import internimg from "@/public/assets/about_bumrungrad/FactSheet/Quality, Accreditations, Certifications and Recognitions.png";
 import responimg from "@/public/assets/about_bumrungrad/FactSheet/Social Responsibility.png";
 import Link from "next/link";
+import Image from "next/image";
 
 const FactSheet = () => {
   return (
@@ -29,13 +30,13 @@ const FactSheet = () => {
           <hr />
         </div>
         <p className="text-justify">
-          The goals of{" "}
+          The goals of
           <Link
              href="https://discoverinternationalmedicalservice.com/"
             className="text-blue font-semibold underline"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           are to create transdisciplinary care teams that provide high-quality,
           compassionate care, achieve operational excellence, and provide
           innovative clinical and service experiences.
@@ -54,7 +55,7 @@ const FactSheet = () => {
         <div className="my-10">
           <hr />
           <p className="text-[16px] py-3 text-blue font-medium">
-            Hospital's main building and services (opened in 1997):
+            Hospitals main building and services (opened in 1997):
           </p>
           <hr />
         </div>
@@ -70,7 +71,10 @@ const FactSheet = () => {
           <li className=" mt-2">Network coverage for Wi-Fi in the hospital</li>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={buildingimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -81,13 +85,13 @@ const FactSheet = () => {
         <div className="my-10">
           <hr />
           <p className="text-[16px] py-3 text-blue font-medium">
-            Facilities and{" "}
+            Facilities and
             <Link
               className="text-blue font-semibold underline"
                href="https://discoverinternationalmedicalservice.com/our-services"
             >
               Services
-            </Link>{" "}
+            </Link>
             for Outpatient Clinics (opened in 2008):
           </p>
           <hr />
@@ -118,7 +122,7 @@ const FactSheet = () => {
             coordination, business, and visa extension services, as well as a
             premium member lounge
           </li>
-          <li className="list-disc mt-2">Volumes of Patients and Revenues –</li>
+          <li className="list-disc mt-2">Volumes of Patients and Revenues </li>
           <ol className="list-decimal">
             <li className=" ml-9 mt-2">
               In total, 1.1 million patients (OPD and IPD) are treated annually.
@@ -133,7 +137,10 @@ const FactSheet = () => {
           </ol>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={clinicimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -157,7 +164,10 @@ const FactSheet = () => {
           <li className=" mt-2">More than 900 nurses</li>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={resourceimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -186,7 +196,7 @@ const FactSheet = () => {
           </li>
           <li className=" mt-2">
             Wi-Fi Connection: a wide selection of television channels as well as
-            the hospital’s information and services
+            the hospitals information and services
           </li>
         </ol>
         <div className="my-10">
@@ -210,7 +220,10 @@ const FactSheet = () => {
           <li className="list-disc mt-2">Outpatient Surgery Center</li>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={roomimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -231,7 +244,7 @@ const FactSheet = () => {
           <li className="list-disc mt-2">
             Bumrungrad Joint Replacement Center
           </li>
-          <li className="list-disc mt-2">Children’s Center</li>
+          <li className="list-disc mt-2">Childrens Center</li>
           <li className="list-disc mt-2">Dental Center</li>
           <li className="list-disc mt-2">Diabetes Center</li>
           <li className="list-disc mt-2">Diagnostic Center</li>
@@ -249,14 +262,14 @@ const FactSheet = () => {
           <li className="list-disc mt-2">Liver Center</li>
           <li className="list-disc mt-2">Medical Clinic</li>
           <li className="list-disc mt-2">Memory Clinic</li>
-          <li className="list-disc mt-2">Men’s Center</li>
+          <li className="list-disc mt-2">Mens Center</li>
           <li className="list-disc mt-2">Nephrology (Kidney) Center</li>
           <li className="list-disc mt-2">Neuroscience Center</li>
           <li className="list-disc mt-2">New Life Healthy Aging Clinic</li>
           <li className="list-disc mt-2">Orthopedic Center</li>
           <li className="list-disc mt-2">Pain Center</li>
           <li className="list-disc mt-2">
-            Parkinson’s Disease and Movement Disorders Clinic
+            Parkinsons Disease and Movement Disorders Clinic
           </li>
           <li className="list-disc mt-2">Perinatal Center</li>
           <li className="list-disc mt-2">
@@ -278,10 +291,13 @@ const FactSheet = () => {
           <li className="list-disc mt-2">
             VitalLife Scientific Wellness Center
           </li>
-          <li className="list-disc mt-2">Women’s Center</li>
+          <li className="list-disc mt-2">Womens Center</li>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={bumrunCenterimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -349,7 +365,10 @@ const FactSheet = () => {
           Pakistan, Qatar, Russia, Sudan, UAE, Vietnam and Virtual.
         </p>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={techimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -388,14 +407,14 @@ const FactSheet = () => {
             hospital in 1999.
           </li>
           <li className=" mt-2">
-            The US-based Joint Commission International (JCI) accredited Asia's
+            The US-based Joint Commission International (JCI) accredited Asias
             first hospital in 2002.
           </li>
           <li className=" mt-2">
             JCI renewed accreditation in 2005, 2008, 2011, 2014, 2017 and 2020
           </li>
           <li className=" mt-2">
-            The Ministry of Labour named Thailand's Model Organisation on Labour
+            The Ministry of Labour named Thailands Model Organisation on Labour
             Relations Management Award recipient.
           </li>
           <li className=" mt-2">
@@ -404,7 +423,7 @@ const FactSheet = () => {
             College of American Pathologists (CAP).
           </li>
           <li className=" mt-2">
-            The American Nurse Credentialing Centre (ANCC)'s Pathway to
+            The American Nurse Credentialing Centre (ANCC)s Pathway to
             Excellence® program, which promotes pleasant practice environments
             for nurses by appreciating their contributions as patient care
             partners, was first implemented in an Asian hospital.
@@ -427,7 +446,7 @@ const FactSheet = () => {
             Asia Pacific Transplant Service Provider of the Year 2018,
           </li>
           <li className=" mt-2">
-            Asia's 2018 Orthopaedic Service Provider of the Year,
+            Asias 2018 Orthopaedic Service Provider of the Year,
           </li>
           <li className=" mt-2">
             Asia Pacific 2018 ENT Service Provider of the Year,
@@ -444,11 +463,11 @@ const FactSheet = () => {
             2021
           </li>
           <li className=" mt-2">
-            Thailand's hospital was named Hospital of the Year by Healthcare
+            Thailands hospital was named Hospital of the Year by Healthcare
             Asia in 2018.
           </li>
           <li className=" mt-2">
-            Thailand's Most Trusted Hospital was recognized at the 2018 Thai
+            Thailands Most Trusted Hospital was recognized at the 2018 Thai
             Business Excellence Awards
           </li>
           <li className=" mt-2">
@@ -464,7 +483,10 @@ const FactSheet = () => {
           </li>
         </ol>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={internimg}
             alt="Bumrungrad International Hospital"
             srcset=""
@@ -500,7 +522,10 @@ const FactSheet = () => {
           from 190 nations.
         </p>
         <div className="mt-4">
-          <img
+          <Image
+            className="w-full h-full"
+            height={500}
+            width={500}
             src={responimg}
             alt="Bumrungrad International Hospital"
             srcset=""
