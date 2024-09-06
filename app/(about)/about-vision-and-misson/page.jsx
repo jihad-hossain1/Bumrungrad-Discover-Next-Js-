@@ -25,13 +25,13 @@ const VissionMisson = () => {
           <hr />
         </div>
         <p className="text-justify">
-          Our main goal at{" "}
+          Our main goal at
           <a 
             className="font-semibold text-blue underline"
             href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </a>{" "}
+          </a>
           is to be the leading source of confidence for health and wellness. Our
           dedication is based on our unwavering quest for perfection as we work
           to become the premier location for all-encompassing health and
@@ -39,7 +39,7 @@ const VissionMisson = () => {
           environment where patients can receive top-notch medical care along
           with life-changing experiences that lead to long-term wellbeing. Our
           vision at Bumrungrad is connected with an unshakable commitment to
-          gaining the trust of those we serve and making sure that each person’s
+          gaining the trust of those we serve and making sure that each persons
           health experience is met with unmatched assurance and confidence.
         </p>
         <div className="my-10">
@@ -48,18 +48,18 @@ const VissionMisson = () => {
           <hr />
         </div>
         <p className="text-justify">
-          Our mission at{" "}
+          Our mission at
           <a 
             className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </a>{" "}
+          </a>
           is multifaceted. Aim for unmatched quality in clinical services,
           pushing the boundaries of patient care. Utilise cutting-edge ideas and
           cutting-edge technologies to transform hospital operations and ensure
           effectiveness and efficiency. Build a solid foundation that supports
-          expansion and guarantees the hospital’s long-term viability.
+          expansion and guarantees the hospitals long-term viability.
         </p>
 
         <div className="my-10">
@@ -86,13 +86,13 @@ const VissionMisson = () => {
           Patient and Staff Safety Statement:
         </h2>
         <p className="text-justify mt-4">
-          Everyone at{" "}
+          Everyone at
           <a 
             className="font-semibold text-blue underline"
               href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </a>{" "}
+          </a>
           PCL has responsibility for the safety of our patients and staff. The
           Hospital Governing Board has the overall responsibility of directing
           the commitment to safety. The Executive and Management teams have the
@@ -115,7 +115,7 @@ const VissionMisson = () => {
                 href="https://discoverinternationalmedicalservice.com/"
             >
               Bumrungrad International Hospital
-            </a>{" "}
+            </a>
           </li>
         </ol>
         <div className="ml-4 mt-4">
@@ -138,7 +138,7 @@ const VissionMisson = () => {
               href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </a>{" "}
+          </a>
           PCL is committed to providing “World Class” services by using the
           Malcolm Baldrige National Quality and Magnet criteria as the framework
           for achieving our overall organizational performance objectives.
@@ -157,11 +157,11 @@ const VissionMisson = () => {
               href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </a>{" "}
+          </a>
           is committed to protecting the global environment and conserving
           energy and natural resources. We engage in activities that uphold
           these ideals and support initiatives aimed at preserving and advancing
-          the community's health and safety.
+          the community&apos;s health and safety.
         </p>
         <h2 className="text-blue text-xl md:text-2xl font-semibold mt-10">
           Environmental Statement Guiding Principles:
@@ -174,13 +174,13 @@ const VissionMisson = () => {
             trained in these policies.
           </li>
           <li className="list-decimal mt-1">
-            Every staff member and contractor on the Hospital’s premises is
-            expected to follow the Hospital’s environmental policies and report
+            Every staff member and contractor on the Hospitals premises is
+            expected to follow the Hospitals environmental policies and report
             any environmental, health or safety concerns to management to take
             appropriate actions.
           </li>
           <li className="list-decimal mt-1">
-            We will minimize the environmental impact of the hospital’s
+            We will minimize the environmental impact of the hospitals
             operations on the neighboring communities due to such potential
             hazards as infectious waste water management, etc.
           </li>

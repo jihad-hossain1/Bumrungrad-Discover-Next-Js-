@@ -4,6 +4,7 @@
 import React from "react";
 import qrimage from "@/public/assets/about_bumrungrad/Bumrungrad  Hospital_QR_bumrungrad_foundation-(3).png";
 import Link from "next/link";
+import Image from "next/image";
 
 const Foundation = () => {
   return (
@@ -20,20 +21,20 @@ const Foundation = () => {
           The Foundation of Bumrungrad International Hospital
         </h2>
         <p className="text-justify mt-3">
-          In May of 1990, the founders of{" "}
+          In May of 1990, the founders of
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
-          Created the{" "}
+          </Link>
+          Created the
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           Foundation, a registered non-profit organization. It runs several
           philanthropic and open initiatives. All over the nation, services are
           offered to assist individuals. Its goal is to offer high-quality
@@ -71,10 +72,10 @@ const Foundation = () => {
         <div className="my-6">
           <hr />
           <p className="text-[16px] py-3 text-blue font-medium">
-            One of the key initiatives of the charity is{" "}
+            One of the key initiatives of the charity is
             <span className="text-purple-700 font-semibold">
-              Rak Jai Thai (Healing Hearts),{" "}
-            </span>{" "}
+              Rak Jai Thai (Healing Hearts),
+            </span>
             which offers financially disadvantaged youngsters with congenital
             heart disease-free operations.
           </p>
@@ -93,13 +94,13 @@ const Foundation = () => {
           remains restricted, despite government aid. Consequently, a
           significant number of children consistently await surgery, with this
           figure increasing annually. In response, the Bumrungrad International
-          Hospital Foundation and{" "}
+          Hospital Foundation and
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           are fulfilling their social responsibility by providing the necessary
           free cardiac procedures for these children.
         </p>
@@ -159,13 +160,13 @@ const Foundation = () => {
           <hr />
         </div>
         <p className="text-justify mt-6">
-          The{" "}
+          The
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           Foundation and Bumrungrad International Hospital have been assisting
           the villagers of Mukdahan Province's Nikhom Kham Soi and Khamcha-i
           Districts by purchasing hand-woven wicker baskets to display
@@ -202,13 +203,13 @@ const Foundation = () => {
           <hr />
         </div>
         <p className="text-justify mt-6">
-          The{" "}
+          The
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           Foundation and Bumrungrad International Hospital are committed to
           spreading health education and other important health-related
           information as a community <Link  href="https://discoverinternationalmedicalservice.com/our-services" className="font-semibold text-blue underline">service</Link>. This comprises health-promoting
@@ -238,11 +239,13 @@ const Foundation = () => {
           </li>
 
           <div className="mt-10">
-            <img
+            <Image
+              height={500}
+              width={500}
               src={qrimage}
               alt="Bumrungrad International Hospital"
               className="w-[25%] mx-auto"
-              srcset=""
+
             />
           </div>
 
@@ -252,13 +255,13 @@ const Foundation = () => {
             between 9.00 and 17.00 (open daily).
           </li>
           <li className="list-decimal mt-2">
-            Write a check out to “The{" "}
+            Write a check out to “The
             <Link
               className="font-semibold text-blue underline"
                href="https://discoverinternationalmedicalservice.com/"
             >
               Bumrungrad International Hospital
-            </Link>{" "}
+            </Link>
             Foundation.”
           </li>
           <li className="list-decimal mt-2">
@@ -271,26 +274,26 @@ const Foundation = () => {
           Donations are Tax-Deductible:
         </p>
         <p className="text-justify">
-          The{" "}
+          The
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           Foundation is a charitable foundation; Registration no. 524 by the
           Ministry of Finance; Ministerial Regulation no. 227, issued under Tax
           Income and Value Added Tax; Tax Identification no. 4030002447; License
           no. T. 119/2533; Established May 1990.
         </p>
         <p className="text-[16px] py-6 text-blue font-semibold">
-          How to Contact the{" "}
+          How to Contact the
           <Link
             className="font-semibold text-blue underline"
              href="https://discoverinternationalmedicalservice.com/"
           >
             Bumrungrad International Hospital
-          </Link>{" "}
+          </Link>
           Foundation
         </p>
         <ol className="pl-10 list-decimal">

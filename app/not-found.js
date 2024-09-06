@@ -17,8 +17,8 @@ export default function NotFound() {
         <div className="flex flex-col gap-5 md:gap-10 items-center">
           <h5 className="text-5xl md:text-9xl font-extrabold text-blue">404</h5>
           <p className="text-center md:text-3xl">
-            "You come the right place but this page not available now, back to
-            home."
+            &quot;You come the right place but this page not available now, back to
+            home.&quot;
           </p>
           <Link
             className="px-4 py-2 bg-blue text-white rounded shadow"
