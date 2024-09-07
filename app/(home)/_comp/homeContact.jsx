@@ -76,7 +76,7 @@ export default function HomeContact() {
           name='message'
         />
         <button
-          className='hover:bg-blue px-4 py-2 text-blue hover:text-white border border-blue font-semibold rounded duration-300 ease-linear'
+          className='bg-blue hover:bg-white px-4 py-2 hover:text-blue text-white border border-blue font-semibold rounded duration-300 ease-linear'
           type='submit'
         >
           Send

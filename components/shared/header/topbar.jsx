@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { Divider } from '@mui/material'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import { Divider } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 // import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -12,14 +12,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import logo from "@/public/assets/Bumrungrad  Hospital_nav_logo.png";
-import { menuItems } from './menuItems';
-import { useRouter } from 'next/navigation'
+import { menuItems } from "./menuItems";
+import { useRouter } from "next/navigation";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import useAuth from '@/helpers/hooks/useAuth'
+import useAuth from "@/helpers/hooks/useAuth";
 
 const Topbar = () => {
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState({
     status: false,
@@ -43,43 +43,49 @@ const Topbar = () => {
     };
   }, []);
 
-  const navigate = useRouter()
+  const navigate = useRouter();
 
   //sign out user
   const handleSingnOut = () => {
     navigate.push("/");
   };
   return (
-    <nav className='bg-cream z-50'>
-      <section className='px-3 py-3 relative md:container md:mx-auto flex items-center justify-between'>
-        <Link href={'/'}>
+    <nav className="bg-cream z-50">
+      <section className="px-3 py-3 relative md:container md:mx-auto flex items-center justify-between">
+        <Link href={"/"}>
           <Image
             src={logo}
-            alt='Bumrungrad International Hospital'
-            className='w-[200px]'
+            alt="Bumrungrad International Hospital"
+            className="w-[200px]"
             width={200}
             height={200}
           />
         </Link>
         {/* Mobile View  */}
-        <div className='min-w-full fixed top-16 left-0 md:hidden z-30'>
+        <div className="min-w-full fixed top-16 left-0 md:hidden z-30">
           {open && (
-            <ul className='min-h-fit backdrop-blur-xl bg-white/30 px-8 py-2.5 flex flex-col gap-4 md:gap-8 text-[16px] text-blue border-t-2 md:border-t-4 border-blue'>
+            <ul className="min-h-fit backdrop-blur-xl bg-white/30 px-8 py-2.5 flex flex-col gap-4 md:gap-8 text-[16px] text-blue border-t-2 md:border-t-4 border-blue">
               {menuItems.map((mi, i) => (
                 <>
-                  <li key={i} className='relative '>
+                  <li key={i} className="relative">
                     <Link
                       href={mi?.link ? mi.link : "#"}
-                      className='flex font-semibold justify-between items-center rounded-xl'
-                      onClick={() => handleDropdown(i)}
+                      className="flex font-semibold justify-between items-center rounded-xl"
+                      onClick={() => {
+                        if (mi.childs) {
+                          handleDropdown(i);  // toggle dropdown for items with children
+                        } else {
+                          setOpen(false);  // close the menu for items without children
+                        }
+                      }}
                     >
                       {mi.header}
                       {mi.childs && (
                         <>
                           {dropdownOpen.status && dropdownOpen.index === i ? (
-                            <ExpandLessIcon sx={{ fontSize: '24px' }} />
+                            <ExpandLessIcon sx={{ fontSize: "24px" }} />
                           ) : (
-                            <ExpandMoreIcon sx={{ fontSize: '24px' }} />
+                            <ExpandMoreIcon sx={{ fontSize: "24px" }} />
                           )}
                         </>
                       )}
@@ -88,16 +94,16 @@ const Topbar = () => {
                     {mi.childs &&
                       dropdownOpen.index === i &&
                       dropdownOpen.status && (
-                        <ul className='p-1 md:p-2'>
+                        <ul className="p-1 md:p-2">
                           {mi.childs?.map((mc, i) => (
                             <Link
                               key={i}
                               href={mc?.link ? mc.link : "#"}
-                              className='flex items-center gap-2'
+                              className="flex items-center gap-2"
                               onClick={() => setOpen(false)}
                             >
-                              <div className='h-2 w-2 rounded-full bg-blue'></div>
-                              <p className='hover:ml-3 my-1 duration-300 ease-linear'>
+                              <div className="h-2 w-2 rounded-full bg-blue"></div>
+                              <p className="hover:ml-3 my-1 duration-300 ease-linear">
                                 {mc.name}
                               </p>
                             </Link>
@@ -112,23 +118,23 @@ const Topbar = () => {
           )}
         </div>
         {/* Desktop View  */}
-        <div className='hidden py-3 lg:block'>
-          <ul className='flex justify-center gap-5 text-[16px] text-blue'>
+        <div className="hidden py-3 lg:block">
+          <ul className="flex justify-center gap-5 text-[16px] text-blue">
             {menuItems.map((mi, i) => (
-              <li key={i} className='group relative'>
-                <Link className='font-semibold' href={mi?.link ? mi.link : "#"}>
+              <li key={i} className="group relative">
+                <Link className="font-semibold" href={mi?.link ? mi.link : "#"}>
                   {mi.header}
                 </Link>
                 {mi.childs && (
-                  <ul className='ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30'>
+                  <ul className="ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
                     {mi.childs?.map((mc, i) => (
                       <Link
                         key={i}
-                       href={mc?.link ? mc.link : "#"}
-                        className='flex items-center gap-2'
+                        href={mc?.link ? mc.link : "#"}
+                        className="flex items-center gap-2"
                       >
-                        <div className='h-2 bg-blue w-2 rounded-full'></div>
-                        <p className='hover:ml-3 my-1 duration-300 ease-linear'>
+                        <div className="h-2 bg-blue w-2 rounded-full"></div>
+                        <p className="hover:ml-3 my-1 duration-300 ease-linear">
                           {mc.name}
                         </p>
                       </Link>
@@ -140,38 +146,38 @@ const Topbar = () => {
           </ul>
         </div>
         {/* link and button  */}
-        <div className='flex gap-4'>
-          <div className='relative group hidden md:block'>
+        <div className="flex gap-4">
+          <div className="relative group hidden md:block">
             <PersonIcon
-              sx={{ fontSize: '28px' }}
-              className='text-blue cursor-pointer'
-            />{' '}
+              sx={{ fontSize: "28px" }}
+              className="text-blue cursor-pointer"
+            />{" "}
             {/* </Link> */}
-            <div className='hidden group-hover:block duration-300 ease-linear bg-white absolute z-50 min-w-[120px] md:min-w-[150px] rounded-xl shadow-xl'>
-              <div className='flex flex-col p-2 rounded-xl gap-2 text-sm'>
-                {auth  ? (
+            <div className="hidden group-hover:block duration-300 ease-linear bg-white absolute z-50 min-w-[120px] md:min-w-[150px] rounded-xl shadow-xl">
+              <div className="flex flex-col p-2 rounded-xl gap-2 text-sm">
+                {auth ? (
                   <>
                     <Link
-                     href={'/my-profile'}
-                      className='hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5'
+                      href={"/my-profile"}
+                      className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
                     >
                       <PersonIcon
-                        sx={{ fontSize: '24px' }}
-                        className='text-blue cursor-pointer'
-                      />{' '}
+                        sx={{ fontSize: "24px" }}
+                        className="text-blue cursor-pointer"
+                      />{" "}
                       <span>Profile</span>
                     </Link>
                     <button
                       onClick={handleSingnOut}
-                      className='hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5'
+                      className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
                     >
-                      <LogoutIcon className='text-blue' /> <span>Sign Out</span>
+                      <LogoutIcon className="text-blue" /> <span>Sign Out</span>
                     </button>
                   </>
                 ) : (
                   <Link
-                   href={'/login'}
-                    className='hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5'
+                    href={"/login"}
+                    className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
                   >
                     <LoginIcon /> <span>Sign In</span>
                   </Link>
@@ -179,24 +185,24 @@ const Topbar = () => {
               </div>
             </div>
           </div>
-          <div className='flex gap-4 items-center'>
-            <a href='mailto:support@discoverinternationalmedicalservice.com'>
+          <div className="flex gap-4 items-center">
+            <a href="mailto:support@discoverinternationalmedicalservice.com">
               <EmailIcon
-                sx={{ fontSize: '28px' }}
-                className='cursor-pointer text-blue'
+                sx={{ fontSize: "28px" }}
+                className="cursor-pointer text-blue"
               />
             </a>
             {/* Navbar Button  */}
-            <button className='md:hidden z-50' onClick={() => setOpen(!open)}>
+            <button className="md:hidden z-50" onClick={() => setOpen(!open)}>
               {open ? (
                 <CloseIcon
-                  sx={{ fontSize: '28px' }}
-                  className='cursor-pointer text-blue'
+                  sx={{ fontSize: "28px" }}
+                  className="cursor-pointer text-blue"
                 />
               ) : (
                 <MenuIcon
-                  sx={{ fontSize: '28px' }}
-                  className='cursor-pointer text-blue'
+                  sx={{ fontSize: "28px" }}
+                  className="cursor-pointer text-blue"
                 />
               )}
             </button>
@@ -204,23 +210,23 @@ const Topbar = () => {
         </div>
       </section>
       {/* Tablet View  */}
-      <section className='hidden px-5 py-3 md:block lg:hidden md:container md:mx-auto'>
-        <ul className='flex flex-wrap gap-8 text-[16px] text-blue'>
+      <section className="hidden px-5 py-3 md:block lg:hidden md:container md:mx-auto">
+        <ul className="flex flex-wrap gap-8 text-[16px] text-blue">
           {menuItems.map((mi, i) => (
-            <li key={i} className='group relative'>
-              <Link href={mi?.link ? mi.link : '#'} className='font-semibold'>
+            <li key={i} className="group relative">
+              <Link href={mi?.link ? mi.link : "#"} className="font-semibold">
                 {mi.header}
               </Link>
               {mi.childs && (
-                <ul className='ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30'>
+                <ul className="ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
                   {mi.childs?.map((mc, i) => (
                     <Link
                       key={i}
-                      href={mc.link ? mc.link : '#'}
-                      className='flex items-center gap-2'
+                      href={mc.link ? mc.link : "#"}
+                      className="flex items-center gap-2"
                     >
-                      <div className='h-2 bg-blue w-2 rounded-full'></div>
-                      <p className='hover:ml-3 my-1 duration-300 ease-linear'>
+                      <div className="h-2 bg-blue w-2 rounded-full"></div>
+                      <p className="hover:ml-3 my-1 duration-300 ease-linear">
                         {mc.name}
                       </p>
                     </Link>
@@ -233,7 +239,7 @@ const Topbar = () => {
       </section>
       <Divider />
     </nav>
-  )
-}
+  );
+};
 
-export default Topbar
+export default Topbar;
