@@ -7,6 +7,7 @@ import { useState } from "react";
 // import Loader from "../../shared/Loader/Loader";
 import Link from "next/link";
 import Image from "next/image";
+import CardLoader from "@/components/ui/cardLoader";
 const AllBlogs = () => {
   const [allBlogData, setAllBlogData] = useState([]);
   const [loader, setLoader] = useState();
@@ -37,8 +38,7 @@ const AllBlogs = () => {
         </div>
       </div>
       {loader ? (
-        // <Loader />
-        "Loading..."
+       <CardLoader cardLength={12} gridNumber={4} speed="slow" />
       ) : (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 my-10">
           {allBlogData?.map((d, i) => (

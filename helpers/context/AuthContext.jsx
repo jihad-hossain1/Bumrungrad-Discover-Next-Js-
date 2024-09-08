@@ -1,46 +1,49 @@
 "use client";
 
-import React, {
-  useEffect,
-  useState,
-  createContext,
-} from "react";
+import React, { useEffect, useState, createContext } from "react";
 
-
-export const AuthContext = createContext(
-  undefined
-);
+export const AuthContext = createContext(undefined);
 
 const AuthContextProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
+  const [access_token, setAccess_Token] = useState(null);
 
   useEffect(() => {
     const fetchAuth = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `/api/v1/auth/login/auth`);
-        if (!response.ok) {
-          console.error(`Error: ${response.statusText}`);
+        if (typeof window !== "undefined") {
+          const token = localStorage.getItem("Access_Token");
+          const userInfo = localStorage.getItem("User_Details");
+          const sanitizeduserinfo = JSON.parse(userInfo);
+          setAuth(sanitizeduserinfo);
+          setAccess_Token(token);
         }
-        const result = await response.json();
-        setAuth(result);
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-    if(isAdd)fetchAuth();
-    fetchAuth()
+    if (isAdd) fetchAuth();
+    fetchAuth();
   }, [isAdd]);
 
   return (
     <AuthContext.Provider
-      value={{ auth, error, loading ,setAuth, isAdd, setIsAdd}}
+      value={{
+        auth,
+        error,
+        loading,
+        setAuth,
+        isAdd,
+        setIsAdd,
+        access_token,
+        setAccess_Token,
+      }}
     >
       {children}
     </AuthContext.Provider>

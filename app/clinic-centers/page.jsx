@@ -12,6 +12,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import Lottie from "lottie-react";
 import notFoundAnim from "@/public/assets/anim/notfound.json";
 import Image from "next/image";
+import CardLoader from "@/components/ui/cardLoader";
 export default function ViewAllCenters() {
   const [loader, setLoader] = useState(false);
   const [slides, setSlides] = useState([]);
@@ -127,8 +128,7 @@ export default function ViewAllCenters() {
         </div>
       </div>
       {loader ? (
-        // <Loader />
-        'loading...'
+        <CardLoader cardLength={12} gridNumber={4} speed="speed" />
       ) : (
         <div>
           {curentSlide?.length > 0 ? (

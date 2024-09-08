@@ -13,6 +13,8 @@ const useAuth = () => {
     setAuth: context.setAuth,
     isAdd: context.isAdd,
     setIsAdd: context.setIsAdd,
+    access_token: context.access_token,
+    setAccess_Token: context.setAccess_Token
   };
 };
 

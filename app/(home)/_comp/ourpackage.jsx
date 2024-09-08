@@ -6,6 +6,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 // import Loader from '../../shared/Loader/Loader'
 import Link from 'next/link'
 import Image from 'next/image'
+import CardLoader from '@/components/ui/cardLoader'
 
 
 export default function HomePackages() {
@@ -40,8 +41,7 @@ export default function HomePackages() {
         </Link>
       </div>
       {loader ? (
-        // <Loader />
-        'Loading....'
+       <CardLoader cardLength={4} gridNumber={4} speed="fast"  />
       ) : (
         <div className='my-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
           {packages.slice(0, 4).map((p, i) => (

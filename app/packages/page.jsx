@@ -13,6 +13,7 @@ import Lottie from 'lottie-react'
 import notFoundAnim from '@/public/assets/anim/notfound.json'
 import Image from 'next/image'
 import Link from 'next/link'
+import CardLoader from '@/components/ui/cardLoader'
 
 export default function ParentPackages() {
   const [loader, setLoader] = useState(false)
@@ -125,8 +126,7 @@ export default function ParentPackages() {
         </div>
       </div>
       {loader ? (
-        // <Loader />
-        'Loading....'
+        <CardLoader cardLength={8} gridNumber={4} />
       ) : (
         <div>
           <div>
