@@ -12,13 +12,15 @@ import { Divider } from "@mui/material";
 // import AirAmbulanceForm from "./modalFrom/AirAmbulanceForm";
 // import AirtTcket from "./modalFrom/AirtTcket";
 // import AirPickup from "./modalFrom/AirPickup";
-import Image from "next/image";;
+import Image from "next/image";import Appointment from "@/components/services/appointment";
+;
 
 const services = [
     {
         name: "Book Appointment",
         img: appointment,
-        pageTo: "/appointment",
+        // pageTo: "/appointment",
+        form: <Appointment />,
         alt: "Bumrungrad International Hospital",
     },
     {
