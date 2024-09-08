@@ -97,7 +97,7 @@ export default function Services() {
             <button
               onClick={() => handleClick(s, i, id)}
               key={i}
-              className='cursor-pointer flex flex-col lg:flex-row gap-4 items-center shadow-class hover:translate-y-5 duration-300 ease-linear p-4 rounded-xl'
+              className='cursor-pointer flex flex-col lg:flex-row gap-4 items-center shadow-class hover:translate-y-5 duration-300 ease-linear p-4 rounded'
             >
               <Image
               height={100}

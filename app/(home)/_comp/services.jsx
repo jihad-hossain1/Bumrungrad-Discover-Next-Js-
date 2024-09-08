@@ -8,7 +8,6 @@ import hotelReservation from "@/public/assets/service_logo/Bumrungrad  Hospital_
 import orderMedicine from "@/public/assets/service_logo/Bumrungrad  Hospital_order_medicine.png";
 import teleMedicine from "@/public/assets/service_logo/Bumrungrad  Hospital_telemedicine.png";
 import medicalRecords from "@/public/assets/service_logo/Bumrungrad  Hospital_medical_records.png";
-import { Divider } from "@mui/material";
 // import AirAmbulanceForm from "./modalFrom/AirAmbulanceForm";
 // import AirtTcket from "./modalFrom/AirtTcket";
 // import AirPickup from "./modalFrom/AirPickup";
@@ -16,20 +15,20 @@ import Image from "next/image";
 
 const services = [
   {
-    name: "Book Appointment",
+    name: "Schedule Doctor Appointment",
     img: appointment,
     pageTo: "/appointment",
     alt: "Bumrungrad International Hospital",
     description:
-      "Schedule an appointment with our specialists for your healthcare needs.",
+      "Easily book your Appointment with top doctors at Bumrungrad International Hospital, Thailand. We're here to make sure you get the best care quickly and without any hassle.",
   },
   {
-    name: "Visa Processing",
+    name: "Thailand Visa Processing",
     img: hotelReservation,
     pageTo: "/visaprocessing",
     alt: "Bumrungrad International Hospital",
     description:
-      "Facilitating visa procedures for international patients seeking medical treatment.",
+      "We’re make getting your Thailand visa simple and stress-free. From figuring out what you need to managing the paperwork, our team has you covered. Let us handle the details so you can get excited about your trip!",
   },
   {
     id: 3,
@@ -38,31 +37,31 @@ const services = [
     pageTo: "/order-medicine",
     alt: "Bumrungrad International Hospital",
     description:
-      "Order prescribed medicines online and have them delivered to your location.",
+      "Enjoy a simple and efficient way to order your medicine from Thailand. Our service manages the details for you, making sure your medication arrives as expected.",
   },
   {
-    name: "Medical Records",
+    name: "Medical Enquiry",
     img: medicalRecords,
     pageTo: "/medical-record",
     alt: "Bumrungrad International Hospital",
     description:
-      "Access and manage your medical records securely and conveniently.",
+      "We want to support you every step of the way. That’s why we offer a clear and easy-to-understand treatment plan along with a detailed cost estimate for critical care. Our friendly approach ensures you have all the information you need, so you can focus on your health without any added stress",
   },
   {
-    name: "Tele Medicine",
+    name: "Telemedicine",
     img: teleMedicine,
     pageTo: "/telemedicine",
     alt: "Bumrungrad International Hospital",
     description:
-      "Consult with doctors remotely via video call from the comfort of your home.",
+      "Experience expert medical consultations from Bumrungrad Hospital through our telemedicine service. We make connecting with top doctors easy and accessible from home.",
   },
   {
     id: 2,
-    name: "Air Ambulance",
+    name: "Air Ambulance Service",
     img: airimg,
     alt: "Bumrungrad International Hospital",
     description:
-      "Emergency air transport services for critical medical situations.",
+      "We’re here to help in emergencies with fast and reliable air ambulance service. Our experienced team ensures you’re transported safely and comfortably to top hospitals.",
   },
   {
     id: 7,
@@ -74,39 +73,39 @@ const services = [
   },
   {
     id: 8,
-    name: "Airport Pickup",
+    name: "Airport Transfer Service",
     img: airpickup,
     alt: "Bumrungrad International Hospital",
     description:
-      "Arrange airport pickup services to ensure smooth transfers to the hospital.",
+      "We’re here to make your airport journey as smooth as possible. Our team will handle pick-up and drop-off, so you can relax and enjoy a comfortable ride to your accommodation.",
   },
   {
-    name: "Hospital Admission",
+    name: "Admission On Arrival",
     img: appointment,
     alt: "Bumrungrad International Hospital",
     description:
-      "Get assistance with hospital admission procedures for a seamless experience.",
+      "We’re make your arrival as smooth and stress-free as possible. From quick online pre-registration to personal help from our team, we’re committed to making sure you settle in comfortably and start your care without any hassle.",
   },
   {
-    name: "Accommodation",
+    name: "Thai Local Accommodation",
     img: appointment,
     alt: "Bumrungrad International Hospital",
     description:
-      "Find comfortable accommodation options near the hospital during your stay.",
+      "We offer your airport pick-up and drop-off is simple and relaxed. From the airport to your Thai accommodation, we make every step of your journey comfortable.",
   },
   {
     name: "Language Interpreter",
     img: appointment,
     alt: "Bumrungrad International Hospital",
     description:
-      "Professional interpreters to assist you during consultations and hospital visits.",
+      "Our language interpreters are here to make your conversations seamless and stress-free. We ensure accurate and easy communication every time.",
   },
   {
-    name: "Money Transfer for Treatment",
+    name: "Transfer Money for Treatment",
     img: appointment,
     alt: "Bumrungrad International Hospital",
     description:
-      "Facilitate secure money transfers for medical expenses and treatments.",
+      "We simplify transferring funds for your medical treatment. Our process ensures your money reaches its destination quickly and securely, so you can focus on your care.",
   },
 ];
 
@@ -119,20 +118,20 @@ export default function Services({ handaleOpen, getData }) {
   return (
     <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto">
       <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
-        Our Services
+        Our Complete Services for Bangladeshi Patients <br /> at Bumrungrad
+        International Hospital
       </h2>
-      <div className="my-5">
-        <Divider />
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-5 md:mt-10">
         {services.map((s, i, id) => (
           <button
             key={i}
             onClick={() => handleClick(s, i, id)}
-            className="cursor-pointer flex flex-col gap-4 items-center md:hover:scale-105 shadow md:hover:shadow-lg md:hover:shadow-blue duration-300 ease-linear p-4 rounded-xl"
+            className="cursor-pointer flex flex-col gap-4 items-center md:hover:scale-105 shadow md:hover:shadow-lg md:hover:shadow-blue duration-300 ease-linear p-4 rounded"
           >
             <Image height={100} width={100} src={s.img} alt={s.alt} />
-            <h5 className="text-xl text-center font-semibold text-blue">{s.name}</h5>
+            <h5 className="text-xl text-center font-semibold text-blue">
+              {s.name}
+            </h5>
             <p className="text-center">{s.description}</p>
           </button>
         ))}

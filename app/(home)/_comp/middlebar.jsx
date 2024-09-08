@@ -30,7 +30,7 @@ export default function MiddleBar() {
 
   return (
     <section className="md:flex md:justify-center">
-      <div className="flex justify-between md:justify-center backdrop-blur-3xl bg-white/30 md:rounded-xl">
+      <div className="flex justify-between md:justify-center backdrop-blur-3xl bg-white/30 md:rounded">
         <Link
           href="/doctors"
           className="md:rounded-l-xl flex flex-col md:flex-row  gap-1 md:gap-2 px-4 py-2.5 md:px-8 md:py-5 hover:bg-white hover:md:bg-blue hover:md:text-white items-center duration-300 ease-linear cursor-pointer text-blue"

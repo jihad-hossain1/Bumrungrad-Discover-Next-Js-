@@ -39,7 +39,7 @@ export default function News() {
         // <Loader />
         'Loading....'
       ) : (
-        <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-4 my-10'>
+        <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-4 mt-5 md:mt-10'>
           {newsData?.slice(0, 8).map((d, i) => (
             <div
               key={i}
