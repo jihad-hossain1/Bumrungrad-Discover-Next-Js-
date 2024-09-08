@@ -70,7 +70,7 @@ const Topbar = () => {
                   <li key={i} className="relative">
                     <Link
                       href={mi?.link ? mi.link : "#"}
-                      className="flex font-semibold justify-between items-center rounded-xl"
+                      className="flex font-semibold justify-between items-center rounded"
                       onClick={() => {
                         if (mi.childs) {
                           handleDropdown(i);  // toggle dropdown for items with children
@@ -126,7 +126,7 @@ const Topbar = () => {
                   {mi.header}
                 </Link>
                 {mi.childs && (
-                  <ul className="ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
+                  <ul className="ml-2 p-2 rounded bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
                     {mi.childs?.map((mc, i) => (
                       <Link
                         key={i}
@@ -153,13 +153,13 @@ const Topbar = () => {
               className="text-blue cursor-pointer"
             />{" "}
             {/* </Link> */}
-            <div className="hidden group-hover:block duration-300 ease-linear bg-white absolute z-50 min-w-[120px] md:min-w-[150px] rounded-xl shadow-xl">
-              <div className="flex flex-col p-2 rounded-xl gap-2 text-sm">
+            <div className="hidden group-hover:block duration-300 ease-linear bg-white absolute z-50 min-w-[120px] md:min-w-[150px] rounded shadow-xl">
+              <div className="flex flex-col p-2 rounded gap-2 text-sm">
                 {auth ? (
                   <>
                     <Link
                       href={"/my-profile"}
-                      className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
+                      className="hover:text-blue font-semibold p-1 rounded duration-300 ease-linear flex items-center gap-2.5"
                     >
                       <PersonIcon
                         sx={{ fontSize: "24px" }}
@@ -169,7 +169,7 @@ const Topbar = () => {
                     </Link>
                     <button
                       onClick={handleSingnOut}
-                      className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
+                      className="hover:text-blue font-semibold p-1 rounded duration-300 ease-linear flex items-center gap-2.5"
                     >
                       <LogoutIcon className="text-blue" /> <span>Sign Out</span>
                     </button>
@@ -177,7 +177,7 @@ const Topbar = () => {
                 ) : (
                   <Link
                     href={"/login"}
-                    className="hover:text-blue font-semibold p-1 rounded-xl duration-300 ease-linear flex items-center gap-2.5"
+                    className="hover:text-blue font-semibold p-1 rounded duration-300 ease-linear flex items-center gap-2.5"
                   >
                     <LoginIcon /> <span>Sign In</span>
                   </Link>
@@ -218,7 +218,7 @@ const Topbar = () => {
                 {mi.header}
               </Link>
               {mi.childs && (
-                <ul className="ml-2 p-2 rounded-xl bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
+                <ul className="ml-2 p-2 rounded bg-white shadow-xl hidden group-hover:block absolute top-6 min-w-[300px] z-30">
                   {mi.childs?.map((mc, i) => (
                     <Link
                       key={i}

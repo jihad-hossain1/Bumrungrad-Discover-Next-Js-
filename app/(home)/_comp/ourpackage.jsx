@@ -25,7 +25,7 @@ export default function HomePackages() {
       });
   }, []);
   return (
-    <section className="p-5 md:p-10 my-5 md:container md:mx-auto">
+    <section className="p-5 md:p-10 my-5 md:my-10 md:container md:mx-auto">
       <div className="flex justify-between items-center">
         <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
           our packages
