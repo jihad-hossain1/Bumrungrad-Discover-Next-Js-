@@ -40,12 +40,12 @@ const services = [
       "Enjoy a simple and efficient way to order your medicine from Thailand. Our service manages the details for you, making sure your medication arrives as expected.",
   },
   {
-    name: "Medical Enquiry",
+    name: "Medical Records",
     img: medicalRecords,
     pageTo: "/medical-record",
     alt: "Bumrungrad International Hospital",
     description:
-      "We want to support you every step of the way. That’s why we offer a clear and easy-to-understand treatment plan along with a detailed cost estimate for critical care. Our friendly approach ensures you have all the information you need, so you can focus on your health without any added stress",
+      "We’re here to support you every step of the way. That’s why we offer a simple, easy-to-understand treatment plan, personalized to your needs, along with a detailed cost estimate for critical care. Our caring and approachable team makes sure you have all the information you need, so you can focus on what really matters—your health—without any extra worries.",
   },
   {
     name: "Telemedicine",
@@ -69,7 +69,7 @@ const services = [
     img: airticket,
     alt: "Bumrungrad International Hospital",
     description:
-      "Book air tickets for patients and their families traveling for treatment.",
+      "Book your Thailand air ticket booking for treatment effortlessly with us. We offer daily options, competitive pricing, and seamless service, ensuring a smooth, professional, and stress-free experience.",
   },
   {
     id: 8,
