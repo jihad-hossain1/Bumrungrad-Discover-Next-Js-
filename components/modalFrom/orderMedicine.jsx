@@ -88,7 +88,7 @@ const OrderMedicine = () => {
       .catch((error) => console.error(error))
   }
   return (
-    <div className='mt-5 mb-10 py-5 px-5 md:px-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl'>
+    <div className='mt-5 mb-10 py-5 px-5 md:px-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Order Medicine
       </h1>
@@ -199,7 +199,7 @@ const OrderMedicine = () => {
                     <TableCell>
                       <button
                         onClick={() => deleteOrderMedicine(row)}
-                        className='px-4 py-2 bg-red rounded-xl text-white'
+                        className='px-4 py-2 bg-red rounded text-white'
                       >
                         Delete
                       </button>
@@ -219,7 +219,7 @@ const OrderMedicine = () => {
           href='http://wa.me/+8801847284860'
           target='_blank'
           rel='noopener noreferrer'
-          className='rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear'
+          className='rounded flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear'
         >
           <Image
             width={40}

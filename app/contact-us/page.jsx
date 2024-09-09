@@ -57,7 +57,7 @@ export default function ContactUs() {
         {ContactCards.map((cc, i) => (
           <div
             key={i}
-            className='group flex flex-col md:flex-row shadow-xl rounded-xl items-center justify-between gap-8 md:gap-0'
+            className='group flex flex-col md:flex-row shadow-xl rounded items-center justify-between gap-8 md:gap-0'
           >
             <div className='p-5 h-full w-full md:w-1/2 relative flex flex-col items-center gap-4'>
               <Image
@@ -73,7 +73,7 @@ export default function ContactUs() {
                 <h5 className='text-center font-semibold text-xl'>
                   {cc.office}
                 </h5>
-                <div className='absolute top-0 left-0 bg-black/90 h-full w-full hidden group-hover:flex flex-col items-center justify-center rounded-xl md:rounded-r-none text-white duration-300 ease-linear'>
+                <div className='absolute top-0 left-0 bg-black/90 h-full w-full hidden group-hover:flex flex-col items-center justify-center rounded md:rounded-r-none text-white duration-300 ease-linear'>
                   <h5 className='text-center font-semibold text-lg'>
                     {cc.office}
                   </h5>

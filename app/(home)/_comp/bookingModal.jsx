@@ -36,7 +36,7 @@ const BookingModal = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style} className={`${height} w-[350px]`}>
+        <Box sx={style} className={`${height} max-sm:w-[350px] w-[700px]`}>
           <button
             onClick={handleClose}
             size='small'

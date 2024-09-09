@@ -1,3 +1,4 @@
+
 'use client'
 
 import {
@@ -106,7 +107,7 @@ export default function Register() {
 
   return (
     <section className='md:p-10 my-5 md:my-10 md:container mx-5 md:mx-auto'>
-      <div className='p-5 md:p-10 shadow shadow-blue rounded-xl'>
+      <div className='p-5 md:p-10 shadow shadow-blue rounded'>
         {/* first-card */}
         <section className=''>
           <h5 className='mb-4 text-xl md:text-3xl text-semibold font-semibold text-blue'>
@@ -195,7 +196,7 @@ export default function Register() {
           <h5 className='mt-5'>Are you in Thailand?</h5>
           <div className='flex gap-2 mt-2.5 mb-5'>
             <button
-              className={`px-5 py-2 rounded-xl ${
+              className={`px-5 py-2 rounded ${
                 yes === true && 'bg-blue text-white'
               }`}
               onClick={() => setYes(true)}
@@ -203,7 +204,7 @@ export default function Register() {
               Yes
             </button>
             <button
-              className={`px-5 py-2 rounded-xl ${
+              className={`px-5 py-2 rounded ${
                 yes === false && 'bg-blue text-white'
               }`}
               onClick={() => {

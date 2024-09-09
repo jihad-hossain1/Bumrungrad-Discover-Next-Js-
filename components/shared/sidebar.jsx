@@ -60,7 +60,7 @@ export default function SideBar() {
             href="http://wa.me/+66948382910"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
+            className="rounded flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
           >
             <Image
               height={40}
@@ -75,7 +75,7 @@ export default function SideBar() {
             href="http://wa.me/+66948382910"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
+            className="rounded flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
           >
             <Image
               height={40}
@@ -92,7 +92,7 @@ export default function SideBar() {
             href="http://wa.me/+66948382910"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
+            className="rounded flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
           >
             <Image
               height={40}
@@ -109,7 +109,7 @@ export default function SideBar() {
             href="http://wa.me/+8801847284864"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
+            className="rounded flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear"
           >
             <Image
               height={40}
