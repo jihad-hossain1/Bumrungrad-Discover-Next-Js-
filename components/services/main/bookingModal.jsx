@@ -4,7 +4,8 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import Services from './services';
+import Services from '@/components/services/main/services';
+// import Services from './services';
 // import Services from './Services'
 
 const style = {

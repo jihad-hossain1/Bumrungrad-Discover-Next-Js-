@@ -263,11 +263,11 @@ export default function Appointment() {
   }
 
   return (
-    <div className=''>
+ <div className='md:p-10 my-5 md:my-10 md:container md:mx-auto lg:flex lg:flex-col lg:items-center'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Book Appointment
       </h1>
-      <div className=' lg:w-11/12 mx-auto'>
+      <div className='my-10 lg:w-1/2'>
         {/* top buttons  */}
         <div className='flex justify-between mx-10 items-center'>
           <button

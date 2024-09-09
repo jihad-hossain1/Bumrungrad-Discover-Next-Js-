@@ -12,12 +12,62 @@ import medicalRecords from "@/public/assets/service_logo/Bumrungrad  Hospital_me
 // import AirtTcket from "./modalFrom/AirtTcket";
 // import AirPickup from "./modalFrom/AirPickup";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+
+
+
+export default function Services({ handaleOpen, getData }) {
+  const path = usePathname();
+  const router = useRouter();
+  const handleClick = (s, i, id) => {
+    if(s?.pageTo){
+      router.push(s?.pageTo)
+      return
+    }
+    handaleOpen(id);
+    getData(s);
+  };
+
+  return (
+    <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto">
+      {
+        path == '/our-services' ? (
+          <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
+            Our Services
+          </h2>
+        ) : (
+          <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
+        Our Complete Services for Bangladeshi Patients <br /> at Bumrungrad
+        International Hospital
+      </h2>
+        )
+      }
+     
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-5 md:mt-10">
+        {services.map((s, i, id) => (
+          <button
+            key={i}
+            onClick={() => handleClick(s, i, id)}
+            className="cursor-pointer flex flex-col gap-4 items-center md:hover:scale-105 shadow md:hover:shadow-lg md:hover:shadow-blue duration-300 ease-linear p-4 rounded"
+          >
+            <Image height={100} width={100} src={s.img} alt={s.alt} />
+            <h5 className="text-xl text-center font-semibold text-blue">
+              {s.name}
+            </h5>
+            <p className="text-center">{s.description}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 const services = [
   {
     name: "Schedule Doctor Appointment",
     img: appointment,
-    pageTo: "/appointment",
+    pageTo: "/our-services/appointment",
     alt: "Bumrungrad International Hospital",
     description:
       "Easily book your Appointment with top doctors at Bumrungrad International Hospital, Thailand. We're here to make sure you get the best care quickly and without any hassle.",
@@ -25,7 +75,7 @@ const services = [
   {
     name: "Thailand Visa Processing",
     img: hotelReservation,
-    pageTo: "/visaprocessing",
+    pageTo: "/our-services/visaprocessing",
     alt: "Bumrungrad International Hospital",
     description:
       "We’re make getting your Thailand visa simple and stress-free. From figuring out what you need to managing the paperwork, our team has you covered. Let us handle the details so you can get excited about your trip!",
@@ -34,7 +84,7 @@ const services = [
     id: 3,
     name: "Order Medicine",
     img: orderMedicine,
-    pageTo: "/order-medicine",
+    pageTo: "/our-services/order-medicine",
     alt: "Bumrungrad International Hospital",
     description:
       "Enjoy a simple and efficient way to order your medicine from Thailand. Our service manages the details for you, making sure your medication arrives as expected.",
@@ -42,7 +92,7 @@ const services = [
   {
     name: "Medical Records",
     img: medicalRecords,
-    pageTo: "/medical-record",
+    pageTo: "/our-services/medical-record",
     alt: "Bumrungrad International Hospital",
     description:
       "We’re here to support you every step of the way. That’s why we offer a simple, easy-to-understand treatment plan, personalized to your needs, along with a detailed cost estimate for critical care. Our caring and approachable team makes sure you have all the information you need, so you can focus on what really matters—your health—without any extra worries.",
@@ -50,7 +100,7 @@ const services = [
   {
     name: "Telemedicine",
     img: teleMedicine,
-    pageTo: "/telemedicine",
+    pageTo: "/our-services/telemedicine",
     alt: "Bumrungrad International Hospital",
     description:
       "Experience expert medical consultations from Bumrungrad Hospital through our telemedicine service. We make connecting with top doctors easy and accessible from home.",
@@ -108,34 +158,3 @@ const services = [
       "We simplify transferring funds for your medical treatment. Our process ensures your money reaches its destination quickly and securely, so you can focus on your care.",
   },
 ];
-
-export default function Services({ handaleOpen, getData }) {
-  const handleClick = (s, i, id) => {
-    handaleOpen(id);
-    getData(s);
-  };
-
-  return (
-    <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto">
-      <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
-        Our Complete Services for Bangladeshi Patients <br /> at Bumrungrad
-        International Hospital
-      </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-5 md:mt-10">
-        {services.map((s, i, id) => (
-          <button
-            key={i}
-            onClick={() => handleClick(s, i, id)}
-            className="cursor-pointer flex flex-col gap-4 items-center md:hover:scale-105 shadow md:hover:shadow-lg md:hover:shadow-blue duration-300 ease-linear p-4 rounded"
-          >
-            <Image height={100} width={100} src={s.img} alt={s.alt} />
-            <h5 className="text-xl text-center font-semibold text-blue">
-              {s.name}
-            </h5>
-            <p className="text-center">{s.description}</p>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}

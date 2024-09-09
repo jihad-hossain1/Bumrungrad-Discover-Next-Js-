@@ -1,5 +1,4 @@
 import Head from "next/head";
-import BookingModal from "./_comp/bookingModal";
 import ClinicCenters from "./_comp/clinicalCenter";
 import Disclaimer from "./_comp/disclaimer";
 import HomeContact from "./_comp/homeContact";
@@ -15,6 +14,7 @@ import WhyUs from "./_comp/whyUs";
 import InsurancePartners from "./_comp/insurancePartners";
 import Faq from "./_comp/faq";
 import Packages from "@/components/packages/packages";
+import BookingModal from "@/components/services/main/bookingModal";
 
 export default function Home() {
   return (
