@@ -113,7 +113,7 @@ export default function Faq() {
         </p>
         <div className="mt-5">
           {faq.map((f, i) => (
-            <Accordion expanded={expanded === i} onChange={handleChange(i)}>
+            <Accordion key={i} expanded={expanded === i} onChange={handleChange(i)}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>{f.question}</Typography>
               </AccordionSummary>

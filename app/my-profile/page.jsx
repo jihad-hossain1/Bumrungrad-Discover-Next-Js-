@@ -42,7 +42,7 @@ export default function User() {
     };
 
     if (access_token && auth) fetchData();
-  }, [access_token, auth?.id]); // The empty dependency array ensures this effect runs once
+  }, [access_token, auth?.id,auth]); // The empty dependency array ensures this effect runs once
 
   // if (loading) {
   //   return <div>Loading...</div>;

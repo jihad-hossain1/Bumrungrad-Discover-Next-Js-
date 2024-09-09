@@ -1,18 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-
-// import Loader from '../../shared/Loader/Loader'
 import TextField from '@mui/material/TextField'
 import { IoSearchOutline } from 'react-icons/io5'
-// import { Link } from 'react-router-dom'
-// import { Helmet, HelmetProvider } from 'react-helmet-async'
-// import { LazyLoadImage } from 'react-lazy-load-image-component'
-// import 'react-lazy-load-image-component/src/effects/blur.css'
 import Lottie from 'lottie-react'
 import notFoundAnim from '@/public/assets/anim/notfound.json'
-import Image from 'next/image'
-import Link from 'next/link'
 import CardLoader from '@/components/ui/cardLoader'
 import { usePathname } from 'next/navigation'
 import SinglePackage from './singlePackage'
@@ -110,7 +102,8 @@ export default function Packages() {
       <h2 className='text-xl font-semibold md:text-2xl lg:text-3xl capitalize text-blue'>
         our packages
       </h2>
-      <div className='mt-8 flex md:justify-center'>
+      {
+        path === '/packages' ? <div className='mt-8 flex md:justify-center'>
         <div className='w-full md:w-1/2 lg:w-1/3  relative'>
           {' '}
           <TextField
@@ -127,7 +120,8 @@ export default function Packages() {
             <IoSearchOutline />
           </button>
         </div>
-      </div>
+      </div> : null
+      }
       {loader ? (
         <CardLoader cardLength={8} gridNumber={4} />
       ) : (
@@ -157,7 +151,8 @@ export default function Packages() {
         </div>
       )}
 
-      <div className='flex justify-center items-center gap-2 md:gap-4 mt-8 '>
+     {
+      path === '/packages' ?  <div className='flex justify-center items-center gap-2 md:gap-4 mt-8 '>
         <button
           onClick={handlePageChangePrev}
           disabled={currentPage === 1}
@@ -234,7 +229,8 @@ export default function Packages() {
             ></path>
           </svg>
         </button>
-      </div>
+      </div> : null
+     }
     </section>
   )
 }

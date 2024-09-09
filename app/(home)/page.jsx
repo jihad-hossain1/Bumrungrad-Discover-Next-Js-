@@ -9,12 +9,12 @@ import MediExpress from "./_comp/mediExpress";
 import MiddleBar from "./_comp/middlebar";
 import News from "./_comp/news";
 import OnlineConsultation from "./_comp/onlineConsultation";
-import HomePackages from "./_comp/ourpackage";
 import RightHealthcare from "./_comp/rightHealthcare";
 import Testimonial from "./_comp/testimonial";
 import WhyUs from "./_comp/whyUs";
 import InsurancePartners from "./_comp/insurancePartners";
 import Faq from "./_comp/faq";
+import Packages from "@/components/packages/packages";
 
 export default function Home() {
   return (
@@ -32,7 +32,8 @@ export default function Home() {
         <BookingModal />
         <ClinicCenters />
         <RightHealthcare />
-        <HomePackages />
+        {/* <HomePackages /> */}
+        <Packages />
         <OnlineConsultation />
         <WhyUs />
         {/* <Testimonial/> */}
