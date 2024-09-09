@@ -39,8 +39,8 @@ export default function News() {
       {loader ? (
         <CardLoader cardLength={3} gridNumber={3} speed='slow' />
       ) : (
-        <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-3 my-10'>
-          {newsData?.slice(0, 3).map((d, i) => (
+        <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-4 mt-5 md:mt-10'>
+          {newsData?.slice(0, 8).map((d, i) => (
             <div
               key={i}
               className='shadow rounded hover:shadow-xl duration-300 ease-linear flex flex-col justify-between'
@@ -51,7 +51,7 @@ export default function News() {
                 effect='blur'
                 className=''
                 height={300}
-                width={300}
+                width={500}
               />
               <div className='p-4'>
                 {' '}

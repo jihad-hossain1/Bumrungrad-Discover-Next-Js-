@@ -145,7 +145,7 @@ const VisaProcessing = () => {
         </FormControl>
       </section>
       {country === 'Bangladesh' ? (
-        <section className='flex flex-col justify-center items-center py-5 gap-4 shadow-xl rounded-xl md:w-1/2'>
+        <section className='flex flex-col justify-center items-center py-5 gap-4 shadow-xl rounded md:w-1/2'>
           <div className='mb-2'>
             <LazyLoadImage
               src={personImg}

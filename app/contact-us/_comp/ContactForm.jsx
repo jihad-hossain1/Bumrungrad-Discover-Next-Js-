@@ -35,8 +35,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div>
-      
+    <div>    
       <h1 className='capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Contact Us
       </h1>

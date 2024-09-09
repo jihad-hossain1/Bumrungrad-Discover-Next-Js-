@@ -70,8 +70,8 @@ export default function Login() {
       <div className="hidden md:block md:w-1/2">
         <Image height={300} width={1000} src={loginimg} alt="Login Image" />
       </div>
-      <div className="p-5 md:p-10 md:w-1/2 my-5 md:my-10 mx-5 md:container md:mx-auto shadow shadow-blue rounded-xl relative">
-        <h5 className="text-xl md:text-3xl font-semibold text-blue mb-4">
+      <div className='p-5 md:p-10 md:w-1/2 my-5 md:my-10 mx-5 md:container md:mx-auto shadow shadow-blue rounded relative'>
+        <h5 className='text-xl md:text-3xl font-semibold text-blue mb-4'>
           Hello Dear!
         </h5>
         <Divider />

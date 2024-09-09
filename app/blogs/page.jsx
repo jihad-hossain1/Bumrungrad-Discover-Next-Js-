@@ -1,6 +1,4 @@
 'use client'
-
-
 import { Divider } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";

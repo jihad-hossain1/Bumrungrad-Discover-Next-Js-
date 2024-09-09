@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 // Import Swiper React components
@@ -74,7 +74,7 @@ export default function ClinicCenters() {
     },
   ];
   return (
-    <div className="p-5 md:p-10 my-5 md:my-10 md:container md:mx-auto rounded-xl shadow-xl">
+    <div className="p-5 md:p-10 my-5 md:my-10 md:container md:mx-auto rounded shadow">
       <div className="flex justify-between items-center">
         <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
           Clinic & Centers
@@ -92,7 +92,7 @@ export default function ClinicCenters() {
       <div>
         <Swiper
           effect={"coverflow"}
-          centeredSlides={true}
+          // centeredSlides={true}
           breakpoints={{
             // Small screens (up to 640px)
             0: {
@@ -126,7 +126,7 @@ export default function ClinicCenters() {
               <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                 <div>
                   <Image
-                  height={500}
+                    height={500}
                     width={500}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
                     src={sc?.img}
@@ -135,26 +135,26 @@ export default function ClinicCenters() {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent from-black/70 via-black/60 to-black/70"></div>
                 <div className="absolute inset-0 flex translate-y-[50%] flex-col items-center justify-center p-5 text-center transition-all duration-500 group-hover:translate-y-0">
-                  <h2 className="mb-1 md:mb-3 font-dmserif md:text-xl font-bold text-white">
+                  <h2 className="mb-2.5 md:mb-5 font-dmserif md:text-xl font-bold text-white">
                     {sc?.name}
                   </h2>
                   <p className="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <span
                       className="md:hidden"
                       dangerouslySetInnerHTML={{
-                        __html: sc?.content?.slice(0, 60),
+                        __html: sc?.desc?.slice(0, 60),
                       }}
                     />
                     <span
                       className="hidden md:block lg:hidden"
                       dangerouslySetInnerHTML={{
-                        __html: sc?.content?.slice(0, 100),
+                        __html: sc?.desc?.slice(0, 100),
                       }}
                     />
                     <span
                       className="hidden lg:block"
                       dangerouslySetInnerHTML={{
-                        __html: sc?.content?.slice(0, 200),
+                        __html: sc?.desc?.slice(0, 200),
                       }}
                     />
                     {/* <span className="md:hidden">

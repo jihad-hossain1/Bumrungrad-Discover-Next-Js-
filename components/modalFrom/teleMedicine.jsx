@@ -94,7 +94,7 @@ const TeleMedicine = () => {
   }
 
   return (
-    <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded-xl'>
+    <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded'>
       <HelmetProvider>
         {' '}
         <Helmet>
