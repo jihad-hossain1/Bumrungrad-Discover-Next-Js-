@@ -12,6 +12,7 @@ import { MuiTelInput } from 'mui-tel-input'
 import whatsapp from '@/public/assets/Bumrungrad  Hospital_whatsapp.png'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
+import Image from 'next/image'
 // import { useNavigate } from 'react-router-dom'
 
 const OrderMedicine = () => {
@@ -225,7 +226,9 @@ const OrderMedicine = () => {
           rel='noopener noreferrer'
           className='rounded-xl flex gap-4 my-2 items-center p-2 hover:shadow-lg duration-300 ease-linear'
         >
-          <img
+          <Image
+            height={40}
+            width={40}
             src={whatsapp}
             alt='Bumrungrad International Hospital'
             className='h-[40px]'

@@ -8,6 +8,8 @@ import inovationsimg from "@/public/assets/about_bumrungrad/bumrungrad_owned (2)
 import careingimg from "@/public/assets/about_bumrungrad/bumrungrad_owned (3).png";
 import Link from "next/link";
 import Image from "next/image";
+
+
 const Bumrungrad = () => {
   return (
     <section className="mx-5 md:container md:mx-auto">
