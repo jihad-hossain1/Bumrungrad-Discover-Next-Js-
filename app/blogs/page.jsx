@@ -1,27 +1,28 @@
 'use client'
 import { Divider } from "@mui/material";
-import { useEffect } from "react";
-import { useState } from "react";
-// import Loader from "../../shared/Loader/Loader";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CardLoader from "@/components/ui/cardLoader";
+import {CardLoader} from "@/components/ui/cardload"; // Make sure this is correctly implemented
+
 const AllBlogs = () => {
   const [allBlogData, setAllBlogData] = useState([]);
-  const [loader, setLoader] = useState();
+  const [loader, setLoader] = useState(true); // Default to loading state
 
   useEffect(() => {
-    setLoader(true);
     fetch("https://api.discoverinternationalmedicalservice.com/api/get/blogs")
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
           setAllBlogData(data?.data);
-          setLoader(false);
         } else {
           console.log(data);
-          setLoader(false);
         }
+        setLoader(false); // Stop loader regardless of response
+      })
+      .catch((error) => {
+        console.error("Error fetching blog data:", error);
+        setLoader(false);
       });
   }, []);
 
@@ -35,8 +36,9 @@ const AllBlogs = () => {
           <Divider />
         </div>
       </div>
+      
       {loader ? (
-       <CardLoader cardLength={12} gridNumber={4} speed="slow" />
+        <CardLoader cardLength={15} gridNumber={3} speed="slow" /> // Skeleton loader
       ) : (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 my-10">
           {allBlogData?.map((d, i) => (
@@ -46,18 +48,16 @@ const AllBlogs = () => {
             >
               <Image
                 height={300}
-                width={300}
+                width={1000}
                 src={d.blogImage}
                 alt="Bumrungrad International Hospital"
-                effect="blur"
-                className=""
+                className="w-full h-[200px] object-cover"
               />
               <div className="p-5">
                 <h5 className="font-semibold text-blue text-lg">
-                  {d.blogTitle}.
-                </h5>{" "}
+                  {d.blogTitle}
+                </h5>
                 <div
-                  id={`blog_desc_${i}`}
                   className="text-sm lg:text-base mb-5"
                   dangerouslySetInnerHTML={{
                     __html: `${d?.blogDescription.slice(0, 300)}${

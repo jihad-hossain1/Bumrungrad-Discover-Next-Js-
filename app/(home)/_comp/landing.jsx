@@ -2,8 +2,28 @@
 
 import React from "react";
 import Image from "next/image";
+import useAuth from "@/helpers/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 const Landing = () => {
+  const {auth} = useAuth();
+  const router = useRouter();
+
+  function handleAppointment() {
+    if (auth) {
+      router.push("/our-services/appointment");
+    } else {
+      router.push("/login");
+    }
+  }
+  function handleHealthScreen() {
+    if (auth) {
+      router.push("/check-up");
+    } else {
+      router.push("/login");
+    }
+  }
+
   return (
     <section className="bg-cream relative">
       <div className="flex flex-col lg:flex-row py-20 px-5 justify-center items-center md:container md:mx-auto relative">
@@ -12,7 +32,7 @@ const Landing = () => {
             Experience Superior Healthcare with Bumrungrad International
             Hospital
           </h1>
-          <p className="">
+          <p>
             DIMS ensures a seamless journey to Asia's Leading healthcare
             destination at Bumrungrad International Hospital. We’re your medical
             assistance company & medical value travel facilitator, ensuring
@@ -20,10 +40,10 @@ const Landing = () => {
           </p>
 
           <div className="flex gap-4 mt-5">
-            <button className="w-full text-sm md:w-fit px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
+            <button onClick={handleAppointment} className="w-full text-sm md:w-fit px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
               Doctor Appoinment
             </button>
-            <button className="w-full text-sm md:w-fit px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
+            <button onClick={handleHealthScreen} className="w-full text-sm md:w-fit px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
               Health Screening
             </button>
           </div>

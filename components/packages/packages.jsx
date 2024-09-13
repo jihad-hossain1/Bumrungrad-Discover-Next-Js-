@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField'
 import { IoSearchOutline } from 'react-icons/io5'
 import Lottie from 'lottie-react'
 import notFoundAnim from '@/public/assets/anim/notfound.json'
-import CardLoader from '@/components/ui/cardLoader'
+import {CardLoader} from '@/components/ui/cardload'
 import { usePathname } from 'next/navigation'
 import SinglePackage from './singlePackage'
 
