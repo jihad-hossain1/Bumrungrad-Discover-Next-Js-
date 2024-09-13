@@ -46,9 +46,10 @@ const NewsAll = () => {
             >
               <Image
                 height={300}
-                width={300}
+                width={1000}
                 src={d.newsImage}
                 alt='Bumrungrad International Hospital'
+                className='w-full h-[200px] object-cover'
               />
               <div className='p-4'>
                 {' '}

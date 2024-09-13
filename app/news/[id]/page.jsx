@@ -27,7 +27,7 @@ const OneNewsPage = ({params}) => {
             width={300}
             src={oneNews?.newsImage}
             alt="Bumrungrad International Hospital"
-            className="lg:h-[40vh] min-w-full"
+            className="lg:h-[40vh] min-w-full w-full"
           />
           <div className="">
             <h5 className="font-semibold text-blue text-xl">
