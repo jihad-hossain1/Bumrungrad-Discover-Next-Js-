@@ -36,7 +36,7 @@ export default function Home() {
         <Packages />
         <OnlineConsultation />
         <WhyUs />
-        {/* <Testimonial/> */}
+        <Testimonial/>
         <News />
         <InsurancePartners/>
         <Faq/>
