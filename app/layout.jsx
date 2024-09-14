@@ -4,6 +4,7 @@ import Topbar from "@/components/shared/header/topbar";
 import AuthContextProvider from "@/helpers/context/AuthContext";
 import BottomBar from "@/components/shared/bottombar";
 import SideBar from "@/components/shared/sidebar";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
        <AuthContextProvider>
        <Topbar />
+       <Toaster position="top-center" reverseOrder={false} />
         <main>
         {children}
         </main>

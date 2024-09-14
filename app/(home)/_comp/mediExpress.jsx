@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import React from "react";
-import img from "@/public/assets/medixpress.jpeg";
+import img from "@/public/assets/medi-express-02.jpg";
 
 export default function MediExpress() {
   return (
-    <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto flex flex-col lg:flex-row lg:items-center gap-16">
-      <div className="flex flex-col gap-2.5 md:gap-5 lg:w-1/2">
+    <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto grid grid-cols-1  xl:grid-cols-2 lg:items-center gap-16">
+      <div className="flex flex-col gap-2.5 md:gap-5 ">
         <h2 className="text-xl md:text-2xl font-semibold text-blue">
           {" "}
           Know More About Us - DIMS
@@ -40,10 +40,11 @@ export default function MediExpress() {
           while we handle every detail with precision and care.
         </p>
       </div>
-      <div className="lg:w-1/2 flex justify-center">
+      <div className="w-full">
         <Image
           height={400}
-          width={600}
+          width={1000}
+          className="rounded-md object-cover w-full h-full"
           src={img}
           effect="blur"
           alt="Bumrungrad International Hospital"
