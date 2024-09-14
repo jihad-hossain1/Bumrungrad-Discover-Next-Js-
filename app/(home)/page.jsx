@@ -1,5 +1,4 @@
 import Head from "next/head";
-import BookingModal from "./_comp/bookingModal";
 import ClinicCenters from "./_comp/clinicalCenter";
 import Disclaimer from "./_comp/disclaimer";
 import HomeContact from "./_comp/homeContact";
@@ -9,12 +8,13 @@ import MediExpress from "./_comp/mediExpress";
 import MiddleBar from "./_comp/middlebar";
 import News from "./_comp/news";
 import OnlineConsultation from "./_comp/onlineConsultation";
-import HomePackages from "./_comp/ourpackage";
 import RightHealthcare from "./_comp/rightHealthcare";
 import Testimonial from "./_comp/testimonial";
 import WhyUs from "./_comp/whyUs";
 import InsurancePartners from "./_comp/insurancePartners";
 import Faq from "./_comp/faq";
+import Packages from "@/components/packages/packages";
+import BookingModal from "@/components/services/main/bookingModal";
 
 export default function Home() {
   return (
@@ -32,10 +32,11 @@ export default function Home() {
         <BookingModal />
         <ClinicCenters />
         <RightHealthcare />
-        <HomePackages />
+        {/* <HomePackages /> */}
+        <Packages />
         <OnlineConsultation />
         <WhyUs />
-        {/* <Testimonial/> */}
+        <Testimonial/>
         <News />
         <InsurancePartners/>
         <Faq/>

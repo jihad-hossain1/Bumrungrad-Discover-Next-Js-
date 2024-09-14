@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 // import Loader from '../../shared/Loader/Loader'
 import Image from 'next/image'
+import CardLoader from '@/components/ui/cardLoader'
 export default function News() {
   const [newsData, setNewsData] = useState()
   const [loader, setLoader] = useState()
@@ -36,11 +37,10 @@ export default function News() {
         </Link>
       </div>
       {loader ? (
-        // <Loader />
-        'Loading....'
+        <CardLoader cardLength={3} gridNumber={3} speed='slow' />
       ) : (
         <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-4 mt-5 md:mt-10'>
-          {newsData?.slice(0, 8).map((d, i) => (
+          {newsData?.slice(0, 4).map((d, i) => (
             <div
               key={i}
               className='shadow rounded hover:shadow-xl duration-300 ease-linear flex flex-col justify-between'
@@ -64,7 +64,7 @@ export default function News() {
               </div>
               <div className='p-4'>
                 {' '}
-                <Link href={`/one-News/${d?.id}`}>
+                <Link href={`/news/${d?.id}`}>
                   <button className='border border-blue bg-blue hover:bg-white px-2 py-1 rounded hover:text-blue text-white duration-300 ease-linear'>
                     Read More
                   </button>

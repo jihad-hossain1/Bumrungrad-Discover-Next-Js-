@@ -46,3 +46,43 @@ box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;}
   text-decoration: underline;
   font-weight: 600;
 }
+
+.bumrungrand-back {
+  background-image: url("/../assets/about_bumrungrad/bumrungrad_owned_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
+
+.vissionMission-back {
+  background-image: url("/../assets/about_bumrungrad/Vision&Mission.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
+
+.insurance-back {
+  background-image: url("/../assets/insurance/Bumrungrad\ \ Hospital_insurance.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
+
+.insurance-goodvibes {
+  background-image: url("/../assets/insurance/Bumrungrad\ \ Hospital_Good-Vibes-2023.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
+
+.insurance-packagePromotion {
+  background-image: url("/../assets/insurance/Bumrungrad\ \ Hospital_promotion.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}

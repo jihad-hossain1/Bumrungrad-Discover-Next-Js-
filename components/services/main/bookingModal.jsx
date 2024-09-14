@@ -4,7 +4,8 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import Services from './services';
+import Services from '@/components/services/main/services';
+// import Services from './services';
 // import Services from './Services'
 
 const style = {
@@ -36,7 +37,7 @@ const BookingModal = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style} className={`${height} w-[350px]`}>
+        <Box sx={style} className={`${height} max-sm:w-[350px] w-[700px]`}>
           <button
             onClick={handleClose}
             size='small'

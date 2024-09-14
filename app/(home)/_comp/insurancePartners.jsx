@@ -62,7 +62,7 @@ export default function InsurancePartners() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {partners.map((p, i) => (
               <div key={i} className="flex flex-col items-center gap-2.5">
-                <Image height={80} width={200} src={p.image} />
+                <Image height={80} width={200} src={p.image} alt={p.name} />
                 <p className="text-sm font-semibold">{p.name}</p>
               </div>
             ))}

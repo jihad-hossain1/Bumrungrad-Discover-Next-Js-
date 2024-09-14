@@ -19,7 +19,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import useAuth from "@/helpers/hooks/useAuth";
 
 const Topbar = () => {
-  const { auth } = useAuth();
+  const {auth, setAuth,setIsAdd} = useAuth();
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState({
     status: false,
@@ -47,7 +47,13 @@ const Topbar = () => {
 
   //sign out user
   const handleSingnOut = () => {
+    if(typeof window !== "undefined"){
+      localStorage.removeItem("Access_Token");
+    localStorage.removeItem("User_Details");
+    setIsAdd(false)
+    setAuth(null);
     navigate.push("/");
+    }
   };
   return (
     <nav className="bg-cream z-50">
