@@ -30,8 +30,8 @@ const CardLoader = ({ cardLength = 4, gridNumber = 4, speed = 'normal' }) => {
             
             {/* Footer text animation */}
             <div className="space-y-2">
-              <div className={`w-full h-4 bg-slate-200 ${animationClass} rounded`}></div>
-              <div className={`w-2/3 h-4 bg-slate-200 ${animationClass} rounded`}></div>
+              <div className={`w-full h-4 bg-[#DFE2F4] ${animationClass} rounded`}></div>
+              <div className={`w-2/3 h-4 bg-[#DFE2F4] ${animationClass} rounded`}></div>
             </div>
           </div>
         </div>

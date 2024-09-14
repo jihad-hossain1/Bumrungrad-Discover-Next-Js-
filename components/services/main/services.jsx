@@ -106,7 +106,7 @@ const services = [
     pageTo: "/our-services/medical-record",
     alt: "Bumrungrad International Hospital",
     description:
-      'We’re here to support you every step of the way. That’s why we offer a simple, easy-to-understand treatment plan, personalized to your needs, along with a detailed cost estimate for critical care. Our caring and approachable team makes sure you have all the information you need, so you can focus on what really matters—your health—without any extra worries.'
+      'We want to support you every step of the way. That’s why we offer a clear and easy-to-understand treatment plan along with a detailed cost estimate for critical care. Our friendly approach ensures you have all the information you need, so you can focus on your health without any added stress.'
   },
   {
     name: "Telemedicine",

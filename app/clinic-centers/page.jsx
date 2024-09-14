@@ -13,6 +13,7 @@ import Lottie from "lottie-react";
 import notFoundAnim from "@/public/assets/anim/notfound.json";
 import Image from "next/image";
 import CardLoader from "@/components/ui/cardLoader";
+import { CardLoaders, ClinicCenterCardSkeleton } from "@/components/ui/cardload";
 export default function ViewAllCenters() {
   const [loader, setLoader] = useState(false);
   const [slides, setSlides] = useState([]);
@@ -128,7 +129,7 @@ export default function ViewAllCenters() {
         </div>
       </div>
       {loader ? (
-        <CardLoader cardLength={12} gridNumber={4} speed="speed" />
+        <CardLoaders Component={ClinicCenterCardSkeleton} cardLength={15} gridNumber={5} speed="speed" />
       ) : (
         <div>
           {curentSlide?.length > 0 ? (
@@ -158,19 +159,19 @@ export default function ViewAllCenters() {
                       <span
                         className="md:hidden"
                         dangerouslySetInnerHTML={{
-                          __html: sc?.content.slice(0, 60),
+                          __html: sc?.content?.slice(0, 60),
                         }}
                       />
                       <span
                         className="hidden md:block lg:hidden"
                         dangerouslySetInnerHTML={{
-                          __html: sc?.content.slice(0, 100),
+                          __html: sc?.content?.slice(0, 100),
                         }}
                       />
                       <span
                         className="hidden lg:block"
                         dangerouslySetInnerHTML={{
-                          __html: sc?.content.slice(0, 200),
+                          __html: sc?.content?.slice(0, 200),
                         }}
                       />
                     </p>

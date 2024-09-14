@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Divider, TextField } from '@mui/material'
 import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
+import AuthRoute from '@/helpers/context/AuthRoute'
 
 
 
@@ -100,7 +101,8 @@ const TeleMedicine = () => {
   }
 
   return (
-    <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded-xl'>
+    <AuthRoute>
+      <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded-xl'>
       
       <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
         Tele Medicine
@@ -279,6 +281,7 @@ const TeleMedicine = () => {
         </button>
       </form>
     </section>
+    </AuthRoute>
   )
 }
 

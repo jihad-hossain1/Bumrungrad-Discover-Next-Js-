@@ -6,6 +6,7 @@ import { Divider } from '@mui/material'
 import Link from 'next/link'
 import Image from 'next/image'
 import CardLoader from '@/components/ui/cardLoader'
+import { CardLoaders, NewsCardSkeleton } from '@/components/ui/cardload'
 
 const NewsAll = () => {
   const [allnewsData, setAllNewsData] = useState()
@@ -36,7 +37,7 @@ const NewsAll = () => {
         </div>
       </div>
       {loader ? (
-        <CardLoader cardLength={9} gridNumber={3} speed='slow' />
+        <CardLoaders Component={NewsCardSkeleton} cardLength={15} gridNumber={3} speed='slow' />
       ) : (
         <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-3 my-10'>
           {allnewsData?.map((d, i) => (
@@ -74,5 +75,8 @@ const NewsAll = () => {
     </div>
   )
 }
+
+
+
 
 export default NewsAll

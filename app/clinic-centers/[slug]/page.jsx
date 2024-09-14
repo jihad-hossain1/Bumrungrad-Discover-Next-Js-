@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 // import Loader from "../../shared/Loader/Loader";
 import Image from "next/image";
+import { ClinicCenterSkeleton } from "@/components/ui/cardload";
 
 export default function SingleCenter({params}) {
   const [loader, setLoader] = useState(false);
@@ -22,16 +23,15 @@ export default function SingleCenter({params}) {
   return (
     <div className="p-5 my-5 md:container md:mx-auto">
       {loader ? (
-        // <Loader />
-        <p>Loading...</p>
+      <ClinicCenterSkeleton />
       ) : (
         <div className="flex flex-col items-center md:flex-row md:items-start gap-5 md:gap-10">
           <div>
             <Image
-              width={400}
+              width={1000}
               height={400}
               src={center?.cover_photo}
-              className="h-[250px] md:h-[400px]"
+              className="h-[250px] md:h-[400px] w-[400px]"
               alt="Bumrungrad International Hospital"
             />
           </div>
