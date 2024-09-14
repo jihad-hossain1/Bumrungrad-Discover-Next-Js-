@@ -13,6 +13,7 @@ import whatsapp from '@/public/assets/Bumrungrad  Hospital_whatsapp.png'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
 import Image from 'next/image'
+import AuthRoute from '@/helpers/context/AuthRoute'
 // import { useNavigate } from 'react-router-dom'
 
 const OrderMedicine = () => {
@@ -93,7 +94,8 @@ const OrderMedicine = () => {
       .catch((error) => console.error(error))
   }
   return (
-    <div className='mt-5 mb-10 py-5 px-5 md:px-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl'>
+   <AuthRoute>
+     <div className='mt-5 mb-10 py-5 px-5 md:px-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Order Medicine
       </h1>
@@ -259,6 +261,7 @@ const OrderMedicine = () => {
         </button>
       </div>
     </div>
+   </AuthRoute>
   )
 }
 

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { TextField, FormControl, MenuItem, Select } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
+import AuthRoute from '@/helpers/context/AuthRoute'
 
 
 export default function CheckUp() {
@@ -155,7 +156,8 @@ export default function CheckUp() {
       .catch((error) => console.error(error))
   }
   return (
-    <div className='px-5 py-3  md:container md:mx-auto'>
+   <AuthRoute>
+     <div className='px-5 py-3  md:container md:mx-auto'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue mt-8'>
         Health Screening Appointment
       </h1>
@@ -404,5 +406,6 @@ export default function CheckUp() {
         )}
       </div>
     </div>
+   </AuthRoute>
   )
 }

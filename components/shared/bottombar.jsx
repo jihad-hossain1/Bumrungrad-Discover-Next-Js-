@@ -5,7 +5,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 const serives = [
   {
     name: "Book Appointment",
-    link: "/appointment",
+    link: "/our-services/appointment",
   },
   {
     name: "Health Screening",

@@ -19,6 +19,7 @@ import DialogContent from '@mui/material/DialogContent'
 import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import AuthRoute from '@/helpers/context/AuthRoute'
 
 
 export default function Appointment() {
@@ -263,7 +264,8 @@ export default function Appointment() {
   }
 
   return (
- <div className='md:p-10 my-5 md:my-10 md:container md:mx-auto lg:flex lg:flex-col lg:items-center'>
+ <AuthRoute>
+  <div className='md:p-10 my-5 md:my-10 md:container md:mx-auto lg:flex lg:flex-col lg:items-center'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Book Appointment
       </h1>
@@ -1168,5 +1170,6 @@ export default function Appointment() {
         </div>
       </div>
     </div>
+ </AuthRoute>
   )
 }

@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
 import Image from 'next/image'
 import { countries } from '@/public/data/country'
+import AuthRoute from '@/helpers/context/AuthRoute'
 
 const VisaProcessing = () => {
   const { auth} = useAuth()
@@ -122,7 +123,8 @@ const VisaProcessing = () => {
   }
 
   return (
-    <section className='mx-5 md:container md:mx-auto pb-10'>
+   <AuthRoute>
+     <section className='mx-5 md:container md:mx-auto pb-10'>
       <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
         Process Your Visa
       </h1>
@@ -404,6 +406,7 @@ const VisaProcessing = () => {
         </section>
       )}
     </section>
+   </AuthRoute>
   )
 }
 

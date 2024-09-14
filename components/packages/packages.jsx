@@ -96,10 +96,13 @@ export default function Packages() {
   }
   // ........Pagination End....//
 
+
+const sanitizedPackage = path === '/packages' ? curentPackage : curentPackage?.slice(0,4)
   return (
     <section className='p-5 my-5 md:container md:mx-auto'>
     
-      <h2 className='text-xl font-semibold md:text-2xl lg:text-3xl capitalize text-blue'>
+     <div className='relative'> 
+     <h2 className='text-xl font-semibold md:text-2xl lg:text-3xl capitalize text-blue'>
         our packages
       </h2>
       {
@@ -120,8 +123,14 @@ export default function Packages() {
             <IoSearchOutline />
           </button>
         </div>
-      </div> : null
+      </div> :  <div className='absolute top-0 right-0'>
+        <a href="/packages" className='rounded px-2 md:px-4 py-1 md:py-2 border border-blue text-blue hover:bg-blue hover:text-white duration-300 ease-linear'>
+        View All
+        </a>
+      </div>
       }
+     
+     </div>
       {loader ? (
         <CardLoader cardLength={8} gridNumber={4} />
       ) : (
@@ -129,9 +138,7 @@ export default function Packages() {
           <div>
             {curentPackage.length > 0 ? (
               <div className='my-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                {path === '/packages' ?  curentPackage?.map((p, i) => (
-                  <SinglePackage p={p} key={i} />
-                )) : curentPackage?.slice(0, 8).map((p, i) => (
+                {sanitizedPackage.map((p, i) => (
                     <SinglePackage p={p} key={i} />
                 ))}
               </div>

@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { TextField } from '@mui/material'
 import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
+import AuthRoute from '@/helpers/context/AuthRoute'
 
 
 const MedicalRecords = () => {
@@ -61,7 +62,8 @@ const MedicalRecords = () => {
       .catch((error) => console.error(error))
   }
   return (
-    <div className='md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16'>
+   <AuthRoute>
+     <div className='md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Medical Records
       </h1>
@@ -128,6 +130,7 @@ const MedicalRecords = () => {
         </button>
       </form>
     </div>
+   </AuthRoute>
   )
 }
 
