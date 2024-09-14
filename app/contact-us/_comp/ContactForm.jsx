@@ -80,9 +80,7 @@ export default function ContactForm() {
                 Contact Us
             </h1>
             <div className='my-10 md:flex gap-8 items-center'>
-                {errors?.error && (
-                    <p className='text-green-500'>{errors?.error}</p>
-                )}
+               
                 <form
                     onSubmit={sendEmail}
                     className='flex flex-col gap-4 md:w-1/2 shadow p-5 rounded'
