@@ -1,5 +1,5 @@
 import React from "react";
-import image from "@/public/assets/video-consultation.png";
+import image from "@/public/assets/online-treatment-02.jpg";
 import Image from "next/image";
 import { CheckCircle } from "@mui/icons-material";
 
@@ -24,37 +24,38 @@ export default function OnlineConsultation() {
   ];
 
   return (
-    <div className="mx-5 my-10 md:my-20 md:container md:mx-auto flex flex-col-reverse lg:flex-row lg:items-center gap-16">
-      <div className="lg:w-1/3">
-        <Image
-          height={600}
-          width={400}
-          src={image}
-          alt="Bumrungrad International Hospital"
-        />
-      </div>
-      <div className="flex flex-col gap-5 md:gap-10 lg:w-2/3 bg-cream p-8 rounded">
-        <h5 className="text-xl md:text-2xl font-semibold text-blue">
-          Schedule an online video consultation at Bumrungrad International
-          Hospital
-        </h5>
-        <p>
-          Connect with world-class medical expertise from the comfort of your
-          home. Our telemedicine services bridge the gap, offering you top-tier
-          care and expert consultations without the need to travel.
-        </p>
-        <div className="grid gap-2.5 md:gap-5 md:grid-cols-2">
-          {data.map((d, i) => (
-            <div key={i}>
-              <p className="flex items-center gap-2">
-                <CheckCircle className="text-green" />
-                <span className="font-semibold text-blue">{d.title}:</span>{" "}
-              </p>
-              <p className="mt-2.5 ml-8">{d.desc}</p>
-            </div>
-          ))}
-        </div>
+    <div className="mx-5 my-10 md:my-20 lg:my-24 xl:container xl:mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+    <div className="w-full max-h-[590px]">
+      <Image
+        height={400}
+        width={1000}
+        src={image}
+        className="rounded-md object-cover w-full h-full"
+        alt="Bumrungrad International Hospital"
+      />
+    </div>
+    <div className="flex flex-col gap-5 md:gap-10 w-full bg-cream p-6 md:p-8 rounded">
+      <h5 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue">
+        Schedule an online video consultation at Bumrungrad International Hospital
+      </h5>
+      <p className="text-sm md:text-base">
+        Connect with world-class medical expertise from the comfort of your home.
+        Our telemedicine services bridge the gap, offering you top-tier care and
+        expert consultations without the need to travel.
+      </p>
+      <div className="grid gap-2.5 md:gap-5 md:grid-cols-2">
+        {data.map((d, i) => (
+          <div key={i}>
+            <p className="flex items-center gap-2 text-sm md:text-base">
+              <CheckCircle className="text-green" />
+              <span className="font-semibold text-blue">{d.title}:</span>{" "}
+            </p>
+            <p className="mt-2.5 ml-8 text-sm md:text-base">{d.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
+  </div>
+  
   );
 }
