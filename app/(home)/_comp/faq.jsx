@@ -57,7 +57,7 @@ export default function Faq() {
     <div className="mx-5 my-16 md:my-32 md:container md:mx-auto flex flex-col md:flex-row gap-8 md:gap-16">
       <form
         action=""
-        className="md:w-1/2 flex flex-col gap-5 shadow p-8 rounded"
+        className="md:w-1/2 flex flex-col gap-5 shadow p-8 max-sm:p-3 rounded"
       >
         <p className="text-xl md:text-2xl font-semibold text-blue">
           Get a second medical opinion at Bumrungrad International Hospital

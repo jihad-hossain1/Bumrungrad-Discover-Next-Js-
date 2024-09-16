@@ -48,7 +48,7 @@ export default function HomeContact() {
     },
   ];
   return (
-    <section className='md:p-10 my-5 md:my-10 md:container md:mx-auto'>
+    <section className='md:p-10 my-5 md:my-10 md:container md:mx-auto max-sm:px-5'>
       <h2 className='capitalize text-xl md:text-2xl font-semibold text-blue'>
         Locate us
       </h2>

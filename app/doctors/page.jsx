@@ -158,7 +158,7 @@ export default function FindDoctor() {
     <section className='min-h-screen container mx-auto'>
       {/* search field  */}
       <div id="finddoctor" className="flex items-center">
-        <div className="container mx-5 md:mx-auto p-6 md:p-12 rounded-xl bg-white shadow-xl md:w-1/2 lg:w-1/3">
+        <div className="container mx-5 md:mx-auto max-sm:p4 p-6 md:p-12 rounded-xl bg-white shadow-xl md:w-1/2 lg:w-1/3">
           <h1 className="text-xl md:text-3xl font-semibold text-blue text-center">
             Find A Doctor
           </h1>

@@ -123,7 +123,7 @@ const VissionMisson = () => {
             src={missionVissionimg}
             alt="Bumrungrad International Hospital"
               height={500}
-              width={500}
+              width={1000}
               className="w-full h-full"
           />
         </div>
@@ -200,7 +200,7 @@ const VissionMisson = () => {
             src={environmentimg}
             alt="Bumrungrad International Hospital"
              height={500}
-              width={500}
+              width={1000}
               className="w-full h-full"
           />
         </div>
