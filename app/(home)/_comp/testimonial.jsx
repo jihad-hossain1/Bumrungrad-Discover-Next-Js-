@@ -1,16 +1,10 @@
-"use client";
+'use client';
 
 import React from "react";
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
-// import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { AiFillStar } from "react-icons/ai";
 import { FaQuoteLeft } from "react-icons/fa";
@@ -48,59 +42,81 @@ export default function Testimonial() {
       <h2 className="text-center text-2xl md:text-4xl font-semibold text-blue capitalize">
         What our patients say
       </h2>
-      <>
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          breakpoints={{
-            // Small screens (up to 640px)
-            0: {
-              slidesPerView: 1,
-            },
-            // Large screens (from 769px and above)
-            1024: {
-              slidesPerView: 2,
-            },
-          }}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={{
-            clickable: true,
-            el: ".custom-pagination", // Custom pagination class
-          }}
-          modules={[EffectCoverflow, Pagination]}
-          className="mySwiper py-5 md:py-10 mt-5 md:mt-10"
-        >
-          {patientReviews.map((d, i) => (
-            <SwiperSlide key={i}>
-              <div className="relative p-4 sm:p-6 md:p-8 lg:p-10 rounded-xl shadow-xl border-2 border-blue">
-                <FaQuoteLeft className="text-4xl sm:text-5xl lg:text-6xl text-blue mb-2 sm:mb-4" />
-                <p className="my-2 sm:my-4 text-justify">{d.comments}</p>
-                <div className="flex items-center gap-1 text-[#f7cb2b] text-base sm:text-xl lg:text-2xl my-2 sm:my-4">
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                </div>
-                <div className="text-sm sm:text-base lg:text-lg">
-                  <p className="font-semibold">{d.patientName}</p>
-                  <p>From {d.country}</p>
-                </div>
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+        }}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[EffectCoverflow, Pagination]}
+        className="mySwiper py-5 md:py-10 mt-5 md:mt-10"
+      >
+        {patientReviews.map((d, i) => (
+          <SwiperSlide key={i}>
+            <div className="relative p-4 sm:p-6 md:p-8 lg:p-10 rounded-xl shadow-xl border-2 border-blue">
+              <FaQuoteLeft className="text-4xl sm:text-5xl lg:text-6xl text-blue mb-2 sm:mb-4" />
+              <p className="my-2 sm:my-4 text-justify">{d.comments}</p>
+              <div className="flex items-center gap-1 text-[#f7cb2b] text-base sm:text-xl lg:text-2xl my-2 sm:my-4">
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              <div className="text-sm sm:text-base lg:text-lg">
+                <p className="font-semibold">{d.patientName}</p>
+                <p>From {d.country}</p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-        {/* Custom pagination for the slider */}
-        <div className="custom-pagination mt-5 flex gap-2 justify-center"></div>
-      </>
+      <style jsx>{`
+        .swiper-container {
+          position: relative;
+        }
+
+        .swiper-pagination {
+          position: absolute;
+          bottom: -30px; /* Adjust this value to move the bullets outside */
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        .swiper-pagination-bullet {
+          background: #007bff; /* Bullet color */
+          width: 12px;
+          height: 12px;
+          border-radius: 0; /* Makes the bullet square */
+          opacity: 1;
+          transition: background 0.3s, transform 0.3s;
+        }
+
+        .swiper-pagination-bullet-active {
+          background: #0056b3;
+          transform: scale(1.2);
+        }
+      `}</style>
     </div>
   );
 }

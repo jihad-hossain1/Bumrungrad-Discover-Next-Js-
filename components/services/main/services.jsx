@@ -177,32 +177,32 @@ const services = [
     description:
       "We simplify transferring funds for your medical treatment. Our process ensures your money reaches its destination quickly and securely, so you can focus on your care.",
   },
-  {
-    name: "Health Check Up",
-    img: healthImage,
-    form: <UpComming />,
-    alt: "Bumrungrad International Hospital",
-    discription: ""
-  },
-  {
-    name: "Anesthesiology",
-    img: ansthImage,
-    form: <UpComming />,
-    alt: "Bumrungrad International Hospital",
-    discription: ""
-  },
-  {
-    name: "Organ Transplant",
-    img: organImage,
-    form: <UpComming />,
-    alt: "Bumrungrad International Hospital",
-    discription: ""
-  },
-  {
-    name: "Internal Medicine",
-    img: internalImage,
-    form: <UpComming />,
-    alt: "Bumrungrad International Hospital",
-    discription: ""
-  }
+  // {
+  //   name: "Health Check Up",
+  //   img: healthImage,
+  //   form: <UpComming />,
+  //   alt: "Bumrungrad International Hospital",
+  //   discription: ""
+  // },
+  // {
+  //   name: "Anesthesiology",
+  //   img: ansthImage,
+  //   form: <UpComming />,
+  //   alt: "Bumrungrad International Hospital",
+  //   discription: ""
+  // },
+  // {
+  //   name: "Organ Transplant",
+  //   img: organImage,
+  //   form: <UpComming />,
+  //   alt: "Bumrungrad International Hospital",
+  //   discription: ""
+  // },
+  // {
+  //   name: "Internal Medicine",
+  //   img: internalImage,
+  //   form: <UpComming />,
+  //   alt: "Bumrungrad International Hospital",
+  //   discription: ""
+  // }
 ];

@@ -28,10 +28,11 @@ export default function JourneyBetter() {
     <div className="p-4 md:p-8 mx-5 md:container md:mx-auto flex flex-col gap-5 md:gap-10 items-center bg-cream rounded shadow mt-5">
       <Image
         height={150}
-        width={350}
+        width={1000}
         src={logo}
         effect="blur"
         alt="Bumrungrad International Hospital"
+        className="max-sm:w-[300px] md:w-[350px] lg:w-[350px]"
       />
       <h2 className="text-xl md:text-2xl text-center font-semibold text-blue">
         Your Journey to Health Starts Here at Bumrungrad Hospital Bangkok
@@ -50,12 +51,12 @@ export default function JourneyBetter() {
         <button onClick={handleHealthScreen} className="text-sm px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
           Health Screening
         </button>
-        <button className="text-sm px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
+        <a href="/doctors" className="text-sm px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
           Find Doctor
-        </button>
-        <button className="text-sm px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
+        </a>
+        <a href="/send-query" className="text-sm px-4 py-2 bg-blue text-white border border-blue hover:bg-cream hover:text-blue md:hover:scale-105 ease-linear duration-300 shadow rounded">
           Send Querey
-        </button>
+        </a>
       </div>
     </div>
   );
