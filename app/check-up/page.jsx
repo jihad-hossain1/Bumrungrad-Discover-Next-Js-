@@ -9,7 +9,6 @@ import AuthRoute from '@/helpers/context/AuthRoute'
 
 export default function CheckUp() {
   // const auth = JSON.parse(localStorage.getItem('User_Details'))
-  // console.log(auth)
   const {auth} = useAuth();
   const navigate = useRouter()
   const [loader, setLoader] = useState(false)
@@ -89,7 +88,6 @@ export default function CheckUp() {
             setDoctors(data.data)
           } else {
             setDoctors([])
-            console.log(data)
           }
         })
         .catch((error) => console.error(error))
@@ -108,22 +106,7 @@ export default function CheckUp() {
   }
   const handaleDataSubmit = () => {
     setLoader(true)
-    // const cheakAppointment = {
-    //   healtePackage,
-    //   specialty,
-    //   prefferdDoctor,
-    //   appoinMentDate,
-    //   appoinMentTime,
-    //   medicalConcern,
-    //   HnNumber,
-    //   patientName,
-    //   gender,
-    //   dob,
-    //   email,
-    //   phone,
-    //   nationality,
-    // }
-    //console.log(cheakAppointment)
+
     const formData = new FormData()
     formData.append('healtePackage', healtePackage)
     formData.append('specialty', specialty)
@@ -144,9 +127,7 @@ export default function CheckUp() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.status === 200) {
-          console.log(data)
           setLoader(false)
           window.alert('Check Up Request Placed')
           navigate('/')

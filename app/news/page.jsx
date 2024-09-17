@@ -21,7 +21,6 @@ const NewsAll = () => {
           setAllNewsData(data?.data)
           setLoader(false)
         } else {
-          console.log(data)
           setLoader(false)
         }
       })

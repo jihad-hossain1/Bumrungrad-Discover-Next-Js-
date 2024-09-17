@@ -16,13 +16,7 @@ const AirAmbulanceForm = () => {
     setLoader(true)
     event.preventDefault()
     const form = event.target
-    // const getAirAmbulance = {
-    //   flydate: date,
-    //   passport: passport,
-    //   caseSummary: caseSummary,
-    //   briflySummary: briflyDiscusion,
-    // }
-    // console.log(getAirAmbulance)
+
 
     const formData = new FormData()
     formData.append('entry_date', date)
@@ -37,7 +31,6 @@ const AirAmbulanceForm = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           setLoader(false)
           window.location.reload();
           alert("Air Ambulance request sent! Our support team will contact you soon.")

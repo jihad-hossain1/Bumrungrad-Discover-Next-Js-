@@ -8,17 +8,17 @@ import hotelReservation from "@/public/assets/service_logo/Bumrungrad  Hospital_
 import orderMedicine from "@/public/assets/service_logo/Bumrungrad  Hospital_order_medicine.png";
 import teleMedicine from "@/public/assets/service_logo/Bumrungrad  Hospital_telemedicine.png";
 import medicalRecords from "@/public/assets/service_logo/Bumrungrad  Hospital_medical_records.png";
-import healthImage from "@/public/assets/service_logo/health_checkup.png"
-import ansthImage from "@/public/assets/service_logo/anesthesiology.png"
 import AirAmbulanceForm from "../airAmbulance";
-import organImage from "@/public/assets/service_logo/organ_transplant.png";
-import internalImage from "@/public/assets/service_logo/internal_medicine.png";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import useAuth from "@/helpers/hooks/useAuth";
 import AirtTcket from "../airtTcket";
 import AirPickup from "../airPickup";
 import UpComming from "../upComming";
+import moneyTransfer from '@/public/assets/service_logo/bro4.png'
+import languageImage from '@/public/assets/service_logo/bro.png'
+import accommodation from '@/public/assets/service_logo/bro2.png'
+import hospitalAdmission from '@/public/assets/service_logo/bro5.png'
 
 
 
@@ -147,7 +147,7 @@ const services = [
   },
   {
     name: "Admission On Arrival",
-    img: appointment,
+    img: hospitalAdmission,
     form: <UpComming />,
     alt: "Bumrungrad International Hospital",
     description:
@@ -155,7 +155,7 @@ const services = [
   },
   {
     name: "Thai Local Accommodation",
-    img: appointment,
+    img: accommodation,
     form: <UpComming />,
     alt: "Bumrungrad International Hospital",
     description:
@@ -163,7 +163,7 @@ const services = [
   },
   {
     name: "Language Interpreter",
-    img: appointment,
+    img: languageImage,
     form: <UpComming />,
     alt: "Bumrungrad International Hospital",
     description:
@@ -171,38 +171,11 @@ const services = [
   },
   {
     name: "Transfer Money for Treatment",
-    img: appointment,
+    img: moneyTransfer,
     form: <UpComming />,
     alt: "Bumrungrad International Hospital",
     description:
       "We simplify transferring funds for your medical treatment. Our process ensures your money reaches its destination quickly and securely, so you can focus on your care.",
   },
-  // {
-  //   name: "Health Check Up",
-  //   img: healthImage,
-  //   form: <UpComming />,
-  //   alt: "Bumrungrad International Hospital",
-  //   discription: ""
-  // },
-  // {
-  //   name: "Anesthesiology",
-  //   img: ansthImage,
-  //   form: <UpComming />,
-  //   alt: "Bumrungrad International Hospital",
-  //   discription: ""
-  // },
-  // {
-  //   name: "Organ Transplant",
-  //   img: organImage,
-  //   form: <UpComming />,
-  //   alt: "Bumrungrad International Hospital",
-  //   discription: ""
-  // },
-  // {
-  //   name: "Internal Medicine",
-  //   img: internalImage,
-  //   form: <UpComming />,
-  //   alt: "Bumrungrad International Hospital",
-  //   discription: ""
-  // }
+ 
 ];

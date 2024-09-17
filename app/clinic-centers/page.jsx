@@ -43,7 +43,6 @@ export default function ViewAllCenters() {
           setSlides([]);
           setLoader(false);
         } else {
-          console.log(data);
           setLoader(false);
         }
       });
@@ -66,7 +65,7 @@ export default function ViewAllCenters() {
       return null;
     }
   });
-  //console.log(showpageNumber)
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

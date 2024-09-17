@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 // import emailjs from '@emailjs/browser'
 import contactAnim from "@/public/assets/anim/contact.json";
 import Lottie from "lottie-react";
@@ -8,8 +8,6 @@ import { TextField } from "@mui/material";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import toast from "react-hot-toast";
 
-// const to = process.env.PUBLIC_ADMIN_EMAIL;
-// console.log("🚀 ~ to:", to)
 
 export default function ContactForm() {
     const [loading, setLoading] = useState(false);
@@ -65,12 +63,10 @@ export default function ContactForm() {
         //   )
         //   .then(
         //     (result) => {
-        //       console.log(result.text)
         //       window.alert('Message sent successfully')
         //       e.target.reset()
         //     },
         //     (error) => {
-        //       console.log(error.text)
         //     }
         //   )
     };

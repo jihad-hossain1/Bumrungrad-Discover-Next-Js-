@@ -46,24 +46,7 @@ const TeleMedicine = () => {
     setLoader(true)
     event.preventDefault()
     const form = event.target
-    const teleMedicines = {
-      fullName,
-      hnNum,
-      birthDate,
-      passportId,
-      nationality,
-      residence,
-      preferredDate,
-      preferredDoctor,
-      purposeAppoinment,
-      investigationDocument,
-      contactDetails,
-      paymentType,
-      epaymentlink,
-      interpreter,
-      specificConcern,
-    }
-    console.log(teleMedicines)
+
     const formData = new FormData()
     formData.append('fullName', fullName)
     formData.append('hnNum', hnNum)
@@ -88,7 +71,6 @@ const TeleMedicine = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           setLoader(false)
           alert(
             'Tele Medicine request sent! Our support team will contact you soon.'

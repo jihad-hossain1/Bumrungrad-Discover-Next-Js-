@@ -19,7 +19,17 @@ const OneNewsPage = ({params}) => {
   return (
     <div className="p-5 my-5 md:container lg:w-[50%] md:mx-auto">
       {loader ? (
-        <CardLoader cardLength={1} gridNumber={1} speed="slow" />
+        <div className="flex flex-col gap-5 animate-pulse">
+        {/* Image skeleton */}
+        <div className="bg-[#DFE2F4]/90 h-[40vh] w-full rounded"></div>
+  
+        {/* Text content skeleton */}
+        <div>
+          <div className="h-6 bg-[#DFE2F4]/90 w-2/3 rounded mb-3"></div>
+          <div className="h-4 bg-[#DFE2F4]/90 w-full rounded mb-2"></div>
+          <div className="h-4 bg-[#DFE2F4]/90 w-5/6 rounded"></div>
+        </div>
+      </div>
       ) : (
         <div className="flex flex-col gap-5">
           <Image
