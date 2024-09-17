@@ -1,8 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import Loader from "../../shared/Loader/Loader";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -12,9 +10,7 @@ import Image from "next/image";
 
 const ChildPackageDetails = ({params}) => {
   const [loader, setLoader] = useState();
-//   const { slug } = useParams();
   const [childDetailsPackage, setChildDetailsPackage] = useState({});
-  // console.log(childDetailsPackage);
 
   const [packageName, setPackageName] = useState("");
   const [packagePrice, setPackagePrice] = useState("");
@@ -36,14 +32,6 @@ const ChildPackageDetails = ({params}) => {
   const handalepackageSubmit = () => {
     setLoader(true);
 
-    const getPackage = {
-      packageName,
-      packagePrice,
-      patientName,
-      hnNumber,
-      phoneNumber,
-      email,
-    };
     const formData = new FormData();
     formData.append("packageName", packageName);
     formData.append("packagePrice", packagePrice);
@@ -59,7 +47,6 @@ const ChildPackageDetails = ({params}) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data);
           setLoader(false);
           window.location.reload();
           alert(
@@ -88,8 +75,37 @@ const ChildPackageDetails = ({params}) => {
       {" "}
       <section className="mx-5 md:container md:mx-auto py-10">
         {loader ? (
-        //   <Loader></Loader>
-          <p>Loading...</p>
+        <div>
+        <div className="flex flex-col gap-5 lg:flex-row animate-pulse">
+          {/* Image skeleton */}
+          <div className="lg:w-1/2">
+            <div className="w-full max-h-[40vh] bg-[#DFE2F4] rounded h-64"></div>
+            <div className="px-4 my-4 py-2 bg-[#DFE2F4]/90 w-32 h-10 rounded mt-5"></div>
+          </div>
+  
+          {/* Text skeleton */}
+          <div className="lg:w-1/2 space-y-4">
+            <div className="h-8 bg-[#DFE2F4]/90 w-3/4 rounded"></div>
+            <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-1 gap-2.5">
+              <div className="h-6 bg-[#DFE2F4]/90 w-1/2 rounded"></div>
+              <div className="h-6 bg-[#DFE2F4]/90 w-3/4 rounded"></div>
+  
+              <ul className="space-y-2">
+                <div className="h-6 bg-[#DFE2F4]/90 w-1/4 rounded"></div>
+                <li className="h-6 bg-[#DFE2F4]/90 w-3/4 rounded ml-5"></li>
+                <li className="h-6 bg-[#DFE2F4]/90 w-3/4 rounded ml-5"></li>
+              </ul>
+  
+              <div className="h-6 bg-[#DFE2F4]/90 w-1/2 rounded"></div>
+            </div>
+          </div>
+        </div>
+  
+        {/* Content skeleton */}
+        <div className="mt-5">
+          <div className="h-48 bg-[#DFE2F4] rounded"></div>
+        </div>
+      </div>
         ) : (
           <div>
             <div className="flex flex-col gap-5 lg:flex-row">
@@ -136,10 +152,6 @@ const ChildPackageDetails = ({params}) => {
               </div>
             </div>
             <div className="mt-5">
-              {/* <h5 className="text-blue font-semibold text-xl mb-2.5">
-                Description: <br />{" "}
-              </h5>{" "} */}
-              {/* <p>{childDetailsPackage?.description}</p> */}
               <div
                 id="blog_desc"
                 dangerouslySetInnerHTML={{
@@ -147,48 +159,6 @@ const ChildPackageDetails = ({params}) => {
                 }}
               />
             </div>
-            {/* {childDetailsPackage?.conditions?.length > 0 && (
-              <div className="mt-5">
-                <h5 className="font-semibold text-blue text-xl">
-                  Terms & Condiotions:
-                </h5>
-                <ul className="list-decimal ml-5 mt-2.5">
-                  {childDetailsPackage?.conditions?.map((c, i) => (
-                    <li key={i} className="my-1">
-                      {c?.information}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {childDetailsPackage?.inclusions?.length > 0 && (
-              <div className="mt-5">
-                <h5 className="font-semibold text-blue text-xl">
-                  Package Inclusions:
-                </h5>
-                <ul className="list-disc ml-5 mt-2.5 grid gap-4 grid-cols-2 lg:grid-cols-3">
-                  {childDetailsPackage?.inclusions?.map((c, i) => (
-                    <li key={i} className="">
-                      {c?.condition}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {childDetailsPackage?.exclusions?.length > 0 && (
-              <div className="mt-5">
-                <h5 className="font-semibold text-blue text-xl">
-                  Package Exclusions:
-                </h5>
-                <ul className="list-disc ml-5 mt-2.5 grid gap-4 grid-cols-2 lg:grid-cols-3">
-                  {childDetailsPackage?.exclusions?.map((c, i) => (
-                    <li key={i} className="">
-                      {c?.treatment}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )} */}
           </div>
         )}
       </section>

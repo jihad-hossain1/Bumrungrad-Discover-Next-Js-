@@ -29,14 +29,6 @@ const AirtTcket = () => {
     event.preventDefault();
     const form = event.target;
 
-    // const getAirTicket = {
-    //   booking_date: flydate,
-    //   doc: passport,
-    //   country: country,
-    //   destination: destination,
-    //   returndate,
-    // };
-    // console.log(getAirTicket);
     const formData = new FormData();
     formData.append("booking_date", flydate);
     formData.append("return_date", returndate);
@@ -51,7 +43,6 @@ const AirtTcket = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data);
           setLoader(false);
           window.location.reload();
           alert(

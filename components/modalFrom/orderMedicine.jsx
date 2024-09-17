@@ -38,7 +38,6 @@ const OrderMedicine = () => {
   const [prescriptionImg, setprescriptionImg] = useState('')
   const navigate = useNavigate()
 
-  //console.log(name, number, address)
   //add Medicine
   const handleAddMedic = () => {
     const medicineQuantityData = [medicine, quantity]
@@ -61,7 +60,6 @@ const OrderMedicine = () => {
       number,
       email,
     }
-    console.log(orderMedicine)
 
     const formData = new FormData()
     formData.append('name', name)
@@ -77,7 +75,6 @@ const OrderMedicine = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           alert(
             'Medicine Order Placed! Our support team will contact you soon.'
           )

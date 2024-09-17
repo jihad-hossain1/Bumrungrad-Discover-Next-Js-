@@ -56,19 +56,6 @@ export default function Register() {
       SetError("Your Confirm Password Didn't Match")
       setLoader(false)
     } else {
-      const registerData = {
-        firstname,
-        lastName,
-        dob,
-        pataientEmail,
-        phone,
-        gender,
-        citizenship,
-        country,
-        password,
-        confirmPassword,
-      }
-      console.log(registerData)
 
       const formData = new FormData()
       formData.append('firstName', firstname)
@@ -93,7 +80,6 @@ export default function Register() {
         .then((res) => res.json())
         .then((data) => {
           if (data.status === 200) {
-            console.log(data)
             SetError('')
             setLoader(false)
             window.alert('Your Registration is Successfull')

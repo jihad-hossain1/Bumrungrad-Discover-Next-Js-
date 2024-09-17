@@ -16,7 +16,6 @@ const AllBlogs = () => {
         if (data.status === 200) {
           setAllBlogData(data?.data);
         } else {
-          console.log(data);
         }
         setLoader(false); // Stop loader regardless of response
       })

@@ -55,26 +55,7 @@ const VisaProcessing = () => {
   const [driveLink2, setDriveLink2] = React.useState('')
 
   const [loader, setLoader] = useState(false)
-  const vissa = {
-    old,
-    hnNumber,
-    firstname,
-    lastName,
-    citizenship,
-    gender,
-    pataientEmail,
-    phone,
-    dob,
-    country,
-    desc,
-    passport,
-    medicalReport1,
-    medicalReport2,
-    invitationLetter,
-    driveLink1,
-    driveLink2,
-  }
-  console.log(vissa)
+
   const handleBookVisa = () => {
     setLoader(true)
     const formData = new FormData()
@@ -105,7 +86,6 @@ const VisaProcessing = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           setLoader(false)
           window.alert('Please your email or spam box!')
           navigate('/')

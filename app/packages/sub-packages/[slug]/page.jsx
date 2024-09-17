@@ -1,19 +1,13 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-// import { Link, useParams } from "react-router-dom";
-// import Loader from "../../shared/Loader/Loader";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-// import { LazyLoadImage } from "react-lazy-load-image-component";
-// import "react-lazy-load-image-component/src/effects/blur.css";
 import Image from "next/image";
 import Link from "next/link";
 
 const ChildPackage = ({params}) => {
   const [loader, setLoader] = useState();
-//   const { slug } = useParams();
   const [childPackage, setChildPackage] = useState([]);
-  console.log(childPackage);
 
   useEffect(() => {
     setLoader(true);
@@ -27,11 +21,37 @@ const ChildPackage = ({params}) => {
         setLoader(false);
       });
   }, [params.slug]);
+
+
   return (
     <section className="mx-5 md:container md:mx-auto py-10">
       {loader ? (
-        // <Loader />
-        <p>Loading...</p>
+       <div>
+       {/* Title Skeleton */}
+       <div className="md:ml-8 h-8 bg-[#DFE2F4]/90 w-2/5 rounded animate-pulse mb-5"></div>
+ 
+       {/* Packages Grid Skeleton */}
+       <div className="md:ml-8 my-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+         {Array(4).fill().map((_, i) => (
+           <div
+             key={i}
+             className="flex flex-col justify-between gap-5 shadow animate-pulse"
+           >
+             {/* Image Skeleton */}
+             <div className="bg-[#DFE2F4]/90 w-full h-64 rounded"></div>
+ 
+             {/* Text Skeleton */}
+             <div className="p-2.5 space-y-3">
+               <div className="h-6 bg-[#DFE2F4]/90 w-3/4 rounded"></div>
+               <div className="h-5 bg-[#DFE2F4]/90 w-1/2 rounded"></div>
+             </div>
+ 
+             {/* Button Skeleton */}
+             <div className="bg-[#DFE2F4]/90 w-full h-10 rounded-bl rounded-br"></div>
+           </div>
+         ))}
+       </div>
+     </div>
       ) : (
         <div>
           {childPackage?.length > 0 ? (
@@ -40,7 +60,6 @@ const ChildPackage = ({params}) => {
                 our packages
               </h2>
               <div className="md:ml-8 my-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {" "}
                 {childPackage.map((cp, i) => (
                   <div
                     key={i}
@@ -61,13 +80,6 @@ const ChildPackage = ({params}) => {
                       <p className="mt-2.5">
                         <span className="font-semibold">Location:</span> {cp?.location}.
                       </p>
-                      {/* <div
-                        id="blog_desc"
-                        className="text-sm lg:text-base mt-2.5"
-                        dangerouslySetInnerHTML={{
-                          __html: cp?.content?.slice(0, 300) + "...",
-                        }}
-                      /> */}
                     </div>
                     <Link
                       href={`/packages/sub-packages/sub-package-details/${cp?.slug}`}

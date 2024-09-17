@@ -10,7 +10,6 @@ import { ClinicCenterSkeleton } from "@/components/ui/cardload";
 export default function SingleCenter({params}) {
   const [loader, setLoader] = useState(false);
   const [center, setCenter] = useState({});
-  console.log(center);
   useEffect(() => {
     setLoader(true);
     fetch(`https://api.discoverinternationalmedicalservice.com/api/get/centers/${params.slug}`)
@@ -44,13 +43,7 @@ export default function SingleCenter({params}) {
               </span>{" "}
               <br /> {center?.location}
             </p>
-            {/* <p>
-              {' '}
-              <span className='font-semibold text-xl text-blue'>
-                Description:
-              </span>{' '}
-              <br /> {center?.description}
-            </p> */}
+           
             <p className="font-semibold text-xl text-blue">Description:</p>{" "}
             <div
               id="blog_desc"
