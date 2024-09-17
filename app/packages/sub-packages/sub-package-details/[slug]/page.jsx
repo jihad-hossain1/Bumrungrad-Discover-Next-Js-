@@ -7,9 +7,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import useAuth from "@/helpers/hooks/useAuth";
+import { IoMdClose } from "react-icons/io";
 
 const ChildPackageDetails = ({params}) => {
   const [loader, setLoader] = useState();
+  const router = useRouter();
+  const {auth}  = useAuth();
   const [childDetailsPackage, setChildDetailsPackage] = useState({});
 
   const [packageName, setPackageName] = useState("");
@@ -21,6 +26,9 @@ const ChildPackageDetails = ({params}) => {
   ///modal function
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = (data) => {
+    if(!auth) {
+      router.push('/login')
+    }
     setOpen(true);
     setPackagePrice(data.price);
     setPackageName(data.title);
@@ -171,15 +179,16 @@ const ChildPackageDetails = ({params}) => {
           fullWidth="true"
         >
           <DialogTitle id="alert-dialog-title">
-            <div className="flex justify-between">
+            <div className="flex justify-between relative">
               {" "}
               <h1 className="font-semibold">Package Booking</h1>
               <button
-                onClick={handleClose}
-                className="px-4 py-1  bg-red rounded text-white"
-              >
-                Close
-              </button>
+            onClick={handleClose}
+            size='small'
+            className='bg-red h-10 w-10 shadow hover:shadow-md flex justify-center absolute top-0 right-0 items-center rounded-full text-white'
+          >
+            <IoMdClose size={20} />
+          </button>
             </div>
           </DialogTitle>
           <DialogContent>

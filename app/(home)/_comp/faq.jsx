@@ -17,6 +17,27 @@ import {
 
 export default function Faq() {
   const [expanded, setExpanded] = React.useState(false);
+  const [loading,setLoading]=React.useState(false)
+
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+    phone: "",
+    subject: "",
+    nationality: "",
+    gender: "",
+    date: "",
+  });
+
+  const handleSubmit= async()=>{
+    try {
+      setLoading(true);
+      setLoading(false);
+    } catch (error) {
+      console.error(error?.message);
+    }
+  }
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -53,6 +74,8 @@ export default function Faq() {
     },
   ];
 
+
+
   return (
     <div className="mx-5 my-16 md:my-32 md:container md:mx-auto flex flex-col md:flex-row gap-8 md:gap-16">
       <form
@@ -63,8 +86,8 @@ export default function Faq() {
           Get a second medical opinion at Bumrungrad International Hospital
         </p>
         <div className="grid md:grid-cols-2 gap-5">
-          <TextField fullWidth label="Enter Name(as on passport)" required />
-          <TextField fullWidth label="Enter Email" required />
+          <TextField value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} fullWidth label="Enter Name(as on passport)" required />
+          <TextField fullWidth label="Enter Email" required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Select Gender</InputLabel>
             <Select
@@ -73,6 +96,8 @@ export default function Faq() {
               //   value={age}
               label="Select Gender"
               //   onChange={handleChange}
+              value={formData.gender}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
             >
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -84,6 +109,8 @@ export default function Faq() {
               Select Nationality
             </InputLabel>
             <Select
+              value={formData.nationality}
+              onChange={(e) => setFormData({ ...formData, nationality: e.target.value })}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               //   value={age}
@@ -95,16 +122,18 @@ export default function Faq() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <TextField fullWidth label="Phone Number" required />
-          <TextField fullWidth required type="date" />
+          <TextField fullWidth label="Phone Number" type="number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required />
+          <TextField fullWidth required type="date" value={formData.dob} onChange={(e) => setFormData({ ...formData, dob: e.target.value })} />
         </div>
-        <TextField fullWidth label="Enter Subject" required />
-        <TextField fullWidth label="Enter Message" required />
+        <TextField fullWidth label="Enter Subject" required value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} />
+        <TextField fullWidth label="Enter Message" required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
         <button
+          onClick={handleSubmit}
+          disabled={loading}
           className="bg-blue hover:bg-white px-4 py-2 hover:text-blue text-white border border-blue font-semibold rounded duration-300 ease-linear"
-          type="submit"
+          type="button"
         >
-          Send
+          {loading ? "Sending..." : "Submit"}
         </button>
       </form>
       <div className="md:w-1/2">

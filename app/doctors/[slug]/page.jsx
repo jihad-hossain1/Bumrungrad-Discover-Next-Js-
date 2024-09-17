@@ -23,7 +23,7 @@ export default function DoctorInfo({params}) {
   const goAppointMent = (doctor) => {
     localStorage.setItem("doctor_name", JSON.stringify(doctor?.name));
     localStorage.setItem("Doctor_specialty", JSON.stringify(doctor?.specialty));
-    navigate.push("/appointment");
+    navigate.push("/our-services/appointment");
   };
 
   useEffect(() => {
@@ -111,8 +111,8 @@ export default function DoctorInfo({params}) {
           </div>
 
           {/* qualifications  */}
-          <div className="p-5 md:p-10 md:container md:mx-auto lg:flex">
-            <div className="lg:w-1/2 flex flex-col gap-5 md:gap-10">
+          <div className="p-5 md:p-10 md:container md:mx-auto lg:flex max-sm:gap-4 md:gap-6 xl:gap-8">
+            <div className="lg:w-1/2 flex flex-col gap-5 md:gap-10 max-sm:px-5">
               <div className="">
                 {doctor?.schools?.length > 0 && (
                   <>
