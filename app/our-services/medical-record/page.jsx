@@ -28,13 +28,7 @@ const MedicalRecords = () => {
     setLoader(true)
     event.preventDefault()
     const form = event.target
-    const getAirAmbulance = {
-      passport,
-      hnNum,
-      caseSummary,
-      name,
-    }
-    console.log(getAirAmbulance)
+
 
     const formData = new FormData()
 
@@ -50,7 +44,6 @@ const MedicalRecords = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           navigate.push('/')
           alert(
             'Medical record request sent! Our support team will contact you soon.'
