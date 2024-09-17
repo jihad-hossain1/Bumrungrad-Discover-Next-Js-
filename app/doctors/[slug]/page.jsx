@@ -25,7 +25,7 @@ export default function DoctorInfo({params}) {
     localStorage.setItem("Doctor_specialty", JSON.stringify(doctor?.specialty));
     navigate.push("/appointment");
   };
-  // console.log(doctor);
+
   useEffect(() => {
     setLoader(true);
     fetch(
@@ -35,10 +35,8 @@ export default function DoctorInfo({params}) {
       .then((data) => {
         if (data.response.status === 200) {
           setDoctor(data.response.data);
-        //   console.log(data.response.data);
           setLoader(false);
         } else {
-          console.log(data);
           setLoader(false);
         }
       });
@@ -46,7 +44,6 @@ export default function DoctorInfo({params}) {
   return (
     <div>
       {loader ? (
-        // <Loader />
         <DoctorSkeleton />
       ) : (
         <section>

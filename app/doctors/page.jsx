@@ -36,7 +36,6 @@ export default function FindDoctor() {
   const [time, setTime] = React.useState("");
   const [gender, setGender] = React.useState("");
   const [doctors, setDoctors] = useState([]);
-  // console.log(doctors);
   const [query, setQuery] = useState({})
   const [specialties, setSpecialities] = useState([])
   const [subSpecialties, setSubSpecialities] = useState([])
@@ -138,7 +137,6 @@ export default function FindDoctor() {
           setDoctors(data.data)
           setQuery(data.query)
           setLoader(false)
-          // console.log(data.query);
         })
         .catch((error) => console.error(error))
     }
@@ -513,10 +511,10 @@ export default function FindDoctor() {
                 Doctor
               </p>
 
-              <div className='grid grid-cols-2 place-items-center  md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5 my-5'>
+              <div className='grid grid-cols-1 place-items-center  md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5 my-5'>
                 {doctors.slice(0, showData).map((d, i) => (
                   <div
-                    className='shadow hover:shadow-xl duration-300 ease-linear flex flex-col gap-5 w-full  h-[380px] md:h-[520px] rounded-xl '
+                    className='shadow hover:shadow-xl duration-300 ease-linear flex flex-col gap-5 w-full h-full lg:h-[520px] rounded-xl '
                     key={i}
                   >
                     <div className='relative'>
@@ -526,7 +524,7 @@ export default function FindDoctor() {
                         src={d.cover_photo}
                         alt='Bumrungrad International Hospital'
                         loading='lazy'
-                        className='h-[200px] md:h-[350px]  w-full rounded-tl-xl rounded-tr-xl'
+                        className='max-sm:h-full max-sm:w-full md:h-[350px]  w-full rounded-tl-xl rounded-tr-xl'
                       />
                       <div>
                         <Link

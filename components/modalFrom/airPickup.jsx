@@ -13,12 +13,6 @@ const AirPickup = () => {
     setLoader(true)
     event.preventDefault()
     const form = event.target
-    const airPickup = {
-      appoinmentfile: appointmentfile,
-      airTicketFile: airTicketFile,
-      passengerQuantity: passenger,
-    }
-    console.log(airPickup)
 
     const formData = new FormData()
     formData.append('appointment', appointmentfile)
@@ -32,7 +26,7 @@ const AirPickup = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
+
           setLoader(false)
           window.location.reload();
           alert("Airport request sent! Our support team will contact you soon.")

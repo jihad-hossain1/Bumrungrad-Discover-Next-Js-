@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-// import Loader from '../../shared/Loader/Loader'
 import Image from 'next/image'
 import CardLoader from '@/components/ui/cardLoader'
+
+
 export default function News() {
   const [newsData, setNewsData] = useState()
   const [loader, setLoader] = useState()
@@ -18,7 +19,6 @@ export default function News() {
           setNewsData(data?.data)
           setLoader(false)
         } else {
-          console.log(data)
           setLoader(false)
         }
       })

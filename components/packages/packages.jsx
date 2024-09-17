@@ -38,7 +38,6 @@ export default function Packages() {
           setPackages([])
           setLoader(false)
         } else {
-          console.log(data)
           setLoader(false)
         }
       })
@@ -60,7 +59,7 @@ export default function Packages() {
       return null
     }
   })
-  //console.log(showpageNumber)
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
   }

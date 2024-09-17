@@ -28,7 +28,6 @@ export default function Appointment() {
   const doctor1 = auth?.doctor_name
   const speacility1 = auth?.Doctor_specialty
 
-  // console.log(userDetails);
   const [loader, setLoader] = useState(false)
   // previwer control
   const [Previewopen, PreviewsetOpen] = React.useState(false)
@@ -164,7 +163,6 @@ export default function Appointment() {
           if (data?.response?.status === 200) {
             setSubSpecialities(data?.response?.data)
           } else {
-            console.log(data)
             setSubSpecialities([])
           }
         })
@@ -189,7 +187,6 @@ export default function Appointment() {
             setDoctors(data.data)
           } else {
             setDoctors([])
-            console.log(data)
           }
         })
         .catch((error) => console.error(error))
@@ -248,7 +245,6 @@ export default function Appointment() {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data)
           setLoader(false)
           PreviewsetOpen(false)
           window.alert('Please check your email or spam box!')
