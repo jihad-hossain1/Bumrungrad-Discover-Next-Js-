@@ -5,8 +5,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import Services from '@/components/services/main/services';
-// import Services from './services';
-// import Services from './Services'
+import { IoMdClose } from "react-icons/io";
 
 const style = {
   position: 'absolute',
@@ -41,9 +40,9 @@ const BookingModal = () => {
           <button
             onClick={handleClose}
             size='small'
-            className='bg-black text-white px-2 py-1 mb-2 rounded float-right'
+            className='bg-red h-10 w-10 shadow hover:shadow-md flex justify-center absolute top-3 right-3 items-center rounded-full text-white'
           >
-            Close
+            <IoMdClose size={20} />
           </button>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             <p className='font-semibold'>{name}</p>

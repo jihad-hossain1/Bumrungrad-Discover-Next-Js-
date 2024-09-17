@@ -555,13 +555,13 @@ export default function Appointment() {
               </p>
               <div className='flex justify-center gap-2'>
                 <button
-                  className='mt-5 px-4 py-2 rounded font-semibold text-white bg-blue hover:bg-white border border-blue hover:text-blue duration-300 ease-linear'
+                  className='max-sm:w-full xl:w-[150px] mt-5 px-4 py-2 rounded font-semibold text-white bg-blue hover:bg-white border border-blue hover:text-blue duration-300 ease-linear'
                   onClick={handleClick2Prev}
                 >
                   Previous
                 </button>
                 <button
-                  className={`mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
+                  className={`max-sm:w-full xl:w-[150px] mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
                     selectedDate === '' ||
                     selectedDate2 === '' ||
                     shift === '' ||

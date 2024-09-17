@@ -497,7 +497,7 @@ export default function FindDoctor() {
       {loader ? (
        <CardLoaders cardLength={20} gridNumber={5} />
       ) : (
-        <div className="mx-5 p-5 md:container md:mx-auto relative">
+        <div className="mx-5 md:container md:mx-auto relative">
           <button
             onClick={handaleToptoBottom}
             className='p-2 md:p-4 fixed bottom-5 right-5 z-50 bg-blue hover:bg-white border-2 border-blue text-white hover:text-blue rounded-full'
@@ -505,8 +505,8 @@ export default function FindDoctor() {
             <FaArrowUp className='text-xl md:text-3xl' />
           </button>
           {doctors?.length > 0 ? (
-            <div>
-              <p className='text-xl md:text-2xl font-semibold'>
+            <div >
+              <p className='max-sm:pt-5 md:pt-10 text-xl md:text-2xl font-semibold'>
                 Found <span className='text-blue'>{doctors?.length}</span>{' '}
                 Doctor
               </p>
