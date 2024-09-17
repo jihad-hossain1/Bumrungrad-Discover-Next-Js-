@@ -26,20 +26,21 @@ export default function Services({ handaleOpen, getData }) {
   const {auth} = useAuth()
   const path = usePathname();
   const router = useRouter();
-  const handleClick = (s, i, id) => {
-    if(s?.pageTo){
-      if(auth){
-      router.push(s?.pageTo)
-      return
-      }
-      else{
-        router.push('/login')
-        return
-      }
-    }
+
+const handleClick = (s, i, id) => {
+  // if (!auth) {
+  //   router.push('/login');
+  //   return;
+  // }
+
+  if (s?.pageTo) {
+    router.push(s.pageTo);
+  } else {
     handaleOpen(id);
     getData(s);
-  };
+  }
+};
+
 
   return (
     <div className="p-5 md:p-10 my-10 md:my-20 md:container md:mx-auto">

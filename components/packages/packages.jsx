@@ -97,6 +97,8 @@ export default function Packages() {
 
 
 const sanitizedPackage = path === '/packages' ? curentPackage : curentPackage?.slice(0,4)
+const cardNumber = path === '/packages' ? 3 : 4
+const cardLength = path === '/packages' ? 15 : 4
   return (
     <section className='p-5 my-5 md:container md:mx-auto'>
     

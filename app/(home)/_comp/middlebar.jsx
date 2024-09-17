@@ -88,9 +88,9 @@ export default function MiddleBar() {
               </button>
             </div>
             <div className="flex mt-5 gap-2">
-              <div className="">
-                <Link href="/check-up" className="relative">
-                  <div className="absolute z-10 top-0 h-[100%] w-full bg-black/50 rounded-lg"></div>
+              <div  className="relative group">
+                <Link href="/check-up">
+                  <div className="absolute z-10 top-0 h-[100%] w-full bg-black/20 rounded-lg"></div>
                   <div className="absolute bottom-0 z-30 w-full bg-blue rounded-bl-lg rounded-br-lg">
                     <h2 className="text-white md:font-medium text-sm md:text-xl text-center p-1 md:py-3">
                       Health <br/> Screnning
@@ -98,32 +98,32 @@ export default function MiddleBar() {
                   </div>
 
                   <Image
-                  height={40}
-                  width={40}
+                  height={300}
+                  width={1000}
                     src={healthScrenning}
                     alt="Bumrungrad International Hospital"
                     srcset=""
                     effect="blur"
-                    className="rounded-lg"
+                    className="rounded-lg max-sm:h-full h-[350px] w-full"
                   />
                 </Link>
               </div>
-              <div className="">
-                <Link href="/appointment" className="relative">
-                  <div className="absolute z-10 top-0 h-[100%] w-full bg-black/50 rounded-lg"></div>
+              <div className="relative">
+                <Link href="/our-services/appointment" >
+                  <div className="absolute z-10 top-0 h-[100%] w-full bg-black/20 rounded-lg"></div>
                   <div className="absolute bottom-0 z-30 w-full bg-blue rounded-bl-lg rounded-br-lg">
-                    <h2 className="text-white md:font-medium text-sm md:text-xl text-center p-1 md:py-3">
+                    <h2 className=" md:font-medium text-white text-sm md:text-xl text-center p-1 md:py-3">
                       Doctor <br/> Schedule
                     </h2>
                   </div>
                   <Image
-                  height={40}
-                  width={40}
+                  height={400}
+                  width={1000}
                     src={apoointDoctor}
                     effect="blur"
                     alt="Bumrungrad International Hospital"
                     srcset=""
-                    className="rounded-lg"
+                    className="rounded-lg max-sm:h-full  h-[350px] w-full"
                   />
                 </Link>
               </div>

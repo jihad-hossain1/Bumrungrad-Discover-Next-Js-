@@ -1,15 +1,20 @@
+
+
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
+import "./test.css";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { AiFillStar } from "react-icons/ai";
 import { FaQuoteLeft } from "react-icons/fa";
 
 export default function Testimonial() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState(null); // Store the Swiper instance
+
   const patientReviews = [
     {
       country: "Nepal",
@@ -37,6 +42,12 @@ export default function Testimonial() {
     },
   ];
 
+  const handlePaginationClick = (index) => {
+    if (swiperInstance) {
+      swiperInstance.slideTo(index); // Change the slide on pagination click
+    }
+  };
+
   return (
     <div className="px-2.5 py-10 mb-10 md:rounded-3xl md:container md:mx-auto">
       <h2 className="text-center text-2xl md:text-4xl font-semibold text-blue capitalize">
@@ -46,6 +57,8 @@ export default function Testimonial() {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} // Track active slide
+        onSwiper={(swiper) => setSwiperInstance(swiper)} // Store swiper instance
         breakpoints={{
           0: {
             slidesPerView: 1,
@@ -60,9 +73,6 @@ export default function Testimonial() {
           depth: 100,
           modifier: 1,
           slideShadows: true,
-        }}
-        pagination={{
-          clickable: true,
         }}
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper py-5 md:py-10 mt-5 md:mt-10"
@@ -88,35 +98,16 @@ export default function Testimonial() {
         ))}
       </Swiper>
 
-      <style jsx>{`
-        .swiper-container {
-          position: relative;
-        }
-
-        .swiper-pagination {
-          position: absolute;
-          bottom: -30px; /* Adjust this value to move the bullets outside */
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-        }
-
-        .swiper-pagination-bullet {
-          background: #007bff; /* Bullet color */
-          width: 12px;
-          height: 12px;
-          border-radius: 0; /* Makes the bullet square */
-          opacity: 1;
-          transition: background 0.3s, transform 0.3s;
-        }
-
-        .swiper-pagination-bullet-active {
-          background: #0056b3;
-          transform: scale(1.2);
-        }
-      `}</style>
+      {/* Custom Pagination */}
+      <div className="custom-pagination-2 flex justify-center mt-4 gap-2">
+        {patientReviews.map((_, index) => (
+          <span
+            key={index}
+            className={`w-4 h-4 rounded-full cursor-pointer ${index === activeIndex ? 'bg-blue' : 'bg-[#a5a4a0]'}`}
+            onClick={() => handlePaginationClick(index)} // Trigger pagination click
+          />
+        ))}
+      </div>
     </div>
   );
 }
