@@ -11,9 +11,9 @@ const VissionMisson = () => {
             <div className='h-[20vh] md:h-[30vh] lg:h-[50vh] vissionMission-back relative flex justify-center items-center'>
                 <div className='absolute top-0 h-full w-full bg-black/60'></div>
                 
-                <h1 className='uppercase text-xl text-center md:text-2xl lg:text-3xl font-bold text-white z-10'>
+                <h4 className='uppercase text-xl text-center md:text-2xl lg:text-3xl font-bold text-white z-10'>
                     Vision & Mission
-                </h1>
+                </h4>
             </div>
             {/* new content here */}
             <div className='mx-5 my-10'>
@@ -44,9 +44,9 @@ const VissionMisson = () => {
                     <hr />
                 </div>
                 <p className='text-justify'>
-                    Our main goal at
+                    Our main goal at 
                     <a
-                        className='font-semibold text-blue underline'
+                        className='font-semibold text-blue underline mr-2 ml-2'
                         href='https://discoverinternationalmedicalservice.com/'
                     >
                         Bumrungrad International Hospital
@@ -73,7 +73,7 @@ const VissionMisson = () => {
                 <p className='text-justify'>
                     Our mission at
                     <a
-                        className='font-semibold text-blue underline'
+                        className='font-semibold text-blue underline ml-2 mr-2'
                         href='https://discoverinternationalmedicalservice.com/'
                     >
                         Bumrungrad International Hospital
@@ -116,7 +116,7 @@ const VissionMisson = () => {
                 <p className='text-justify mt-4'>
                     Everyone at
                     <a
-                        className='font-semibold text-blue underline'
+                        className='font-semibold text-blue underline mx-2'
                         href='https://discoverinternationalmedicalservice.com/'
                     >
                         Bumrungrad International Hospital
@@ -163,7 +163,7 @@ const VissionMisson = () => {
                 </h2>
                 <p className='text-justify mt-4'>
                     <a
-                        className='font-semibold text-blue underline'
+                        className='font-semibold text-blue underline mr-2'
                         href='https://discoverinternationalmedicalservice.com/'
                     >
                         Bumrungrad International Hospital
@@ -183,7 +183,7 @@ const VissionMisson = () => {
                 </h2>
                 <p className='text-justify mt-4'>
                     <a
-                        className='font-semibold text-blue underline'
+                        className='font-semibold text-blue underline mr-2'
                         href='https://discoverinternationalmedicalservice.com/'
                     >
                         Bumrungrad International Hospital
