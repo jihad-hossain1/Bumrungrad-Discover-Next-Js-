@@ -20,6 +20,10 @@ import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import AuthRoute from '@/helpers/context/AuthRoute'
+import { admin_mails } from '@/constant'
+import toast from 'react-hot-toast'
+import { sendEmails } from '@/helpers/mail/sendMail'
+import { mailBody } from '@/helpers/mail/mailbody'
 
 
 export default function Appointment() {
@@ -81,6 +85,7 @@ export default function Appointment() {
   const [shift2, setShift2] = React.useState('')
   const [firstSiftTime, setFirstShiftTime] = React.useState('')
   const [SecondSiftTime, setSecondSiftTime] = React.useState('')
+  const [formDatas,setFormDatas] = React.useState(null)
 
   const [hnNumber, setHnNumber] = React.useState('')
   const [firstname, setfirstname] = React.useState(
@@ -198,66 +203,96 @@ export default function Appointment() {
   const navigate = useRouter()
 
   //book apppointment
-  const handleBookAppointment = () => {
-    setLoader(true)
-    const formData = new FormData()
+  const handleBookAppointment = async () => {
+    try {
+      setLoader(true);
+  
+      const formData = new FormData();
+      const { id: userId } = userDetails || {};
+      
+      const fields = {
+        user_id: userId,
+        specialty,
+        doctor,
+        subSpecialty,
+        medicalDesc,
+        selectedDate: format(selectedDate, 'PP'),
+        selectedDate2: format(selectedDate2, 'PP'),
+        shift,
+        shift2,
+        firstSiftTime,
+        SecondSiftTime,
+        oldPataint: old,
+        HnNumber: hnNumber,
+        PataientFirstName: firstname,
+        PataientLastName: lastName,
+        PataientCitizenship: citizenship,
+        PataientGender: gender,
+        PataientEmail: pataientEmail,
+        PataientPhone: phone,
+        PataientDob: dob,
+        country,
+        mediicalCorncern: desc,
+        RequestorFirstname: requestorFirstname,
+        RequestorLastName: requestorLastName,
+        RequestorEmail: requestorEmail,
+        RequestorPhone: phone2,
+        RequestoerRelation: relation,
+        passport,
+        medicalReport1,
+        medicalReport2,
+        driveLink1,
+        driveLink2
+      };
+  
+      // Append all fields to FormData
+      Object.entries(fields).forEach(([key, value]) => {
+        formData.append(key, value);
+        setFormDatas((prev) => ({ ...prev, [key]: value }));
+      });
+  
+      
+      // setFormDatas({ ...formData });
+      console.log("🚀 ~ formData:", formDatas);
+  
 
-    formData.append('user_id', userDetails?.id)
-    formData.append('specialty', specialty)
-    formData.append('doctor', doctor)
-    formData.append('subSpecialty', subSpecialty)
-    formData.append('medicalDesc', medicalDesc)
-    formData.append('selectedDate', format(selectedDate, 'PP'))
-    formData.append('selectedDate2', format(selectedDate2, 'PP'))
-    formData.append('shift', shift)
-    formData.append('shift2', shift2)
-    formData.append('firstSiftTime', firstSiftTime)
-    formData.append('SecondSiftTime', SecondSiftTime)
-    formData.append('oldPataint', old)
-    formData.append('HnNumber', hnNumber)
-    formData.append('PataientFirstName', firstname)
-    formData.append('PataientLastName', lastName)
-    formData.append('PataientCitizenship', citizenship)
-    formData.append('PataientGender', gender)
-    formData.append('PataientEmail', pataientEmail)
-    formData.append('PataientPhone', phone)
-    formData.append('PataientDob', dob)
-    formData.append('country', country)
-    formData.append('mediicalCorncern', desc)
-
-    formData.append('RequestorFirstname', requestorFirstname)
-    formData.append('RequestorLastName', requestorLastName)
-    formData.append('RequestorEmail', requestorEmail)
-    formData.append('RequestorPhone', phone2)
-    formData.append('RequestoerRelation', relation)
-
-    formData.append('passport', passport)
-    formData.append('medicalReport1', medicalReport1)
-    formData.append('medicalReport2', medicalReport2)
-
-    formData.append('driveLink1', driveLink1)
-    formData.append('driveLink2', driveLink2)
-
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/doctor/appointment', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          PreviewsetOpen(false)
-          window.alert('Please check your email or spam box!')
-          navigate.push('/')
-          localStorage.removeItem('doctor_name')
-          localStorage.removeItem('Doctor_specialty')
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        setLoader(false)
-      })
-  }
+      // Send API request
+      const apiResponse = await fetch('https://api.discoverinternationalmedicalservice.com/api/add/doctor/appointment', {
+        method: 'POST',
+        body: formData
+      });
+  
+      const data = await apiResponse.json();
+  
+      if (data.status === 200) {
+        window.alert('Please check your email or spam box!');
+        localStorage.removeItem('doctor_name');
+        localStorage.removeItem('Doctor_specialty');
+        setLoader(false);
+        PreviewsetOpen(false);
+      } else {
+        throw new Error('Failed to book appointment');
+      }
+      
+      // Send email
+      const emailResponse = await sendEmails(admin_mails, 'Book Appointment', mailBody(formDatas), );
+  
+      if (emailResponse.messageId) {
+        toast.success('Mail has been sent', {
+          position: 'top-center',
+          style: { borderRadius: '20px' },
+          duration: 5000
+        });
+      }
+  
+    } catch (error) {
+      console.error("Error booking appointment or sending email:", error);
+      setLoader(false);
+    } finally {
+      setLoader(false);
+    }
+  };
+  
 
   return (
  <AuthRoute>
@@ -442,6 +477,7 @@ export default function Appointment() {
               <div className='flex flex-col gap-2.5 md:flex-row md:gap-5'>
                 <div className='flex flex-col items-center shadow my-2.5'>
                   <p className='font-semibold text-blue'>First Date Choice</p>
+                  <input type="date" name="" onChange={(e) => setSelectedDate(e.target.value)} id="" />
                   <DayPicker
                     mode='single'
                     selected={selectedDate}
