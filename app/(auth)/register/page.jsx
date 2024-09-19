@@ -14,6 +14,7 @@ import { MuiTelInput } from 'mui-tel-input'
 import Link from 'next/link'
 import { AiFillEye } from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export default function Register() {
   const navigate = useRouter()
@@ -35,6 +36,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = React.useState('')
   const [isVisible, setIsVisible] = useState(false)
   const [isVisible1, setIsVisible1] = useState(false)
+  const [errors, SetErrors] = useState(null)
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible)
@@ -50,8 +52,8 @@ export default function Register() {
     setPhone(newPhone)
   }
 
-  const handaleRegister = () => {
-    setLoader(true)
+  const handaleRegister = async () => {
+   
     if (password !== confirmPassword) {
       SetError("Your Confirm Password Didn't Match")
       setLoader(false)
@@ -73,21 +75,40 @@ export default function Register() {
       formData.append('password', password)
       formData.append('confirmPassword', confirmPassword)
 
-      fetch('https://api.discoverinternationalmedicalservice.com/api/register', {
+      setLoader(true)
+      SetErrors(null)
+   const res = await   fetch('https://api.discoverinternationalmedicalservice.com/api/register', {
         method: 'POST',
         body: formData,
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === 200) {
-            SetError('')
-            setLoader(false)
-            window.alert('Your Registration is Successfull')
-
-            navigate.push('/login')
+      setLoader(false)
+      const jsonData = await res.json()
+      
+      if(jsonData?.err){
+        toast.error("Something went wrong", {
+          position: "top-center",
+          style: {
+            padding: "20px",
+            border: "1px solid #ccc",
+            color: "red",
           }
         })
-        .catch((error) => console.error(error))
+        SetErrors(jsonData.err)
+        return;
+      }
+
+      if(jsonData?.data?.token){
+        toast.success("Your Registration is Successfull", {
+          position: "top-center",
+          style: {
+            padding: "20px",
+            border: "1px solid #ccc",
+            color: "green",
+          },
+          duration: 5000
+        })
+        navigate.push('/login')
+      }
     }
   }
 
@@ -149,7 +170,7 @@ export default function Register() {
               </Select>
             </FormControl>
             <div>
-              <p className='mb-2.5'>Enter Email(Required)</p>
+              <p className='mb-2.5'>Enter Email(Required)</p> {errors?.email && <p className='text-red'>{errors?.email[0]}</p>}
               <TextField
                 fullWidth
                 placeholder='Required'

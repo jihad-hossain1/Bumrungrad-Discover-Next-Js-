@@ -103,7 +103,7 @@ const VisaProcessing = () => {
   }
 
   return (
-   <AuthRoute>
+   <>
      <section className='mx-5 md:container md:mx-auto pb-10'>
       <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
         Process Your Visa
@@ -386,7 +386,7 @@ const VisaProcessing = () => {
         </section>
       )}
     </section>
-   </AuthRoute>
+   </>
   )
 }
 

@@ -53,7 +53,7 @@ export default function User() {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <AuthRoute>
+    <>
       <section className="mx-5 md:container md:mx-auto py-10  md:flex md:gap-8 lg:gap-16">
         <div className="shadow p-5 rounded-lg shadow-blue relative md:w-1/2">
           <div className="h-16 w-16 bg-blue absolute bottom-5 right-5 rounded-full animate-bounce"></div>
@@ -145,6 +145,6 @@ export default function User() {
           </div>
         </div>
       </section>
-    </AuthRoute>
+    </>
   );
 }
