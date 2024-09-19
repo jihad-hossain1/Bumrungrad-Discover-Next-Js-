@@ -17,6 +17,7 @@ const style = {
   borderRadius: '16px',
   boxShadow: 24,
   p: 2,
+  overflow: 'auto',
 }
 
 const BookingModal = () => {
@@ -49,7 +50,7 @@ const BookingModal = () => {
           </Typography>
 
           <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-            <div>{form}</div>
+            <div className=''>{form}</div>
           </Typography>
         </Box>
       </Modal>
