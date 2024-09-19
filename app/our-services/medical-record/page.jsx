@@ -55,7 +55,7 @@ const MedicalRecords = () => {
       .catch((error) => console.error(error))
   }
   return (
-   <AuthRoute>
+   <>
      <div className='md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Medical Records
@@ -123,7 +123,7 @@ const MedicalRecords = () => {
         </button>
       </form>
     </div>
-   </AuthRoute>
+   </>
   )
 }
 

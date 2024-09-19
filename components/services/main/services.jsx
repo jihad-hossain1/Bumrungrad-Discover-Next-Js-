@@ -29,14 +29,13 @@ export default function Services({ handaleOpen, getData }) {
   const router = useRouter();
 
 const handleClick = (s, i, id) => {
-  // if (!auth) {
-  //   router.push('/login');
-  //   return;
-  // }
-
   if (s?.pageTo) {
     router.push(s.pageTo);
   } else {
+    if (!auth) {
+      router.push('/login');
+      // return;
+    }
     handaleOpen(id);
     getData(s);
   }

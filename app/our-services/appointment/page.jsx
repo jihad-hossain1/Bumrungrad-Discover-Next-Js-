@@ -260,7 +260,7 @@ export default function Appointment() {
       const data = await apiResponse.json();
   
       if (data.status === 200) {
-        window.alert('Please check your email or spam box!');
+       toast.success('Please check your email or spam box!');
         localStorage.removeItem('doctor_name');
         localStorage.removeItem('Doctor_specialty');
         setLoader(false);
@@ -270,7 +270,7 @@ export default function Appointment() {
       }
       
       // Send email
-      const emailResponse = await sendEmails(admin_mails, 'Book Appointment', mailBody(formDatas), );
+      const emailResponse = await sendEmails(admin_mails, 'Book Appointment', mailBody(formDatas) );
   
       if (emailResponse.messageId) {
         toast.success('Mail has been sent', {
@@ -278,10 +278,23 @@ export default function Appointment() {
           style: { borderRadius: '20px' },
           duration: 5000
         });
+
+        const responseClient = await sendEmails([formDatas.PataientEmail], 'Book Appointment', mailBody({...formDatas, user_id: "-"}) );
+      
+        if (responseClient.messageId) {
+          toast.success('please check your email', {
+            position: 'top-center',
+            style: { borderRadius: '20px' },
+            duration: 5000
+          });
+          navigate.push('/my-profile');
+
+        }
+        
+
       }
   
     } catch (error) {
-      console.error("Error booking appointment or sending email:", error);
       setLoader(false);
     } finally {
       setLoader(false);
@@ -290,7 +303,7 @@ export default function Appointment() {
   
 
   return (
- <AuthRoute>
+ <>
   <div className='md:p-10 my-5 md:my-10 md:container md:mx-auto lg:flex lg:flex-col lg:items-center'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Book Appointment
@@ -1197,6 +1210,6 @@ export default function Appointment() {
         </div>
       </div>
     </div>
- </AuthRoute>
+ </>
   )
 }

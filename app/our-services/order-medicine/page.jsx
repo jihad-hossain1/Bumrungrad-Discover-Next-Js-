@@ -83,7 +83,7 @@ const OrderMedicine = () => {
       .catch((error) => console.error(error))
   }
   return (
-   <AuthRoute>
+   <>
      <div className='mt-5 mb-10 py-5 px-5 md:px-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Order Medicine
@@ -250,7 +250,7 @@ const OrderMedicine = () => {
         </button>
       </div>
     </div>
-   </AuthRoute>
+   </>
   )
 }
 
