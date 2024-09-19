@@ -251,11 +251,6 @@ export default function Appointment() {
         setFormDatas((prev) => ({ ...prev, [key]: value }));
       });
   
-      
-      // setFormDatas({ ...formData });
-      console.log("🚀 ~ formData:", formDatas);
-  
-
       // Send API request
       const apiResponse = await fetch('https://api.discoverinternationalmedicalservice.com/api/add/doctor/appointment', {
         method: 'POST',

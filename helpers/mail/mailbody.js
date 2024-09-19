@@ -35,13 +35,14 @@ export const mailBody = (data) => {
                   color: #333;
               }
               p {
-                  font-size: 16px;
+                  font-size: 14px;
                   color: #555;
                   line-height: 1.5;
               }
               .label {
                   font-weight: bold;
                   color: #333;
+                  font-size: 14px;
               }
               .value {
                   margin-left: 10px;
