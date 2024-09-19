@@ -19,6 +19,7 @@ import moneyTransfer from '@/public/assets/service_logo/bro4.png'
 import languageImage from '@/public/assets/service_logo/bro.png'
 import accommodation from '@/public/assets/service_logo/bro2.png'
 import hospitalAdmission from '@/public/assets/service_logo/bro5.png'
+import Arrival from "../arrival";
 
 
 
@@ -149,7 +150,7 @@ const services = [
   {
     name: "Admission On Arrival",
     img: hospitalAdmission,
-    form: <UpComming />,
+    form: <Arrival />,
     alt: "Bumrungrad International Hospital",
     description:
       "We’re make your arrival as smooth and stress-free as possible. From quick online pre-registration to personal help from our team, we’re committed to making sure you settle in comfortably and start your care without any hassle.",
@@ -157,7 +158,7 @@ const services = [
   {
     name: "Thai Local Accommodation",
     img: accommodation,
-    form: <UpComming />,
+    pageTo: "http://wa.me/+8801847284864",
     alt: "Bumrungrad International Hospital",
     description:
       "We offer your airport pick-up and drop-off is simple and relaxed. From the airport to your Thai accommodation, we make every step of your journey comfortable.",
@@ -173,7 +174,7 @@ const services = [
   {
     name: "Transfer Money for Treatment",
     img: moneyTransfer,
-    form: <UpComming />,
+    pageTo: "http://wa.me/+66948382910",
     alt: "Bumrungrad International Hospital",
     description:
       "We simplify transferring funds for your medical treatment. Our process ensures your money reaches its destination quickly and securely, so you can focus on your care.",

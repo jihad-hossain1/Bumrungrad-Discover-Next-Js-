@@ -16,7 +16,8 @@ const style = {
   border: '2px solid #fff',
   borderRadius: '16px',
   boxShadow: 24,
-  p: 4,
+  p: 2,
+  overflow: 'auto',
 }
 
 const BookingModal = () => {
@@ -36,11 +37,11 @@ const BookingModal = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style} className={`${height} max-sm:w-[350px] w-[700px]`}>
+        <Box sx={style} className={`${height} max-sm:w-[370px] w-[700px]`}>
           <button
             onClick={handleClose}
             size='small'
-            className='bg-red h-10 w-10 shadow hover:shadow-md flex justify-center absolute top-3 right-3 items-center rounded-full text-white'
+            className='bg-red h-10 w-10 max-sm:w-6 max-sm:h-6 shadow hover:shadow-md flex justify-center absolute top-3 right-3 items-center rounded-full text-white'
           >
             <IoMdClose size={20} />
           </button>
@@ -49,7 +50,7 @@ const BookingModal = () => {
           </Typography>
 
           <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-            <div>{form}</div>
+            <div className=''>{form}</div>
           </Typography>
         </Box>
       </Modal>
