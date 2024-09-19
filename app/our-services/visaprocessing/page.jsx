@@ -109,11 +109,10 @@ const VisaProcessing = () => {
         Process Your Visa
       </h1>
       {/* second card  */}
-      <section>
+      <section className=''>
         <p className='my-5 text-xl text-blue font-semibold'>
           Where are you from?
         </p>
-        <Divider />
         <FormControl fullWidth className='md:!w-1/2'>
           <p className='my-2.5'>Select Country(Required)</p>
           <Select
@@ -131,7 +130,7 @@ const VisaProcessing = () => {
         </FormControl>
       </section>
       {country === 'Bangladesh' ? (
-        <section className='flex flex-col justify-center items-center py-5 gap-4 shadow-xl rounded-xl md:w-1/2'>
+        <section className='flex flex-col justify-center items-center py-5 gap-4 shadow rounded md:w-1/2'>
           <div className='mb-2'>
             <Image
               height={300}
