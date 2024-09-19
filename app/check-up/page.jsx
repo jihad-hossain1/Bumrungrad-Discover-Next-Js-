@@ -5,6 +5,9 @@ import { TextField, FormControl, MenuItem, Select } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
 import AuthRoute from '@/helpers/context/AuthRoute'
+import { mailBody, sendEmails } from '@/helpers/mail/sendMail'
+import { admin_mails } from '@/constant'
+import toast from 'react-hot-toast'
 
 
 export default function CheckUp() {
@@ -45,6 +48,7 @@ export default function CheckUp() {
   const [nationality, setNationality] = useState(
     auth?.citizenship ? auth?.citizenship : ''
   )
+  const [formDatas,setFormDatas] = useState(null)
 
   //get packages
   useEffect(() => {
@@ -104,38 +108,64 @@ export default function CheckUp() {
     setStepper1(true)
     setStepper2(false)
   }
-  const handaleDataSubmit = () => {
-    setLoader(true)
+const handaleDataSubmit = async () => {
+  try {
+    setLoader(true);
 
-    const formData = new FormData()
-    formData.append('healtePackage', healtePackage)
-    formData.append('specialty', specialty)
-    formData.append('prefferdDoctor', prefferdDoctor)
-    formData.append('appoinMentDate', appoinMentDate)
-    formData.append('appoinMentTime', appoinMentTime)
-    formData.append('medicalConcern', medicalConcern)
-    formData.append('HnNumber', HnNumber)
-    formData.append('patientName', patientName)
-    formData.append('gender', gender)
-    formData.append('email', email)
-    formData.append('phone', phone)
-    formData.append('nationality', nationality)
+    const formData = new FormData();
 
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/health/check_up', {
+    // Define form fields in an object
+    const fields = {
+      healtePackage,
+      specialty,
+      prefferdDoctor,
+      appoinMentDate,
+      appoinMentTime,
+      medicalConcern,
+      HnNumber,
+      patientName,
+      gender,
+      email,
+      phone,
+      nationality
+    };
+
+    // Append all fields to FormData
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value)
+      setFormDatas((prev) => ({ ...prev, [key]: value }));
+    });
+
+    // Send POST request
+    const response = await fetch('https://api.discoverinternationalmedicalservice.com/api/add/health/check_up', {
       method: 'POST',
       body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          window.alert('Check Up Request Placed')
-          navigate('/')
+    });
+
+    const data = await response.json();
+
+    if (data.status === 200) {
+      window.alert('Check Up Request Placed');
+      const mailResponse = await sendEmails(admin_mails, 'Check Up Request Placed', mailBody(formDatas));
+      console.log("🚀 ~ handaleDataSubmit ~ mailResponse:", mailResponse)
+      toast.success("Check Up Request Placed", {
+        duration: 4000,
+        style: {
+          padding: '20px',
+          color: 'green',
         }
-        setLoader(false)
-      })
-      .catch((error) => console.error(error))
+      });
+      // navigate('/');
+    } else {
+      throw new Error('Failed to submit data');
+    }
+  } catch (error) {
+    console.error("Error submitting check up request:", error);
+  } finally {
+    setLoader(false);
   }
+};
+
   return (
    <AuthRoute>
      <div className='px-5 py-3  md:container md:mx-auto'>
