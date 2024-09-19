@@ -29,14 +29,13 @@ export default function Services({ handaleOpen, getData }) {
   const router = useRouter();
 
 const handleClick = (s, i, id) => {
-  // if (!auth) {
-  //   router.push('/login');
-  //   return;
-  // }
-
   if (s?.pageTo) {
     router.push(s.pageTo);
   } else {
+    if (!auth) {
+      router.push('/login');
+      // return;
+    }
     handaleOpen(id);
     getData(s);
   }
@@ -65,7 +64,7 @@ const handleClick = (s, i, id) => {
             onClick={() => handleClick(s, i, id)}
             className="cursor-pointer flex flex-col gap-4 items-center md:hover:scale-105 shadow md:hover:shadow-lg md:hover:shadow-blue duration-300 ease-linear p-4 rounded"
           >
-            <Image height={100} width={100} src={s.img} alt={s.alt} />
+            <Image height={150} width={100} src={s.img} alt={s.alt} />
             <h5 className="text-xl text-center font-semibold text-blue">
               {s.name}
             </h5>

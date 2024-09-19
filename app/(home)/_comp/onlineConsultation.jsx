@@ -24,7 +24,7 @@ export default function OnlineConsultation() {
   ];
 
   return (
-    <div className="mx-5 my-10 md:my-20 lg:my-24 xl:container xl:mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+    <div className="mx-5 my-10 md:my-20 lg:my-24 xl:container xl:mx-auto grid grid-cols-1 lg:grid-cols-2">
     <div className="w-full max-h-[590px]">
       <Image
         height={400}
@@ -34,7 +34,7 @@ export default function OnlineConsultation() {
         alt="Bumrungrad International Hospital"
       />
     </div>
-    <div className="flex flex-col gap-5 md:gap-10 w-full bg-cream p-6 md:p-8 rounded">
+    <div className="flex flex-col gap-5 md:gap-10 w-full p-6 md:p-8">
       <h5 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue">
         Schedule an online video consultation at Bumrungrad International Hospital
       </h5>

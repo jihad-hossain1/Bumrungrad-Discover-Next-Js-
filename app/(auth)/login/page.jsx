@@ -8,6 +8,8 @@ import { AiFillEye } from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import useAuth from '@/helpers/hooks/useAuth'
+import toast from 'react-hot-toast'
+import { userTokenSet } from '@/helpers/lib/usertoken'
 
 export default function Login() {
   const {setIsAdd} = useAuth()
@@ -52,13 +54,51 @@ export default function Login() {
           'User_Details',
           JSON.stringify(data?.msg?.user_details)
         )
+        const setTokenOnServer = await userTokenSet(data?.msg?.token)
+        console.log("🚀 ~ handleLogin ~ setTokenOnServer:", setTokenOnServer)
+        if(setTokenOnServer.success == "success") {
+       toast.success('Login Successful ✌️',{
+        duration: 5000,
+        position: 'top-center',
+        style: {
+          padding: '20px',
+          border: '1px solid #ccc',
+          color: 'green',
+        }
+       })
+       setTimeout(() => {
         navigate.push('/')
+       }, 1500);
+        }
+
+       if(setTokenOnServer.error == "error") {
+        toast.error('Something went wrong 😱😱'  ,{
+          duration: 5000,
+          style: {
+            padding: '20px',
+            color: 'red',
+          }
+        })
+       }
+
       } else {
-        alert("Credential didn't match with our record!")
+        toast.error("Credential didn't match with our record! 😱😱",{
+          duration: 5000,
+          style: {
+            padding: '20px',
+            color: 'red',
+          }
+        })
       }
     } catch (error) {
       console.error(error)
-      alert('Something went wrong. Please try again.')
+      toast.error('Something went wrong. Please try again. 😱😱',{
+        duration: 5000,
+        style: {
+          padding: '20px',
+          color: 'red',
+        }
+      })
       setLoader(false)
     }
   }

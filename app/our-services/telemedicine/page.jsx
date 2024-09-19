@@ -83,7 +83,7 @@ const TeleMedicine = () => {
   }
 
   return (
-    <AuthRoute>
+    <>
       <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded-xl'>
       
       <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
@@ -263,7 +263,7 @@ const TeleMedicine = () => {
         </button>
       </form>
     </section>
-    </AuthRoute>
+    </>
   )
 }
 
