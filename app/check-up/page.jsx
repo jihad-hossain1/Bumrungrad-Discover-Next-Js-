@@ -5,9 +5,10 @@ import { TextField, FormControl, MenuItem, Select } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
 import AuthRoute from '@/helpers/context/AuthRoute'
-import { mailBody, sendEmails } from '@/helpers/mail/sendMail'
+import {sendEmails } from '@/helpers/mail/sendMail'
 import { admin_mails } from '@/constant'
 import toast from 'react-hot-toast'
+import { mailBody } from '@/helpers/mail/mailbody'
 
 
 export default function CheckUp() {
@@ -110,7 +111,7 @@ export default function CheckUp() {
   }
 const handaleDataSubmit = async () => {
   try {
-    setLoader(true);
+  
 
     const formData = new FormData();
 
@@ -137,6 +138,7 @@ const handaleDataSubmit = async () => {
     });
 
     // Send POST request
+    setLoader(true);
     const response = await fetch('https://api.discoverinternationalmedicalservice.com/api/add/health/check_up', {
       method: 'POST',
       body: formData,
@@ -145,21 +147,36 @@ const handaleDataSubmit = async () => {
     const data = await response.json();
 
     if (data.status === 200) {
-      window.alert('Check Up Request Placed');
+      toast.success('Check Up Request Placed');
+
+      setLoader(true);
       const mailResponse = await sendEmails(admin_mails, 'Check Up Request Placed', mailBody(formDatas));
-      console.log("🚀 ~ handaleDataSubmit ~ mailResponse:", mailResponse)
-      toast.success("Check Up Request Placed", {
+      setLoader(false);
+
+      setLoader(true);
+      const clientMailResponse = await sendEmails(formDatas.email, 'Check Up Request Placed', mailBody(formDatas));
+     setLoader(false);
+
+      if(mailResponse.messageId && clientMailResponse.messageId) {
+      toast.success("Check Up Mail Sent Successfully", {
         duration: 4000,
         style: {
           padding: '20px',
           color: 'green',
         }
       });
-      // navigate('/');
+      navigate.push('/');
+
+     }else{
+      toast.error('Something went wrong,Mail not sent');
+     }
+     
     } else {
-      throw new Error('Failed to submit data');
+      setLoader(false);
+      toast.error('Something went wrong');
     }
   } catch (error) {
+    setLoader(false);
     console.error("Error submitting check up request:", error);
   } finally {
     setLoader(false);
@@ -167,7 +184,7 @@ const handaleDataSubmit = async () => {
 };
 
   return (
-   <AuthRoute>
+   <>
      <div className='px-5 py-3  md:container md:mx-auto'>
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue mt-8'>
         Health Screening Appointment
@@ -402,6 +419,7 @@ const handaleDataSubmit = async () => {
                       : 'bg-blue text-white '
                   }`}
                   disabled={
+                    loader ||
                     patientName === '' ||
                     gender === '' ||
                     email === '' ||
@@ -417,6 +435,6 @@ const handaleDataSubmit = async () => {
         )}
       </div>
     </div>
-   </AuthRoute>
+   </>
   )
 }

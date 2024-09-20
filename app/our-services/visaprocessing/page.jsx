@@ -11,7 +11,10 @@ import { useRouter } from 'next/navigation'
 import useAuth from '@/helpers/hooks/useAuth'
 import Image from 'next/image'
 import { countries } from '@/public/data/country'
-import AuthRoute from '@/helpers/context/AuthRoute'
+import toast from 'react-hot-toast'
+import { sendEmails } from '@/helpers/mail/sendMail'
+import { admin_mails } from '@/constant'
+import { mailBody } from '@/helpers/mail/mailbody'
 
 const VisaProcessing = () => {
   const { auth} = useAuth()
@@ -58,48 +61,93 @@ const VisaProcessing = () => {
 
   const [driveLink1, setDriveLink1] = React.useState('')
   const [driveLink2, setDriveLink2] = React.useState('')
+  const [formDatas,setFormDatas] = useState(null)
 
   const [loader, setLoader] = useState(false)
 
-  const handleBookVisa = () => {
-    setLoader(true)
+  const handleBookVisa =async () => {
+   
     const formData = new FormData()
-    formData.append('oldPataint', old)
-    formData.append('HnNumber', hnNumber)
-    formData.append('PataientFirstName', firstname)
-    formData.append('PataientLastName', lastName)
-    formData.append('PataientCitizenship', citizenship)
-    formData.append('PataientGender', gender)
-    formData.append('PataientEmail', pataientEmail)
-    formData.append('PataientPhone', phone)
-    formData.append('PataientDob', dob)
-    formData.append('country', country)
-    formData.append('mediicalCorncern', desc)
 
-    formData.append('passport', passport)
-    formData.append('medicalReport1', medicalReport1)
-    formData.append('medicalReport2', medicalReport2)
-    formData.append('invitationLetter', invitationLetter)
+    const fields = {
+      oldPataint: old,
+      HnNumber: hnNumber,
+      PataientFirstName: firstname,
+      PataientLastName: lastName,
+      PataientCitizenship: citizenship,
+      PataientGender: gender,
+      PataientEmail: pataientEmail,
+      PataientPhone: phone,
+      PataientDob: dob,
+      country: country,
+      mediicalCorncern: desc,
 
-    formData.append('driveLink1', driveLink1)
-    formData.append('driveLink2', driveLink2)
+      passport: passport,
+      medicalReport1: medicalReport1,
+      medicalReport2: medicalReport2,
+      invitationLetter: invitationLetter,
 
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/visa/precessing', {
+      driveLink1: driveLink1,
+      driveLink2: driveLink2,
+
+    }
+      // Append all fields to FormData
+      Object.entries(fields).forEach(([key, value]) => {
+        formData.append(key, value);
+        setFormDatas((prev) => ({ ...prev, [key]: value }));
+      });
+
+    setLoader(true)
+
+   const res = await fetch('https://api.discoverinternationalmedicalservice.com/api/add/visa/precessing', {
       method: 'POST',
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          window.alert('Please your email or spam box!')
-          navigate.push('/')
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        setLoader(false)
-      })
+    setLoader(false)
+    const data = await res.json()
+  
+    if (data.status === 200) {
+      toast.success('Please your email or spam box!')
+     try {
+       setLoader(true)
+       console.log("formdatas", formDatas)
+       const mailRes = await sendEmails(admin_mails,`Visa Processing Request- ${userDetails?.firstName}`,mailBody({...formDatas,oldPataint: formDatas.oldPataint ? "Yes, I am an old patient" : "I am a New Patient"}))
+       setLoader(false)
+       
+       setLoader(true)
+       const mailRes2 = await sendEmails(userDetails?.email,`Visa Processing Request- ${userDetails?.firstName}`,mailBody({...formDatas,oldPataint: formDatas.oldPataint ? "Yes, I am an old patient" : "I am a New Patient"}))
+       setLoader(false)
+       if(mailRes.messageId && mailRes2.messageId){
+         toast.success("Request Sent. We will get back to you soon")
+         navigate.push('/my-profile')
+       }else{
+         setLoader(false)
+         toast.error("Something went wrong, please try again")
+        //  return;
+       }
+     } catch (error) {
+      setLoader(false)
+      console.error(error)
+     }
+      // navigate.push('/')
+    }else{
+      setLoader(false)
+      toast.error("Something went wrong")
+      return;
+    }
+
+      // .then((res) => res.json())
+      // .then((data) => {
+      //   if (data.status === 200) {
+      //     setLoader(false)
+      //     window.alert('Please your email or spam box!')
+      //     navigate.push('/')
+      //   }
+      // })
+      // .catch((e) => {
+      //   console.error(e)
+      //   setLoader(false)
+      // })
   }
 
   return (
@@ -363,6 +411,7 @@ const VisaProcessing = () => {
                   : 'text-white'
               }`}
               disabled={
+                loader ||
                 firstname === '' ||
                 lastName === '' ||
                 citizenship === '' ||

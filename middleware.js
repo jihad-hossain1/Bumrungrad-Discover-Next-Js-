@@ -18,6 +18,7 @@ export const config = {
     matcher: [
         '/our-services/:path*',
         "/my-profile",
+        "/check-up",
        
     ],
 }
