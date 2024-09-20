@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import { TextField } from "@mui/material";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import toast from "react-hot-toast";
+import { admin_mails } from "@/constant";
 
 
 export default function ContactForm() {
@@ -16,26 +17,24 @@ export default function ContactForm() {
         email: "",
         message: "",
     });
-    // multiple recipients
-    const recipients = ['demo3@gmail.com', 'demo1@gmail.com', 'demo2@gmail.com'];
+
 
     const sendEmail = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
             const response = await sendEmails(
-              recipients,
+              admin_mails,
                 `Contact Us - ${formData.email}`,
                 formData.message,
             );
 
             setLoading(false);
             if (response.success == true) {
-                toast.success("Email sent successfully", {
+                toast.success("Email sent successfully 👌👌", {
                     position: "top-center",
-                    style: { padding: "16px", border: "1px solid #ccc" },
+                    style: { padding: "16px", color: "green", border: "1px solid green" },
                     duration: 3000,
-                    icon: "👌👌",
                 });
                 setFormData({
                     name: "",
@@ -54,21 +53,6 @@ export default function ContactForm() {
         } catch (error) {
             console.error(error);
         }
-        // emailjs
-        //   .sendForm(
-        //     'service_pm53vin',
-        //     'template_z8tqovt',
-        //     form.current,
-        //     'ycRGcqWUeQ5dMytN2'
-        //   )
-        //   .then(
-        //     (result) => {
-        //       window.alert('Message sent successfully')
-        //       e.target.reset()
-        //     },
-        //     (error) => {
-        //     }
-        //   )
     };
     return (
         <div>
