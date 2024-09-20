@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import useAuth from "@/helpers/hooks/useAuth";
 import { useRouter } from "next/navigation";
@@ -8,20 +8,17 @@ import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import { mailBody } from "@/helpers/mail/mailbody";
-import { uploadToImgbb } from "@/helpers/fileUpload";
+
 
 const MedicalRecords = () => {
   const { auth } = useAuth();
+  // console.log("🚀 ~ MedicalRecords ~ auth:", auth)
   const userDetails = auth;
   //loader
   const [loader, setLoader] = useState();
 
   const [passport, setPassport] = useState("");
-  const [name, setName] = useState(
-    userDetails?.firstName
-      ? `${userDetails?.firstName} ${userDetails?.lastName}`
-      : ""
-  );
+  const [name, setName] = useState('');
   const [hnNum, setHnNum] = useState("");
   const [caseSummary, setCaseSummary] = useState("");
   const navigate = useRouter();
@@ -38,7 +35,10 @@ const MedicalRecords = () => {
       hnNum,
       caseSummary,
     };
-
+    // Object.entries(fields).forEach(([key, value]) => {
+    //   formData.append(key, value);
+    //   setFormDatas((prev) => ({ ...prev, [key]: value }));
+    // });
     Object.entries(fields).forEach(([key, value]) => {
       formData.append(key, value);
       setFormDatas((prev) => ({ ...prev, [key]: value }));
@@ -67,10 +67,14 @@ const MedicalRecords = () => {
         });
         
         setLoader(true);
-        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, mailBody({name: auth?.firstName, email: auth?.email, hn: hnNum, case_summary: caseSummary, passport: "Image Link"}));
+        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, mailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: "Image Link"}));
         setLoader(false);
 
-        if (send_admin_mails.messageId) {
+        setLoader(true);
+        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, mailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: "Image Link"}));
+        setLoader(false);
+
+        if (send_admin_mails.messageId && send_client_mails.messageId) {
           toast.success(
           "Mail sent Ok.",{
             position: "top-center",
@@ -107,6 +111,12 @@ const MedicalRecords = () => {
       console.error(error?.message);
     }
   };
+
+  useEffect(()=>{
+    if(userDetails){
+      setName(`${userDetails?.firstName} ${userDetails?.lastName}` || "")
+    }
+  },[userDetails])
   return (
     <>
       <div className="md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16">
@@ -162,6 +172,7 @@ const MedicalRecords = () => {
             </div>
           </div>
           <button
+            disabled={loader || !name || !passport || !hnNum || !caseSummary}
             type="submit"
             className="bg-blue mt-6 text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1"
           >
