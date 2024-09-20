@@ -1,5 +1,6 @@
 
 export const uploadToImgbb = async (file) => {
+    // console.log("🚀 ~ uploadToImgbb ~ file:", file)
     const apiKey = process.env.IMGBB_API_KEY; // Replace with your actual ImgBB API key
   
     // Create a FormData object to hold the image file
@@ -7,7 +8,7 @@ export const uploadToImgbb = async (file) => {
     formData.append("image", file);
   
     try {
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=a7cb0f71661d0890f32501a84f69a63d`, {
         method: "POST",
         body: formData,
       });
@@ -18,11 +19,11 @@ export const uploadToImgbb = async (file) => {
         // If upload is successful, return the image URL
         return result.data.url;
       } else {
-        throw new Error("Failed to upload image");
+        console.error("Failed to upload image");
       }
     } catch (error) {
       console.error("Error uploading image to ImgBB:", error);
-      throw error; // You can handle the error as per your use case
+    return error; // You can handle the error as per your use case
     }
   };
   

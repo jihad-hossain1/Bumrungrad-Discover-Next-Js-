@@ -1,87 +1,132 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react'
-import { MuiTelInput } from 'mui-tel-input'
-import { FormControl, MenuItem, Select, TextField } from '@mui/material'
-import { natioNalities ,countries} from '@/public/data/country'
-import { useRouter } from 'next/navigation'
+import React, { useState } from "react";
+import { MuiTelInput } from "mui-tel-input";
+import { FormControl, MenuItem, Select, TextField } from "@mui/material";
+import { natioNalities, countries } from "@/public/data/country";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { sendEmails } from "@/helpers/mail/sendMail";
+import { admin_mails } from "@/constant";
+import { mailBody } from "@/helpers/mail/mailbody";
 // import { useNavigate } from 'react-router-dom'
 
 const SendQuery = () => {
-  const [loader, setLoader] = useState()
-  const [inquery, setInquery] = useState('')
-  const [doctorName, setDoctorName] = useState('')
-  const [treatmentInterest, setTreatmentInterest] = useState('')
-  const [question, setQuestion] = useState('')
-  const [hospitalNumber, setHospitalNumber] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [birtDate, setDOB] = useState('')
-  const [gender, setGender] = useState('')
-  const [citizenship, setCitizenship] = useState('')
-  const [country, setCountry] = useState('')
+  const [loader, setLoader] = useState();
+  const [inquery, setInquery] = useState("");
+  const [doctorName, setDoctorName] = useState("");
+  const [treatmentInterest, setTreatmentInterest] = useState("");
+  const [question, setQuestion] = useState("");
+  const [hospitalNumber, setHospitalNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [birtDate, setDOB] = useState("");
+  const [gender, setGender] = useState("");
+  const [citizenship, setCitizenship] = useState("");
+  const [country, setCountry] = useState("");
+  const [formDatas, setFormDatas] = useState(null);
 
   //phoneNumberSelect
   const handleChange = (newValue) => {
-    setPhoneNumber(newValue)
-  }
-  const navigate = useRouter()
+    setPhoneNumber(newValue);
+  };
+  const navigate = useRouter();
 
   //  Query Submit
-  const handaleQuerySubmit = (event) => {
-    setLoader(true)
-    event.preventDefault()
-    const form = event.target
-    const formData = new FormData()
-    formData.append('inquery', inquery)
-    formData.append('doctorName', doctorName)
-    formData.append('treatmentInterest', treatmentInterest)
-    // formData.append('bumRungradOffice', bumRungradOffice)
-    formData.append('question', question)
-    formData.append('hospitalNumber', hospitalNumber)
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
-    formData.append('email', email)
-    formData.append('phoneNumber', phoneNumber)
-    formData.append('birtDate', birtDate)
-    formData.append('gender', gender)
-    formData.append('citizenship', citizenship)
-    formData.append('country', country)
+  const handaleQuerySubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData();
 
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/question', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          navigate.push('/')
-          alert(
-            'Querey sent successfully. Our support team will contact you soon.'
-          )
-          form.reset()
+    const fields = {
+      inquery,
+      doctorName,
+      treatmentInterest,
+      question,
+      hospitalNumber,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      birtDate,
+      gender,
+      citizenship,
+      country,
+    };
+
+
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value);
+      setFormDatas((prev) => ({ ...prev, [key]: value }));
+    });
+
+    try {
+      setLoader(true);
+      const response = await fetch(
+        "https://api.discoverinternationalmedicalservice.com/api/add/question",
+        {
+          method: "POST",
+          body: formData,
         }
-      })
-      .catch((error) => console.error(error))
-  }
+      );
+      setLoader(false);
 
+      const get_response = await response.json();
 
+      if (get_response.status !== 200) {
+        toast.success("Something went wrong, please try again", {
+          duration: 5000,
+          style: {
+            color: "red",
+          },
+        });
+        return;
+      }
+
+      if (get_response.status === 200) {
+        setLoader(true);
+        const send_admin_mail = await sendEmails(
+          admin_mails,
+          `Query Request - ${email}`,
+          mailBody(formDatas)
+        );
+        setLoader(false);
+
+        if (send_admin_mail.messageId) {
+          toast.success(
+            "Querey sent successfully. Our support team will contact you soon.",
+            {
+              duration: 5000,
+              style: {
+                color: "green",
+              },
+            }
+          );
+          form.reset();
+          setFormDatas(null);
+          navigate.push("/");
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.log(error?.message);
+    }
+  };
 
   return (
-    <section className='md:container md:mx-auto'>
-      <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
+    <section className="md:container md:mx-auto">
+      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center">
         Left Us Your Query !
       </h1>
-      <div className='md mb-14'>
-        <div className='shadow-xl rounded-xl md:p-5'>
-          <div className='p-4'>
+      <div className="md mb-14">
+        <div className="shadow-xl rounded-xl md:p-5">
+          <div className="p-4">
             <form onSubmit={handaleQuerySubmit}>
-              <div className='grid md:grid-cols-2 gap-2.5'>
+              <div className="grid md:grid-cols-2 gap-2.5">
                 <div>
-                  <p className='mb-2.5 font-semibold text-sm'>
+                  <p className="mb-2.5 font-semibold text-sm">
                     Type of Inquiry*
                   </p>
                   <TextField
@@ -90,8 +135,8 @@ const SendQuery = () => {
                     required
                   />
                 </div>
-                <div className=''>
-                  <p className='mb-2.5 font-semibold text-sm'>
+                <div className="">
+                  <p className="mb-2.5 font-semibold text-sm">
                     Enter The Doctor's Name or Surname*
                   </p>
                   <TextField
@@ -100,8 +145,8 @@ const SendQuery = () => {
                     required
                   />
                 </div>
-                <div className=''>
-                  <p className='mb-2.5 font-semibold text-sm'>
+                <div className="">
+                  <p className="mb-2.5 font-semibold text-sm">
                     Condition or Treatment of Interest*
                   </p>
                   <TextField
@@ -121,8 +166,8 @@ const SendQuery = () => {
                 />
               </div> */}
 
-              <div className='mt-4'>
-                <p className='mb-2.5 font-semibold text-sm'>Your Question *</p>
+              <div className="mt-4">
+                <p className="mb-2.5 font-semibold text-sm">Your Question *</p>
                 <TextField
                   onChange={(e) => setQuestion(e.target.value)}
                   fullWidth
@@ -131,90 +176,90 @@ const SendQuery = () => {
                   required
                 />
               </div>
-              <div className='grid md:grid-cols-2 gap-2.5'>
-                <div className='mt-4'>
-                  <p className='mb-2.5 font-semibold text-sm'>
+              <div className="grid md:grid-cols-2 gap-2.5">
+                <div className="mt-4">
+                  <p className="mb-2.5 font-semibold text-sm">
                     Hospital Number*
                   </p>
                   <TextField
                     onChange={(e) => setHospitalNumber(e.target.value)}
                     fullWidth
-                    placeholder='Example : HN12345678'
+                    placeholder="Example : HN12345678"
                   />
                 </div>
-                <div className='mt-4'>
-                  <p className='mb-2.5 font-semibold text-sm'>First Name*</p>
+                <div className="mt-4">
+                  <p className="mb-2.5 font-semibold text-sm">First Name*</p>
                   <TextField
                     onChange={(e) => setFirstName(e.target.value)}
                     fullWidth
                     required
                   />
                 </div>
-                <div className='mt-4'>
-                  <p className='mb-2.5 font-semibold text-sm'>Last Name*</p>
+                <div className="mt-4">
+                  <p className="mb-2.5 font-semibold text-sm">Last Name*</p>
                   <TextField
                     onChange={(e) => setLastName(e.target.value)}
                     fullWidth
                     required
                   />
                 </div>
-                <div className='mt-4'>
-                  <p className='mb-2.5 font-semibold text-sm'>Email*</p>
+                <div className="mt-4">
+                  <p className="mb-2.5 font-semibold text-sm">Email*</p>
                   <TextField
                     onChange={(e) => setEmail(e.target.value)}
                     fullWidth
-                    placeholder='Ex : example123@gmail.com'
+                    placeholder="Ex : example123@gmail.com"
                     required
                   />
                 </div>
-                <div className='mt-4'>
-                  <p className='mb-2.5 font-semibold text-sm'>
+                <div className="mt-4">
+                  <p className="mb-2.5 font-semibold text-sm">
                     Enter WhatsApp Number*
                   </p>
                   <MuiTelInput
                     value={phoneNumber}
                     onChange={handleChange}
-                    defaultCountry='TH'
-                    className='w-[100%]'
+                    defaultCountry="TH"
+                    className="w-[100%]"
                   />
                 </div>
               </div>
-              <div className='mt-6 grid  md:grid-cols-2 gap-4'>
+              <div className="mt-6 grid  md:grid-cols-2 gap-4">
                 <div>
-                  <p className='mb-2.5 font-semibold text-sm'>Date of Birth*</p>
+                  <p className="mb-2.5 font-semibold text-sm">Date of Birth*</p>
                   <TextField
                     onChange={(e) => setDOB(e.target.value)}
-                    type='date'
+                    type="date"
                     fullWidth
-                    placeholder='Please Enter the Date of Birth'
+                    placeholder="Please Enter the Date of Birth"
                   />
                 </div>
                 <div>
                   <FormControl fullWidth>
-                    <p className='mb-2.5 font-semibold text-sm'>
+                    <p className="mb-2.5 font-semibold text-sm">
                       Select Gender*
                     </p>
                     <Select
-                      labelId='demo-simple-select-label'
-                      id='demo-simple-select'
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
                       value={gender}
                       required
                       onChange={(e) => setGender(e.target.value)}
                     >
-                      <MenuItem value='Male'>Male</MenuItem>
-                      <MenuItem value='Female'>Female</MenuItem>
-                      <MenuItem value='Other'>Other</MenuItem>
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female">Female</MenuItem>
+                      <MenuItem value="Other">Other</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
                 <div>
                   <FormControl fullWidth>
-                    <p className='mb-2.5 font-semibold text-sm'>
+                    <p className="mb-2.5 font-semibold text-sm">
                       Select Citizenship*
                     </p>
                     <Select
-                      labelId='demo-simple-select-label'
-                      id='demo-simple-select'
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
                       value={citizenship}
                       required
                       onChange={(e) => setCitizenship(e.target.value)}
@@ -228,11 +273,11 @@ const SendQuery = () => {
                   </FormControl>
                 </div>
                 <div>
-                  <p className='mb-2.5 font-semibold text-sm'>
+                  <p className="mb-2.5 font-semibold text-sm">
                     Country of Residence*
                   </p>
                   <TextField
-                    id='filled-select-currency-native'
+                    id="filled-select-currency-native"
                     select
                     fullWidth
                     onChange={(e) => setCountry(e.target.value)}
@@ -240,7 +285,7 @@ const SendQuery = () => {
                     SelectProps={{
                       native: true,
                     }}
-                    helperText='Please select your country'
+                    helperText="Please select your country"
                   >
                     {countries.map((option) => (
                       <option key={option} value={option}>
@@ -250,19 +295,19 @@ const SendQuery = () => {
                   </TextField>
                 </div>
               </div>
-              <div className='flex justify-center m-5'>
+              <div className="flex justify-center m-5">
                 <button
-                  type='submit'
-                  className='bg-blue text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1'
-                  
+                disabled={loader}
+                  type="submit"
+                  className="bg-blue text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1"
                 >
-                  {' '}
+                  {" "}
                   Send Query
                   {loader && (
-                    <div className='flex gap-0.5'>
-                      <div className='h-2 w-2 rounded-full bg-white shadow'></div>
-                      <div className='h-2 w-2 rounded-full bg-white shadow animate-bounce'></div>
-                      <div className='h-2 w-2 rounded-full bg-white shadow'></div>
+                    <div className="flex gap-0.5">
+                      <div className="h-2 w-2 rounded-full bg-white shadow"></div>
+                      <div className="h-2 w-2 rounded-full bg-white shadow animate-bounce"></div>
+                      <div className="h-2 w-2 rounded-full bg-white shadow"></div>
                     </div>
                   )}
                 </button>
@@ -272,7 +317,7 @@ const SendQuery = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SendQuery
+export default SendQuery;

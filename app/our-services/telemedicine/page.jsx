@@ -5,6 +5,10 @@ import { Divider, TextField } from '@mui/material'
 import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import AuthRoute from '@/helpers/context/AuthRoute'
+import toast from 'react-hot-toast'
+import { sendEmails } from '@/helpers/mail/sendMail'
+import { admin_mails } from '@/constant'
+import { mailBody } from '@/helpers/mail/mailbody'
 
 
 
@@ -41,45 +45,100 @@ const TeleMedicine = () => {
   const [epaymentlink, setEpaymentlink] = useState('')
   const [interpreter, setInterpreter] = useState('')
   const [specificConcern, setSpecificConcern] = useState('')
+  const [formDatas, setFormDatas]  = useState(null);
 
-  const handaleAddteleMedicine = (event) => {
-    setLoader(true)
+
+  const handaleAddteleMedicine = async (event) => {
     event.preventDefault()
     const form = event.target
-
     const formData = new FormData()
-    formData.append('fullName', fullName)
-    formData.append('hnNum', hnNum)
-    formData.append('birthDate', birthDate)
-    formData.append('passportId', passportId)
-    formData.append('nationality', nationality)
-    formData.append('residence', residence)
-    formData.append('preferredDate', preferredDate)
-    formData.append('preferredDoctor', preferredDoctor)
-    formData.append('purposeAppointment', purposeAppoinment)
-    formData.append('investigationDocument', investigationDocument)
-    formData.append('contactDetails', contactDetails)
-    formData.append('paymentType', paymentType)
-    formData.append('epaymentlink', epaymentlink)
-    formData.append('interpreter', interpreter)
-    formData.append('specificConcern', specificConcern)
+    const fields = {
+      fullName,
+      hnNum,
+      birthDate,
+      passportId,
+      nationality,
+      residence,
+      preferredDate,
+      preferredDoctor,
+      purposeAppoinment,
+      investigationDocument,
+      contactDetails,
+      paymentType,
+      epaymentlink,
+      interpreter,
+      specificConcern
+    }
 
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/tele/medicine', {
+
+    // formData.append('fullName', fullName)
+    // formData.append('hnNum', hnNum)
+    // formData.append('birthDate', birthDate)
+    // formData.append('passportId', passportId)
+    // formData.append('nationality', nationality)
+    // formData.append('residence', residence)
+    // formData.append('preferredDate', preferredDate)
+    // formData.append('preferredDoctor', preferredDoctor)
+    // formData.append('purposeAppointment', purposeAppoinment)
+    // formData.append('investigationDocument', investigationDocument)
+    // formData.append('contactDetails', contactDetails)
+    // formData.append('paymentType', paymentType)
+    // formData.append('epaymentlink', epaymentlink)
+    // formData.append('interpreter', interpreter)
+    // formData.append('specificConcern', specificConcern)
+
+
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value)
+      setFormDatas((prev) => ({ ...prev, [key]: value }));
+    })
+
+        setLoader(true)
+  const response = await  fetch('https://api.discoverinternationalmedicalservice.com/api/add/tele/medicine', {
       method: 'POST',
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          alert(
-            'Tele Medicine request sent! Our support team will contact you soon.'
-          )
-          form.reset()
-          navigate.push('/')
-        }
-      })
-      .catch((error) => console.error(error))
+    setLoader(false)
+
+
+    const jsonresponse = await response.json()
+
+
+    if (jsonresponse.status === 200) {
+      setLoader(false)
+      toast.success(
+        'Tele Medicine request sent! Our support team will contact you soon.'
+      )
+      
+      setLoader(true);
+      const send_mail_on_admin = await sendEmails(admin_mails,`Tele Medicine`, mailBody({...formDatas,investigationDocument: "Image link are not found"}))
+      setLoader(false)
+
+      if(send_mail_on_admin.messageId){
+        toast.success("Email sent successfully")
+      }else{
+        toast.error("Something went wrong, mail not send")
+      }
+
+      form.reset()
+      navigate.push('/')
+    }else{
+      toast.error("Something went wrong")
+      setLoader(false)
+    }
+
+      // .then((res) => res.json())
+      // .then((data) => {
+      //   if (data.status === 200) {
+      //     setLoader(false)
+      //     alert(
+      //       'Tele Medicine request sent! Our support team will contact you soon.'
+      //     )
+      //     form.reset()
+      //     navigate.push('/')
+      //   }
+      // })
+      // .catch((error) => console.error(error))
   }
 
   return (
