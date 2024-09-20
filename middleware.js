@@ -6,6 +6,7 @@ import { serverAuth } from './helpers/lib/session';
 
 export async function middleware(request) {
     const isAuth = await serverAuth()
+    console.log("🚀 ~ middleware ~ isAuth:", isAuth)
 
     if (isAuth) {
         return NextResponse.next()
@@ -18,6 +19,7 @@ export const config = {
     matcher: [
         '/our-services/:path*',
         "/my-profile",
+        "/check-up",
        
     ],
 }
