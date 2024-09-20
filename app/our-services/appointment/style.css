@@ -20,10 +20,11 @@
   
   .rdp-day_today {
     border: 2px solid red;
+    margin-left: 20px;
   }
   
   .rdp-caption_label {
-    color: orange;
+    color: rgb(9, 9, 9);
     font-size: 1.2rem;
   }
   

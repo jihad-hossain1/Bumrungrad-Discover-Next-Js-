@@ -292,7 +292,8 @@ export default function Appointment() {
       }
       
       // Send email
-      const emailResponse = await sendEmails(admin_mails, 'Book Appointment', mailBody(formDatas) );
+      const emailResponse = await sendEmails(admin_mails, 'Book Appointment', mailBody({...formDatas, passport: "no link",medicalReport1 : "no links",medicalReport2 : "no links"  }) );
+      console.log("🚀 ~ handleBookAppointment ~ emailResponse:", emailResponse)
   
       if (emailResponse.messageId) {
         toast.success('Mail has been sent', {
@@ -509,7 +510,7 @@ export default function Appointment() {
                   <p className='font-semibold text-blue'>First Date Choice</p>
                  
                   <DayPicker
-                        styles={customStyles}
+                    styles={customStyles}
 
                     mode='single'
                     selected={selectedDate}

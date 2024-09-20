@@ -75,13 +75,13 @@ const AirtTcket = () => {
                 
                 const sendMail = await sendEmails(
                     admin_mails,
-                   `Air Ticket - ${formDatas.email}`,
-                    mailBody({...formDatas}),
+                   `Air Ticket - ${auth?.email}`,
+                    mailBody({...formDatas, doc: "Image linke not available"}),
                 );
                 const sendMail2 = await sendEmails(
                   auth?.email,
                   `Air Ticket`,
-                  mailBody({...formDatas}),
+                  mailBody({...formDatas, doc: "Image linke not available"}),
                 )
 
                 setLoader(false);

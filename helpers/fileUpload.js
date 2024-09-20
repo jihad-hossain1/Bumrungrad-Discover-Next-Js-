@@ -8,7 +8,7 @@ export const uploadToImgbb = async (file) => {
     formData.append("image", file);
   
     try {
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=a7cb0f71661d0890f32501a84f69a63d`, {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
         method: "POST",
         body: formData,
       });
