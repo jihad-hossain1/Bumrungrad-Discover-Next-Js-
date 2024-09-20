@@ -10,6 +10,8 @@ import {
 import { format } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { DayPicker } from 'react-day-picker'
+import 'react-day-picker/dist/style.css';
+import './style.css'
 import { countries } from '@/public/data/country'
 import { MuiTelInput } from 'mui-tel-input'
 import Divider from '@mui/material/Divider'
@@ -19,12 +21,31 @@ import DialogContent from '@mui/material/DialogContent'
 import useAuth from '@/helpers/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import AuthRoute from '@/helpers/context/AuthRoute'
 import { admin_mails } from '@/constant'
 import toast from 'react-hot-toast'
 import { sendEmails } from '@/helpers/mail/sendMail'
 import { mailBody } from '@/helpers/mail/mailbody'
 
+
+const customStyles = {
+  day: { 
+    fontSize: '1rem',
+    color: 'blue',
+    borderRadius: '50%',
+    padding: '5px',
+  },
+  selected: { 
+    backgroundColor: 'green',
+    color: 'white',
+  },
+  today: { 
+    border: '1px solid red',
+  },
+  caption: { 
+    color: 'orange', 
+    fontSize: '1.2rem',
+  }
+};
 
 export default function Appointment() {
     const {auth} = useAuth()
@@ -258,6 +279,7 @@ export default function Appointment() {
       });
   
       const data = await apiResponse.json();
+
   
       if (data.status === 200) {
        toast.success('Please check your email or spam box!');
@@ -308,9 +330,9 @@ export default function Appointment() {
       <h1 className='text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue'>
         Book Appointment
       </h1>
-      <div className='my-10 lg:w-1/2'>
+      <div className='my-10 lg:w-11/12'>
         {/* top buttons  */}
-        <div className='flex justify-between mx-10 items-center'>
+        <div className='flex justify-between items-center w-1/2 mx-auto'>
           <button
             className={`px-4 py-2 shadow rounded-full border border-blue font-semibold text-xl ${
               (stepperOpen || stepperOpen2 || stepperOpen3) &&
@@ -478,15 +500,17 @@ export default function Appointment() {
             </div>
           )}
           {stepperOpen2 && (
-            <div className='md:p-5 flex flex-col justify-center items-center gap-5 overflow-y-auto'>
+            <div className=' flex flex-col justify-center items-center gap-5 '>
               <p className='font-semibold text-blue text-xl'>
                 Select Desired Day
               </p>
               <div className='flex flex-col gap-2.5 md:flex-row md:gap-5'>
                 <div className='flex flex-col items-center shadow my-2.5'>
                   <p className='font-semibold text-blue'>First Date Choice</p>
-                  <input type="date" name="" onChange={(e) => setSelectedDate(e.target.value)} id="" />
+                 
                   <DayPicker
+                        styles={customStyles}
+
                     mode='single'
                     selected={selectedDate}
                     onSelect={setSelectedDate}
@@ -496,12 +520,14 @@ export default function Appointment() {
                     <span className='font-semibold text-blue'>
                       *Update Date:
                     </span>{' '}
-                    {format(selectedDate, 'PP')}
+                   {selectedDate ? format(selectedDate, 'PP') : 'No date selected'}
                   </p>
                 </div>
                 <div className='flex flex-col items-center shadow my-2.5'>
                   <p className='font-semibold text-blue'>Second Date Choice</p>
                   <DayPicker
+                        styles={customStyles}
+
                     mode='single'
                     selected={selectedDate2}
                     onSelect={setSelectedDate2}
@@ -511,14 +537,14 @@ export default function Appointment() {
                     <span className='font-semibold text-blue'>
                       *Update Date:
                     </span>{' '}
-                    {format(selectedDate2, 'PP')}
+                    {selectedDate2 ? format(selectedDate2, 'PP') : 'No date selected'}
                   </p>
                 </div>
               </div>
               <p className='my-2.5 font-semibold text-blue text-xl'>
                 Select Desired Shift
               </p>
-              <div className='w-full flex flex-col md:flex-row gap-5'>
+              <div className='lg:w-[770px] max-sm:w-full mx-auto flex flex-col md:flex-row gap-5'>
                 <div className='w-full'>
                   <FormControl fullWidth>
                     <InputLabel id='demo-simple-select-label'>
