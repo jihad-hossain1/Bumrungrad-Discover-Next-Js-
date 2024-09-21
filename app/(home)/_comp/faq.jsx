@@ -18,7 +18,8 @@ import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import { natioNalities } from "@/public/data/country";
-import { mailBody } from "@/helpers/mail/mailbody";
+import { mailBody, userMailBody } from "@/helpers/mail/mailbody";
+import Loader from "@/components/ui/loader";
 
 export default function Faq() {
     const [expanded, setExpanded] = React.useState(false);
@@ -61,42 +62,44 @@ export default function Faq() {
             const response = await sendEmails(
               admin_mails,
                 `Contact Us - ${formData.email}`,
-                mailBody(formData),
+                userMailBody(formData, "Contact Us"),
             )
             setLoading(false);
-            if(response?.success == false){
-              toast.error("Something went wrong", {
-                  position: "top-center",
-                  style: {
-                      padding: "16px",
-                      border: "1px solid #ccc",
-                      color: "red",
-                  },
-                  duration: 3000,
-                  icon: "😱",
-              })
+            if(response?.messageId){
+                toast.success("Email sent successfully 🚑", {
+                    position: "top-center",
+                    style: {
+                        padding: "16px",
+                        border: "1px solid #ccc",
+                        color: "green",
+                    },
+                    duration: 3000,
+                    icon: "🚑",
+                });
+    
+                setFormData({
+                    name: "",
+                    email: "",
+                    message: "",
+                    phone: "",
+                    subject: "",
+                    nationality: "",
+                    gender: "",
+                    date: "",
+                });
+            }else{
+                toast.error("Something went wrong", {
+                    position: "top-center",
+                    style: {
+                        padding: "16px",
+                        border: "1px solid #ccc",
+                        color: "red",
+                    },
+                    duration: 3000,
+                    icon: "😱",
+                });
             }
-            toast.success("Email sent successfully 🚑", {
-                position: "top-center",
-                style: {
-                    padding: "16px",
-                    border: "1px solid #ccc",
-                    color: "green",
-                },
-                duration: 3000,
-                icon: "🚑",
-            });
-
-            setFormData({
-                name: "",
-                email: "",
-                message: "",
-                phone: "",
-                subject: "",
-                nationality: "",
-                gender: "",
-                date: "",
-            });
+            
 
 
         } catch (error) {
@@ -320,7 +323,7 @@ export default function Faq() {
                     className='bg-blue flex items-center justify-center hover:bg-white px-4 py-2 hover:text-blue text-white border border-blue font-semibold rounded duration-300 ease-linear'
                     type='button'
                 >
-                    {loading ? <TbLoaderQuarter className='animate-spin' /> : "Submit"}
+                    {loading ? <Loader fill='white' stroke='white' className='animate-spin' /> : "Submit"}
                 </button>
             </form>
             <div className='md:w-1/2'>
