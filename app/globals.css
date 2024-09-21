@@ -11,6 +11,10 @@ body {
 } */
 
 
+.btn_primary {
+  @apply mt-6 justify-center w-[100px] py-2  rounded flex items-center gap-1;
+}
+
 .card {
   max-width: 300px;
   min-height: 200px;
@@ -86,3 +90,4 @@ box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;}
   background-size: cover;
 
 }
+
