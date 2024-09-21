@@ -16,6 +16,7 @@ import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import { uploadToImgbb } from "@/helpers/fileUpload";
+import Loader from "@/components/ui/loader";
 
 const VisaProcessing = () => {
     const { auth } = useAuth();
@@ -506,13 +507,7 @@ const VisaProcessing = () => {
                                     (passport === "" && driveLink1 === "")
                                 }
                             >
-                                Submit
-                                {loader && (
-                                    <div className='flex gap-1'>
-                                        <div className='h-3 w-3 shadow bg-white rounded-full'></div>
-                                        <div className='h-3 w-3 shadow bg-white rounded-full animate-bounce'></div>
-                                    </div>
-                                )}
+                                { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Book Visa"}
                             </button>
                         </div>
                     </section>

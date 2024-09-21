@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import { sendEmails } from '@/helpers/mail/sendMail'
 import { admin_mails } from '@/constant'
 import { mailBody } from '@/helpers/mail/mailbody'
+import Loader from '@/components/ui/loader'
 
 
 
@@ -70,24 +71,6 @@ const TeleMedicine = () => {
       specificConcern
     }
 
-
-    // formData.append('fullName', fullName)
-    // formData.append('hnNum', hnNum)
-    // formData.append('birthDate', birthDate)
-    // formData.append('passportId', passportId)
-    // formData.append('nationality', nationality)
-    // formData.append('residence', residence)
-    // formData.append('preferredDate', preferredDate)
-    // formData.append('preferredDoctor', preferredDoctor)
-    // formData.append('purposeAppointment', purposeAppoinment)
-    // formData.append('investigationDocument', investigationDocument)
-    // formData.append('contactDetails', contactDetails)
-    // formData.append('paymentType', paymentType)
-    // formData.append('epaymentlink', epaymentlink)
-    // formData.append('interpreter', interpreter)
-    // formData.append('specificConcern', specificConcern)
-
-
     Object.entries(fields).forEach(([key, value]) => {
       formData.append(key, value)
       setFormDatas((prev) => ({ ...prev, [key]: value }));
@@ -126,19 +109,6 @@ const TeleMedicine = () => {
       toast.error("Something went wrong")
       setLoader(false)
     }
-
-      // .then((res) => res.json())
-      // .then((data) => {
-      //   if (data.status === 200) {
-      //     setLoader(false)
-      //     alert(
-      //       'Tele Medicine request sent! Our support team will contact you soon.'
-      //     )
-      //     form.reset()
-      //     navigate.push('/')
-      //   }
-      // })
-      // .catch((error) => console.error(error))
   }
 
   return (
@@ -311,14 +281,9 @@ const TeleMedicine = () => {
           type='submit'
           className='bg-blue mt-6 text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1'
         >
-          Submit
-          {loader && (
-            <div className='flex gap-0.5'>
-              <div className='h-2 w-2 rounded-full bg-white shadow'></div>
-              <div className='h-2 w-2 rounded-full bg-white shadow animate-bounce'></div>
-              <div className='h-2 w-2 rounded-full bg-white shadow'></div>
-            </div>
-          )}
+         {
+           loader ? <Loader className="animate-spin" stroke="white" fill="white" />  : "Submit"
+         }
         </button>
       </form>
     </section>

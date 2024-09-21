@@ -1232,6 +1232,7 @@ export default function Appointment() {
                                 </section>
                                 <div className='flex justify-center gap-2'>
                                     <button
+                                    disabled={loader}
                                         className='mt-5 px-4 py-2 rounded font-semibold text-white bg-blue hover:bg-white border border-blue hover:text-blue duration-300 ease-linear'
                                         onClick={handleClick3Prev}
                                     >
@@ -1253,6 +1254,7 @@ export default function Appointment() {
                                         }`}
                                         onClick={handlePreviewClickOpen}
                                         disabled={
+                                            loader ||
                                             firstname === "" ||
                                             lastName === "" ||
                                             citizenship === "" ||
