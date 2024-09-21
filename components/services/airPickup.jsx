@@ -3,42 +3,76 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 import { useState } from 'react'
+import Loader from '../ui/loader'
+import toast from 'react-hot-toast'
+import { uploadToImgbb } from '@/helpers/fileUpload'
+import useAuth from '@/helpers/hooks/useAuth'
+import { sendEmails } from '@/helpers/mail/sendMail'
+import { admin_mails } from '@/constant'
+import { comapanyMailBody } from '@/helpers/mail/mailbody'
 
 
 const AirPickup = () => {
-  //loader
+  const {auth} = useAuth()
   const [loader, setLoader] = useState()
-
   const [appointmentfile, setAppointmentfile] = useState('')
   const [airTicketFile, setAirTicketFile] = useState('')
   const [passenger, setPassenger] = useState('')
 
-  const orderAirPickup = (event) => {
-    setLoader(true)
+  const orderAirPickup =async (event) => {
     event.preventDefault()
     const form = event.target
-
-
     const formData = new FormData()
-    formData.append('appointment', appointmentfile)
-    formData.append('air_ticket', airTicketFile)
-    formData.append('passenger', passenger)
+   
+    const fields = {
+      appointment_file: appointmentfile,
+      air_ticket_file: airTicketFile,
+      passenger: passenger
+    }
+    Object.keys(fields).forEach((key) => formData.append(key, fields[key]))
 
-    fetch('https://api.discoverinternationalmedicalservice.com/api/add/air/pickup', {
+    setLoader(true)
+  const response = await  fetch('https://api.discoverinternationalmedicalservice.com/api/add/air/pickup', {
       method: 'POST',
       body: formData,
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          setLoader(false)
-          window.location.reload();
-          alert("Airport request sent! Our support team will contact you soon.")
-        }
-      })
-      .catch((error) => console.error(error))
 
-    form.reset()
+    setLoader(false)
+    const resjson = await response.json()
+
+    if(resjson.status === 200){
+      toast.success('Airport Transfer sent! Our support team will contact you soon.')
+
+      setLoader(true)
+      const uploadImage = airTicketFile ? await uploadToImgbb(airTicketFile) : 'No Image found'
+      const uploadImage2 = appointmentfile ? await uploadToImgbb(appointmentfile) : 'No Image found'
+
+      setLoader(false)
+
+      setLoader(true)
+      const send_mails = await sendEmails(
+        admin_mails,
+        `Airport Transfer`,
+        comapanyMailBody({
+          name: `${auth?.firstname} ${auth?.lastname}`,
+          email: auth?.email,
+          ...fields,
+          air_ticket_file: uploadImage,
+          appointment_file: uploadImage2
+        },'Airport Transfer')
+      )
+      setLoader(false)
+
+      if(send_mails.messageId){
+        toast.success('Airport Transfer sent! Our support team will contact you soon.')
+        form.reset()
+        window.location.reload()
+      }
+    }else{
+      toast.error("Airport Transfer request failed!")
+    }
+      
+
   }
   return (
     <div>
@@ -78,10 +112,11 @@ const AirPickup = () => {
           </div>
         </div>
         <button
+        disabled={loader}
           type='submit'
           className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
         >
-          {loader ? 'Loading...' : 'Submit'}
+          { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : 'Submit'}
         </button>
       </form>
     </div>
