@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import useAuth from "@/helpers/hooks/useAuth";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import Loader from "@/components/ui/loader";
 
 const OrderMedicine = () => {
   const { auth } = useAuth();
@@ -273,14 +274,9 @@ const OrderMedicine = () => {
             onClick={orderMedicine}
             disabled={medicArr.length === 0 && prescriptionImg === ""}
           >
-            Submit
-            {loader && (
-              <div className="flex gap-0.5">
-                <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-                <div className="h-2 w-2 rounded-full bg-white shadow animate-bounce"></div>
-                <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-              </div>
-            )}
+           {
+             loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Order Now"
+           }
           </button>
         </div>
       </div>

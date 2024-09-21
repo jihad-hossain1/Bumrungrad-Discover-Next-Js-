@@ -1,12 +1,16 @@
 'use client'
 
 import { admin_mails } from "@/constant";
-import { mailBody } from "@/helpers/mail/mailbody";
+import useAuth from "@/helpers/hooks/useAuth";
+import { comapanyMailBody, mailBody } from "@/helpers/mail/mailbody";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
+import Loader from "../ui/loader";
+import toast from "react-hot-toast";
 
 const Arrival = () => {
+    const { auth } = useAuth();
     const [loader, setLoader] = useState(false);
     const [errors, SetErrors] = useState(null);
     const [formData, setFormData] = useState({
@@ -36,78 +40,51 @@ const Arrival = () => {
             if (!handleValidation(formData)) {
                 return;
             }
+
             setLoader(true);
             SetErrors(null);
             const response_admin = await sendEmails(
                 admin_mails,
-                `Admission on arrival - ${formData.email}`,
-                mailBody(formData),
+                `Admission on arrival - ${auth?.email}`,
+                comapanyMailBody({ name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email ,...formData},"Admission on arrival"),
             );
             setLoader(false);
-
-            if (response_admin?.success == false) {
-                toast.error("Something went wrong", {
-                    position: "top-center",
-                    style: {
-                        padding: "16px",
-                        border: "1px solid #ccc",
-                        color: "red",
-                    },
-                    duration: 3000,
-                    icon: "😱",
-                });
-            }
-
-            toast.success("Admission on arrival sent successfully 🚑", {
-                position: "top-center",
-                style: {
-                    padding: "16px",
-                    border: "1px solid #ccc",
-                    color: "green",
-                },
-                duration: 3000,
-                icon: "👌👌",
-            });
 
             // send email on user
             setLoader(true);
             const response_sender = await sendEmails(
-                [formData.email],
+                auth?.email,
                 `Admission on arrival`,
-                mailBody(formData),
+                comapanyMailBody({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email ,...formData},"Admission on arrival"),
             );
 
             setLoader(false);
-            if (response_sender?.success == false) {
-                toast.error("Something went wrong getting email", {
+
+            if (response_sender?.messageId && response_admin?.messageId) {
+                toast.success("You will receive an email 🚑", {
                     position: "top-center",
                     style: {
                         padding: "16px",
                         border: "1px solid #ccc",
-                        color: "red",
+                        color: "green",
                     },
                     duration: 3000,
-                    icon: "😱",
+                    icon: "👌👌",
                 });
+    
+                setFormData({
+                    "passport copy": "",
+                    "case summary": "",
+                    "admission date": "",
+                    message: "",
+                });
+    
+                window.location.reload();
+            } else {
+                toast.error("Submission failed");
             }
 
-            toast.success("You will receive an email 🚑", {
-                position: "top-center",
-                style: {
-                    padding: "16px",
-                    border: "1px solid #ccc",
-                    color: "green",
-                },
-                duration: 3000,
-                icon: "👌👌",
-            });
-
-            setFormData({
-                "passport copy": "",
-                "case summary": "",
-                "admission date": "",
-                message: "",
-            });
+           
         } catch (error) {
             console.log(error);
         }
@@ -200,10 +177,10 @@ const Arrival = () => {
                 <button
                     type='button'
                     disabled={loader}
-                    className='btn btn-primary'
+                    className="bg-blue text-white px-3 py-1 rounded float-left mt-3 w-fit"
                     onClick={handleSubmit}
                 >
-                    {loader ? "Submit..." : "Submit"}
+                    {loader ? <Loader className='animate-spin' fill='white' stroke='white' /> : "Submit"}
                 </button>
             </div>
         </div>

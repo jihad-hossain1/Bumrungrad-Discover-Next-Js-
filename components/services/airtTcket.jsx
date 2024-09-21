@@ -7,10 +7,11 @@ import { countries } from "@/public/data/country";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
-import { mailBody } from "@/helpers/mail/mailbody";
+import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import { admin_mails } from "@/constant";
 import useAuth from "@/helpers/hooks/useAuth";
 import { uploadToImgbb } from "@/helpers/fileUpload";
+import Loader from "../ui/loader";
 
 const AirtTcket = () => {
     const {auth} = useAuth()
@@ -23,11 +24,9 @@ const AirtTcket = () => {
     const [country, setCountry] = useState("");
     const [destination, setDestination] = useState("");
     const router = useRouter();
-    const [formDatas, setFormDatas] = useState(null);
 
     const handleAirTicket = async (event) => {
         event.preventDefault();
-
         const formData = new FormData();
 
         const fields = {
@@ -37,13 +36,9 @@ const AirtTcket = () => {
             country: country,
             destination: destination,
         };
-        console.log("🚀 ~ handleAirTicket ~ fields.doc:", fields.doc)
 
         // Optional: Log formData for debugging purposes
-        Object.entries(fields).forEach(([key, value]) => {
-            formData.append(key, value);
-            setFormDatas((prev) => ({ ...prev, [key]: value }));
-        });
+        Object.entries(fields).forEach(([key, value]) => formData.append(key, value));
 
         try {
           setLoader(true);
@@ -71,20 +66,25 @@ const AirtTcket = () => {
                     },
                 );
                 setLoader(true);
-                // const docImage = await uploadToImgbb(formDatas.doc);
-                
+                const docImage = passport  ?  await uploadToImgbb(passport) : "No Image found";
+                setLoader(false);
+
+                setLoader(true);
                 const sendMail = await sendEmails(
                     admin_mails,
                    `Air Ticket - ${auth?.email}`,
-                    mailBody({...formDatas, doc: "Image linke not available"}),
+                    comapanyMailBody({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage},"Air Ticket Request"),
                 );
+                setLoader(false);
+
+                setLoader(true);
                 const sendMail2 = await sendEmails(
                   auth?.email,
                   `Air Ticket`,
-                  mailBody({...formDatas, doc: "Image linke not available"}),
+                  comapanyMailBody({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage},"Air Ticket Request"),
                 )
-
                 setLoader(false);
+
                 if (sendMail?.messageId && sendMail2?.messageId) {
                     toast.success("Mail has been sent", {
                         position: "top-center",
@@ -201,10 +201,11 @@ const AirtTcket = () => {
 
                     <div>
                         <button
+                            disabled={loader}
                             type='submit'
                             className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
                         >
-                            {loader ? "Loading..." : "Submit"}
+                            { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"}
                         </button>
                     </div>
                 </div>
