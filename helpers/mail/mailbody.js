@@ -1,14 +1,14 @@
 export const mailBody = (data) => {
     // Generate the field HTML dynamically based on the keys in the data object
     const fieldHtml = Object.keys(data)
-      .filter(key => data[key])  // Only include fields that have a value
-      .map(key => {
-        // Capitalize the first letter of the key to use as the label
-        const label = key.charAt(0).toUpperCase() + key.slice(1);
-        return `<p><span class="label">${label}:</span> <span class="value">${data[key]}</span></p>`;
-      })
-      .join("");  // Join all fields together into a single HTML string
-  
+        .filter((key) => data[key]) // Only include fields that have a value
+        .map((key) => {
+            // Capitalize the first letter of the key to use as the label
+            const label = key.charAt(0).toUpperCase() + key.slice(1);
+            return `<p><span class="label">${label}:</span> <span class="value">${data[key]}</span></p>`;
+        })
+        .join(""); // Join all fields together into a single HTML string
+
     return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -58,25 +58,25 @@ export const mailBody = (data) => {
       </body>
       </html>
     `;
-  };
+};
 
-  export const comapanyMailBody = (data) => {
+export const comapanyMailBody = (data, mail_title) => {
     // Generate the table rows dynamically based on the keys in the data object
     const rowsHtml = Object.keys(data)
-      .filter(key => data[key])  // Only include fields that have a value
-      .map(key => {
-        // Capitalize the first letter of the key to use as the label
-        const label = key.charAt(0).toUpperCase() + key.slice(1);
-        return `<tr><td class="label">${label}:</td><td class="value">${data[key]}</td></tr>`;
-      })
-      .join("");  // Join all rows together into a single HTML string
-  
+        .filter((key) => data[key]) // Only include fields that have a value
+        .map((key) => {
+            // Capitalize the first letter of the key to use as the label
+            const label = key.charAt(0).toUpperCase() + key.slice(1);
+            return `<tr><td class="label">${label}:</td><td class="value">${data[key]}</td></tr>`;
+        })
+        .join(""); // Join all rows together into a single HTML string
+
     return `<!DOCTYPE html>
       <html lang="en">
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${data.subject || "Submitted Form"}</title>
+          <title>${mail_title || "Submitted Form"}</title>
           <style>
               body {
                   font-family: Arial, sans-serif;
@@ -134,15 +134,14 @@ export const mailBody = (data) => {
       
       <!-- Company Information Section -->
       <div class="company-info">
-          <p><strong>Company Name:</strong> Your Company Inc.</p>
-          <p><strong>Address:</strong> 1234 Street Name, City, State, ZIP</p>
-          <p><strong>Phone:</strong> (123) 456-7890</p>
-          <p><strong>Email:</strong> support@yourcompany.com</p>
+          <p><strong>Company Name:</strong> Bumrungrad International Hospital</p>
+          <p><strong>Phone:</strong> (+880) 1847284864</p>
+          <p><strong>Email:</strong> discover.bumrungrad@gmail.com</p>
       </div>
 
       <!-- Main Content Section -->
       <div class="container">
-          <h2>${data.subject || "Submitted Form"}</h2>
+          <h2>${mail_title || "Submitted Form"}</h2>
           <table>
               ${rowsHtml}
           </table>
@@ -150,12 +149,20 @@ export const mailBody = (data) => {
 
       <!-- Footer Section -->
       <div class="footer">
-          <p>If you have any questions or need further assistance, please don't hesitate to contact us at support@yourcompany.com.</p>
-          <p>Thank you for choosing Your Company Inc.!</p>
+          <p>If you have any questions or need further assistance, please don't hesitate to contact us at discover.bumrungrad@gmail.com.</p>
+          <p>Thank you for choosing Bumrungrad International Hospital!</p>
+          <div class="company-info">
+            <h4>Dhanmondi Office</h4>
+            <p>Rupayan Prime Tower</p>
+            <p>10th Floor (Lift-9)</p>
+            <p>House:02,Road: 07, Green Road</p>
+            <p>Dhanmondi, Dhaka-1205</p>
+            <p>+8801847284860</p>
+            <p>+8801324-418100</p>
+        </div>
       </div>
 
       </body>
       </html>
     `;
 };
-

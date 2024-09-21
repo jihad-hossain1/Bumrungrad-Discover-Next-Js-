@@ -1,14 +1,11 @@
 
-export const uploadToImgbb = async (file) => {
-    // console.log("🚀 ~ uploadToImgbb ~ file:", file)
-    const apiKey = process.env.IMGBB_API_KEY; // Replace with your actual ImgBB API key
-  
+export const uploadToImgbb = async (file) => {  
     // Create a FormData object to hold the image file
     const formData = new FormData();
     formData.append("image", file);
   
     try {
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=646f6e46bb244c91bad69897323f238a`, {
         method: "POST",
         body: formData,
       });
