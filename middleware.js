@@ -13,7 +13,11 @@ export async function middleware(request) {
 
 export const config = {
     matcher: [
-        '/our-services/:path*',
+        '/our-services/appointment',
+        '/our-services/visaprocessing',
+        '/our-services/telemedicine',
+        '/our-services/order-medicine',
+        '/our-services/medical-record',
         "/my-profile",
         "/check-up",
     ],
