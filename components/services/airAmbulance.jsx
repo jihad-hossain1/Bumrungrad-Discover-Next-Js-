@@ -7,7 +7,9 @@ import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import useAuth from "@/helpers/hooks/useAuth";
-import { mailBody } from "@/helpers/mail/mailbody";
+import { comapanyMailBody } from "@/helpers/mail/mailbody";
+import { uploadToImgbb } from "@/helpers/fileUpload";
+import Loader from "../ui/loader";
 
 const AirAmbulanceForm = () => {
     const { auth } = useAuth();
@@ -31,10 +33,7 @@ const AirAmbulanceForm = () => {
             description: briflyDiscusion,
         };
 
-        Object.keys(fields).forEach((key) => {
-            formData.append(key, fields[key]);
-            setFormDatas((prev) => ({ ...prev, [key]: fields[key] }));
-        });
+        Object.keys(fields).forEach((key) => formData.append(key, fields[key]));
 
         try {
             setLoader(true);
@@ -52,17 +51,21 @@ const AirAmbulanceForm = () => {
             // console.log(data)
             if (data.status == 200) {
                 setLoader(true);
+                const uploadImage = passport ? await uploadToImgbb(passport) : "No Image found"; 
+                setLoader(false);
+
+                setLoader(true);
                 const send_mails = await sendEmails(
                     admin_mails,
                     `Air Ambulance Request`,
-                    mailBody({
+                    comapanyMailBody({
                         name: `${auth?.firstName} ${auth?.lastName}`,
                         email: auth?.email,
                         date: date,
-                        passport_copy: "Image linke not available",
+                        passport_copy: uploadImage,
                         summary: caseSummary,
                         description: briflyDiscusion,
-                    }),
+                    },"Air Ambulance Request"),
                 );
                 setLoader(false);
 
@@ -70,14 +73,14 @@ const AirAmbulanceForm = () => {
                 const send_mail_client = await sendEmails(
                     auth?.email,
                     `Air Ambulance Request`,
-                    mailBody({
+                    comapanyMailBody({
                         name: `${auth?.firstName} ${auth?.lastName}`,
                         email: auth?.email,
                         date: date,
-                        passport_copy: "Image linke not available",
+                        passport_copy: uploadImage,
                         summary: caseSummary,
                         description: briflyDiscusion,
-                    }),
+                    },"Air Ambulance Request"),
                 );
 
                 setLoader(false);
@@ -162,7 +165,7 @@ const AirAmbulanceForm = () => {
                     type='submit'
                     className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
                 >
-                    {loader ? "Loading..." : "Submit"}
+                    { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"}
                 </button>
             </form>
         </div>

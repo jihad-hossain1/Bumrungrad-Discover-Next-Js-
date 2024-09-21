@@ -8,6 +8,8 @@ import { TextField } from "@mui/material";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import toast from "react-hot-toast";
 import { admin_mails } from "@/constant";
+import { userMailBody } from "@/helpers/mail/mailbody";
+import Loader from "@/components/ui/loader";
 
 
 export default function ContactForm() {
@@ -26,11 +28,16 @@ export default function ContactForm() {
             const response = await sendEmails(
               admin_mails,
                 `Contact Us - ${formData.email}`,
-                formData.message,
+                userMailBody(formData, "Contact Us")
             );
+            const sendClientMail = await sendEmails(
+                formData.email,
+                `Contact Us - ${formData.name}`,
+                userMailBody(formData, "Contact Us")
+            )
 
             setLoading(false);
-            if (response.success == true) {
+            if (response.success == true && sendClientMail.success == true) {
                 toast.success("Email sent successfully 👌👌", {
                     position: "top-center",
                     style: { padding: "16px", color: "green", border: "1px solid green" },
@@ -102,10 +109,11 @@ export default function ContactForm() {
                         rows={5}
                     />
                     <button
-                        className='hover:bg-blue px-4 py-2 text-blue hover:text-white border border-blue font-semibold rounded duration-300 ease-linear'
+                    disabled={loading}
+                        className='flex items-center justify-center hover:bg-blue px-4 py-2 text-blue hover:text-white border border-blue font-semibold rounded duration-300 ease-linear'
                         type='submit'
                     >
-                        {loading ? "Sending..." : "Send"}
+                        {loading ? <Loader className="animate-spin" /> : "Submit"}
                     </button>
                 </form>
                 <div className=' md:w-1/2'>

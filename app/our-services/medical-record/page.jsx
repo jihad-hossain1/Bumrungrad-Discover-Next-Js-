@@ -7,22 +7,20 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
-import { mailBody } from "@/helpers/mail/mailbody";
+import { comapanyMailBody } from "@/helpers/mail/mailbody";
+import Loader from "@/components/ui/loader";
+import { uploadToImgbb } from "@/helpers/fileUpload";
 
 
 const MedicalRecords = () => {
   const { auth } = useAuth();
-  // console.log("🚀 ~ MedicalRecords ~ auth:", auth)
   const userDetails = auth;
-  //loader
   const [loader, setLoader] = useState();
-
   const [passport, setPassport] = useState("");
   const [name, setName] = useState('');
   const [hnNum, setHnNum] = useState("");
   const [caseSummary, setCaseSummary] = useState("");
   const navigate = useRouter();
-  const [formDatas, setFormDatas] = useState(null);
 
   const addPatient = async (event) => {
     event.preventDefault();
@@ -35,14 +33,8 @@ const MedicalRecords = () => {
       hnNum,
       caseSummary,
     };
-    // Object.entries(fields).forEach(([key, value]) => {
-    //   formData.append(key, value);
-    //   setFormDatas((prev) => ({ ...prev, [key]: value }));
-    // });
-    Object.entries(fields).forEach(([key, value]) => {
-      formData.append(key, value);
-      setFormDatas((prev) => ({ ...prev, [key]: value }));
-    });
+
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value));
 
     try {
       setLoader(true);
@@ -65,13 +57,15 @@ const MedicalRecords = () => {
             color: "green",
           },
         });
+
+        const uploadImage = passport ?  await uploadToImgbb(passport) : "Image not found"; ;
         
         setLoader(true);
-        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, mailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: "Image Link"}));
+        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadImage}));
         setLoader(false);
 
         setLoader(true);
-        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, mailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: "Image Link"}));
+        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadImage}));
         setLoader(false);
 
         if (send_admin_mails.messageId && send_client_mails.messageId) {
@@ -176,14 +170,9 @@ const MedicalRecords = () => {
             type="submit"
             className="bg-blue mt-6 text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1"
           >
-            Submit
-            {loader && (
-              <div className="flex gap-0.5">
-                <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-                <div className="h-2 w-2 rounded-full bg-white shadow animate-bounce"></div>
-                <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-              </div>
-            )}
+           {
+            loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"
+           }
           </button>
         </form>
       </div>
