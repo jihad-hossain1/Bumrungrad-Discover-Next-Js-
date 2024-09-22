@@ -188,6 +188,7 @@ const AirtTcket = () => {
                         <Select
                             id='filled-select-currency-native'
                             select
+                            required
                             fullWidth
                             onChange={(e) => setDestination(e.target.value)}
                         >

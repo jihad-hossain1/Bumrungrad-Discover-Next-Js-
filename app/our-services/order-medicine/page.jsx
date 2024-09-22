@@ -219,7 +219,7 @@ const OrderMedicine = () => {
           </div>
         ) : (
           <div>
-            <div className="flex flex-col gap-y-4 md:flex-row md:justify-between md:items-center mt-5">
+            <div className="flex flex-col gap-y-4 md:flex-row md:gap-3 md:items-center mt-5">
               <div>
                 <TextField
                   label="Medicine Name"
@@ -237,6 +237,7 @@ const OrderMedicine = () => {
               </div>
               <div>
                 <Button
+                style={{padding: "14px 0px"}}
                   onClick={handleAddMedic}
                   disabled={medicine === "" || quantity === ""}
                   variant="contained"
@@ -301,12 +302,12 @@ const OrderMedicine = () => {
           <button
           
             className={`btn_primary ${
-              !prescriptionImg || loader || !address
+              (!prescriptionImg || !medicArr.length) || loader || !address
                 ? "bg-white text-black border"
                 : "bg-blue text-white"
             }`}
             onClick={orderMedicine}
-            disabled={!prescriptionImg || loader || !address}
+            disabled={ (!prescriptionImg || !medicArr.length) || loader || !address}
           >
            {
              loader ? <Loader className="animate-spin" stroke={loader ? "black" : "white"} fill={loader ? "black" : "white"} /> : "Order Now"

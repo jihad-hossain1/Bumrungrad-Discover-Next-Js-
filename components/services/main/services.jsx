@@ -20,6 +20,7 @@ import languageImage from '@/public/assets/service_logo/bro.png'
 import accommodation from '@/public/assets/service_logo/bro2.png'
 import hospitalAdmission from '@/public/assets/service_logo/bro5.png'
 import Arrival from "../arrival";
+import LangugeInterpreter from "../languge";
 
 
 
@@ -165,7 +166,7 @@ const services = [
   {
     name: "Language Interpreter",
     img: languageImage,
-    form: <UpComming />,
+    form: <LangugeInterpreter />,
     alt: "Bumrungrad International Hospital",
     description:
       "Our language interpreters are here to make your conversations seamless and stress-free. We ensure accurate and easy communication every time.",

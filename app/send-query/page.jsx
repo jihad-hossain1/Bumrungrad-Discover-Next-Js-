@@ -117,7 +117,7 @@ const SendQuery = () => {
 
   return (
     <section className="md:container md:mx-auto">
-      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center">
+      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 ">
         Left Us Your Query !
       </h1>
       <div className="md mb-14">

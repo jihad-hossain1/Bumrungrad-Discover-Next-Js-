@@ -120,7 +120,7 @@ const TeleMedicine = () => {
 
     return (
         <>
-            <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow-xl rounded-xl'>
+            <section className='md:container lg:w-1/2 md:mx-auto md:my-20 shadow rounded-xl'>
                 <h1 className='text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center'>
                     Tele Medicine
                 </h1>
@@ -131,8 +131,9 @@ const TeleMedicine = () => {
                     <h2 className='font-semibold mb-2.5 text-blue'>
                         *Patient Details
                     </h2>
-                    <Divider />
-                    <div className='mt-2.5'>
+                    <Divider className='my-2.5' />
+                   <section className="grid md:grid-cols-2 gap-2.5">
+                   <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Enter Full Name
                         </p>
@@ -145,7 +146,7 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Hospital No.(HN)
                         </p>
@@ -155,7 +156,7 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Date of Birth
                         </p>
@@ -167,7 +168,7 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Passport / Id No
                         </p>
@@ -179,7 +180,7 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Nationality
                         </p>
@@ -190,7 +191,7 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Country of Residence
                         </p>
@@ -202,7 +203,7 @@ const TeleMedicine = () => {
                             value={residence}
                         />
                     </div>
-                    <div className='mt-3'>
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Contact Details of Patient
                         </p>
@@ -214,11 +215,13 @@ const TeleMedicine = () => {
                             value={contactDetails}
                         />
                     </div>
+                   </section>
                     <h1 className='uppercase font-semibold text-blue mt-5 mb-2.5 md:mt-10'>
                         *appointment details
                     </h1>
-                    <Divider />
-                    <div className='mt-3'>
+                    <Divider className='my-2.5' />
+                    <section className="grid md:grid-cols-2 gap-2.5">
+                    <div>
                         <p className='mb-2 font-semibold text-sm'>
                             Preferred Appoinment Date
                         </p>
@@ -229,8 +232,8 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Preferred Doctor
                         </p>
                         <TextField
@@ -239,8 +242,8 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Purpose of Appoinment
                         </p>
                         <TextField
@@ -252,8 +255,8 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             {" "}
                             Availlable Investigation Document
                         </p>
@@ -265,8 +268,8 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Request for Interpreter
                         </p>
                         <TextField
@@ -275,8 +278,8 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Payment Type
                         </p>
                         <TextField
@@ -286,8 +289,8 @@ const TeleMedicine = () => {
                             required
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Email for E-payment Link
                         </p>
                         <TextField
@@ -297,8 +300,8 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
-                    <div className='mt-3'>
-                        <p className='mb-2 font-semibold text-sm mt-3'>
+                    <div>
+                        <p className='mb-2 font-semibold text-sm'>
                             Specific Concern
                         </p>
                         <TextField
@@ -307,6 +310,7 @@ const TeleMedicine = () => {
                             fullWidth
                         />
                     </div>
+                    </section>
                     <button
                         disabled={loader}
                         type='submit'

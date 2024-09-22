@@ -113,13 +113,13 @@ const MedicalRecords = () => {
   },[userDetails])
   return (
     <>
-      <div className="md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16">
+      <div className="md:my-10 container md:max-w-[600px] md:mx-auto lg:w-1/2  mx-5 shadow-xl rounded-xl p-5 md:p-10 ">
         <h1 className="text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
           Medical Records
         </h1>
         <form
           onSubmit={addPatient}
-          className="mt-3 mb-2 md:w-full max-w-screen-lg pb-8 px-5"
+          className="mt-3 mb-2 w-full"
         >
           <div className="mb-2 flex flex-col">
             <div>
