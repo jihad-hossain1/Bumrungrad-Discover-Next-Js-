@@ -177,10 +177,10 @@ const Arrival = () => {
                 <button
                     type='button'
                     disabled={loader}
-                    className="bg-blue text-white px-3 py-1 rounded float-left mt-3 w-fit"
+                    className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
                     onClick={handleSubmit}
                 >
-                    {loader ? <Loader className='animate-spin' fill='white' stroke='white' /> : "Submit"}
+                    {loader ? <Loader className='animate-spin' fill='black' stroke='black' /> : "Submit"}
                 </button>
             </div>
         </div>

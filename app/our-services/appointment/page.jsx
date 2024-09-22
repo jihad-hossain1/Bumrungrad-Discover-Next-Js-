@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { comapanyMailBody, mailBody } from "@/helpers/mail/mailbody";
 import { uploadToImgbb } from "@/helpers/fileUpload";
+import Loader from "@/components/ui/loader";
 
 const customStyles = {
     day: {
@@ -294,16 +295,18 @@ export default function Appointment() {
             // upload image
             setLoader(true);
             const uploadImage = passport
-                ? await uploadToImgbb(passport)
-                : "Image link not provided";
+                ? data?.passport
+                : "link not provided";
             const uploadImage2 = medicalReport1
-                ? await uploadToImgbb(medicalReport1)
-                : "Image link not provided";
+                ? data?.medicalReport1 
+                : "link not provided";
             const uploadImage3 = medicalReport2
-                ? await uploadToImgbb(medicalReport2)
-                : "Image link not provided";
+                ? data?.medicalReport1
+                : "link not provided";
             setLoader(false);
             // Send email
+
+            setLoader(true);
             const emailResponse = await sendEmails(
                 admin_mails,
                 "Book Appointment",
@@ -317,38 +320,31 @@ export default function Appointment() {
                     "Book Appointment",
                 ),
             );
-            // console.log("🚀 ~ handleBookAppointment ~ emailResponse:", emailResponse)
+            setLoader(false);
+            setLoader(true);
+            const responseClient = await sendEmails(
+                auth?.email,
+                "Book Appointment",
+                comapanyMailBody(
+                    {
+                        ...fields,
+                        user_id: "-",
+                        passport: uploadImage,
+                        medicalReport1: uploadImage2,
+                        medicalReport2: uploadImage3,
+                    },
+                    "Book Appointment",
+                ),
+            );
+            setLoader(false);
 
-            if (emailResponse.messageId) {
+            if (emailResponse.messageId && responseClient.messageId) {
                 toast.success("Mail has been sent", {
                     position: "top-center",
                     style: { borderRadius: "20px" },
                     duration: 5000,
                 });
-
-                const responseClient = await sendEmails(
-                    auth?.email,
-                    "Book Appointment",
-                    comapanyMailBody(
-                        {
-                            ...fields,
-                            user_id: "-",
-                            passport: uploadImage,
-                            medicalReport1: uploadImage2,
-                            medicalReport2: uploadImage3,
-                        },
-                        "Book Appointment",
-                    ),
-                );
-
-                if (responseClient.messageId) {
-                    toast.success("please check your email", {
-                        position: "top-center",
-                        style: { borderRadius: "20px" },
-                        duration: 5000,
-                    });
-                    navigate.push("/my-profile");
-                }
+                navigate.push("/my-profile");
             }
         } catch (error) {
             setLoader(false);
@@ -469,7 +465,7 @@ export default function Appointment() {
                                                 setActiveChoose(true);
                                             }}
                                         >
-                                            Choose{" "}
+                                            Choose
                                             <span className='hidden md:block'>
                                                 Doctor
                                             </span>
@@ -484,7 +480,7 @@ export default function Appointment() {
                                                 setActiveChoose(false);
                                             }}
                                         >
-                                            Recommend{" "}
+                                            Recommend
                                             <span className='hidden md:block'>
                                                 Doctor
                                             </span>
@@ -598,12 +594,12 @@ export default function Appointment() {
                                             mode='single'
                                             selected={selectedDate}
                                             onSelect={setSelectedDate}
+                                            
                                         />
                                         <p className='mb-2.5'>
-                                            {" "}
                                             <span className='font-semibold text-blue'>
                                                 *Update Date:
-                                            </span>{" "}
+                                            </span>
                                             {selectedDate
                                                 ? format(selectedDate, "PP")
                                                 : "No date selected"}
@@ -620,10 +616,9 @@ export default function Appointment() {
                                             onSelect={setSelectedDate2}
                                         />
                                         <p className='mb-2.5'>
-                                            {" "}
                                             <span className='font-semibold text-blue'>
                                                 *Update Date:
-                                            </span>{" "}
+                                            </span>
                                             {selectedDate2
                                                 ? format(selectedDate2, "PP")
                                                 : "No date selected"}
@@ -649,17 +644,14 @@ export default function Appointment() {
                                                 }
                                             >
                                                 <MenuItem value='Morning'>
-                                                    {" "}
                                                     Morning (06:00 am - 12:00
                                                     pm)
                                                 </MenuItem>
                                                 <MenuItem value='Evening'>
-                                                    {" "}
                                                     Afternoon (12:00 pm - 06:00
                                                     pm)
                                                 </MenuItem>
                                                 <MenuItem value='Night'>
-                                                    {" "}
                                                     Night (06:00 pm - 12:00 am)
                                                 </MenuItem>
                                             </Select>
@@ -1160,7 +1152,6 @@ export default function Appointment() {
                                     </p>
 
                                     <div>
-                                        {" "}
                                         <div>
                                             <p className='mb-2.5'>
                                                 Attach Passport(Required)
@@ -1204,7 +1195,6 @@ export default function Appointment() {
                                             />
                                         </div>
                                         <div className='my-2.5'>
-                                            {" "}
                                             <div className='flex flex-col gap-2.5'>
                                                 <TextField
                                                     fullWidth
@@ -1232,7 +1222,7 @@ export default function Appointment() {
                                 </section>
                                 <div className='flex justify-center gap-2'>
                                     <button
-                                    disabled={loader}
+                                        disabled={loader}
                                         className='mt-5 px-4 py-2 rounded font-semibold text-white bg-blue hover:bg-white border border-blue hover:text-blue duration-300 ease-linear'
                                         onClick={handleClick3Prev}
                                     >
@@ -1318,7 +1308,7 @@ export default function Appointment() {
                                                 <li>
                                                     {specialty && (
                                                         <span>
-                                                            Specialty:{" "}
+                                                            Specialty:
                                                             {specialty}
                                                         </span>
                                                     )}
@@ -1326,7 +1316,7 @@ export default function Appointment() {
                                                 <li>
                                                     {subSpecialty && (
                                                         <span>
-                                                            Sub Specialty:{" "}
+                                                            Sub Specialty:
                                                             {subSpecialty}
                                                         </span>
                                                     )}
@@ -1334,7 +1324,7 @@ export default function Appointment() {
                                                 <li>
                                                     {medicalDesc && (
                                                         <span>
-                                                            Medical Description:{" "}
+                                                            Medical Description:
                                                             {medicalDesc}
                                                         </span>
                                                     )}
@@ -1342,7 +1332,7 @@ export default function Appointment() {
                                                 <li>
                                                     {requestorEmail && (
                                                         <span>
-                                                            Email:{" "}
+                                                            Email:
                                                             {requestorEmail}
                                                         </span>
                                                     )}
@@ -1373,7 +1363,7 @@ export default function Appointment() {
                                                     <li>
                                                         {selectedDate && (
                                                             <span>
-                                                                First Date:{" "}
+                                                                First Date:
                                                                 {format(
                                                                     selectedDate,
                                                                     "PP",
@@ -1384,7 +1374,7 @@ export default function Appointment() {
                                                     <li>
                                                         {shift && (
                                                             <span>
-                                                                First Shift:{" "}
+                                                                First Shift:
                                                                 {shift}
                                                             </span>
                                                         )}
@@ -1393,7 +1383,7 @@ export default function Appointment() {
                                                         {firstSiftTime && (
                                                             <span>
                                                                 First Shift
-                                                                Time:{" "}
+                                                                Time:
                                                                 {firstSiftTime}
                                                             </span>
                                                         )}
@@ -1403,7 +1393,7 @@ export default function Appointment() {
                                                     <li>
                                                         {selectedDate2 && (
                                                             <span>
-                                                                Second Date:{" "}
+                                                                Second Date:
                                                                 {format(
                                                                     selectedDate2,
                                                                     "PP",
@@ -1414,7 +1404,7 @@ export default function Appointment() {
                                                     <li>
                                                         {shift && (
                                                             <span>
-                                                                Second Shift:{" "}
+                                                                Second Shift:
                                                                 {shift2}
                                                             </span>
                                                         )}
@@ -1423,7 +1413,7 @@ export default function Appointment() {
                                                         {SecondSiftTime && (
                                                             <span>
                                                                 Second Shift
-                                                                Time:{" "}
+                                                                Time:
                                                                 {SecondSiftTime}
                                                             </span>
                                                         )}
@@ -1441,7 +1431,7 @@ export default function Appointment() {
                                                     <li>
                                                         {requestorFirstname && (
                                                             <span>
-                                                                Firstname:{" "}
+                                                                Firstname:
                                                                 {
                                                                     requestorFirstname
                                                                 }
@@ -1451,7 +1441,7 @@ export default function Appointment() {
                                                     <li>
                                                         {requestorLastName && (
                                                             <span>
-                                                                Lastname:{" "}
+                                                                Lastname:
                                                                 {
                                                                     requestorLastName
                                                                 }
@@ -1461,7 +1451,7 @@ export default function Appointment() {
                                                     <li>
                                                         {requestorEmail && (
                                                             <span>
-                                                                Email:{" "}
+                                                                Email:
                                                                 {requestorEmail}
                                                             </span>
                                                         )}
@@ -1476,7 +1466,7 @@ export default function Appointment() {
                                                     <li>
                                                         {relation && (
                                                             <span>
-                                                                Relation:{" "}
+                                                                Relation:
                                                                 {relation}
                                                             </span>
                                                         )}
@@ -1493,7 +1483,7 @@ export default function Appointment() {
                                                 <li>
                                                     {firstname && lastName ? (
                                                         <span>
-                                                            Name: {firstname}{" "}
+                                                            Name: {firstname}
                                                             {lastName}
                                                         </span>
                                                     ) : (
@@ -1509,7 +1499,7 @@ export default function Appointment() {
                                                 <li>
                                                     {hnNumber && (
                                                         <span>
-                                                            HN Number:{" "}
+                                                            HN Number:
                                                             {hnNumber}
                                                         </span>
                                                     )}
@@ -1517,7 +1507,7 @@ export default function Appointment() {
                                                 <li>
                                                     {pataientEmail && (
                                                         <span>
-                                                            Email:{" "}
+                                                            Email:
                                                             {pataientEmail}
                                                         </span>
                                                     )}
@@ -1539,7 +1529,7 @@ export default function Appointment() {
                                                 <li>
                                                     {citizenship && (
                                                         <span>
-                                                            Citizenship:{" "}
+                                                            Citizenship:
                                                             {citizenship}
                                                         </span>
                                                     )}
@@ -1554,7 +1544,7 @@ export default function Appointment() {
                                                 <li>
                                                     {desc && (
                                                         <span>
-                                                            Medical Description:{" "}
+                                                            Medical Description:
                                                             {desc}
                                                         </span>
                                                     )}
@@ -1621,22 +1611,30 @@ export default function Appointment() {
                                         </div>
                                         <div className='flex items-center gap-1'>
                                             <button
+                                                disabled={loader}
                                                 onClick={handleBookAppointment}
-                                                className='flex gap-1 items-center px-2 py-2 md:px-4 md:py-2 bg-blue border border-blue text-white rounded-full font-semibold duration-300 ease-linear'
+                                                className={`btn_primary ${
+                                                    loader
+                                                        ? "bg-white border text-black"
+                                                        : "text-white bg-blue"
+                                                }`}
                                             >
-                                                Book
-                                                {loader && (
-                                                    <div className='flex gap-1'>
-                                                        <div className='h-3 w-3 shadow bg-white rounded-full'></div>
-                                                        <div className='h-3 w-3 shadow bg-white rounded-full animate-bounce'></div>
-                                                    </div>
+                                                {loader ? (
+                                                    <Loader
+                                                        className='animate-spin'
+                                                        stroke='black'
+                                                        color='black'
+                                                    />
+                                                ) : (
+                                                    "Book Appointment"
                                                 )}
                                             </button>
                                             <button
+                                                disabled={loader}
                                                 onClick={
                                                     handlePreviewClosePreview
                                                 }
-                                                className='ml-2 md:ml-4  px-2 py-2 md:px-4 md:py-2 bg-red border border-red text-white rounded-full hover:bg-white hover:text-red font-semibold duration-300 ease-linear'
+                                                className='mt-4 ml-2 px-4 py-2 bg-red border border-red text-white rounded-md hover:bg-white hover:text-red font-semibold duration-300 ease-linear'
                                             >
                                                 Close
                                             </button>
