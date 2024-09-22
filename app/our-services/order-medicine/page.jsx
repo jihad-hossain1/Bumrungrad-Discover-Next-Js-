@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,27 +15,24 @@ import useAuth from "@/helpers/hooks/useAuth";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import Loader from "@/components/ui/loader";
+import { admin_mails } from "@/constant";
+import { sendEmails } from "@/helpers/mail/sendMail";
+import {  mailBodyMedicine } from "@/helpers/mail/mailbody";
 
 const OrderMedicine = () => {
   const { auth } = useAuth();
-  const userDetails = auth;
   const [prescriptionState, setPrescriptionState] = useState(1);
   //loader
   const [loader, setLoader] = useState();
 
-  const [name, setName] = useState(
-    userDetails?.firstName
-      ? `${userDetails?.firstName} ${userDetails?.lastName}`
-      : ""
+  const [name, setName] = useState(""
   );
-  const [number, setNumber] = useState(
-    userDetails?.phone ? userDetails?.phone : ""
+  const [number, setNumber] = useState( ""
   );
   const handleChange = (newValue) => {
     setNumber(newValue);
   };
-  const [email, setEmail] = useState(
-    userDetails?.email ? userDetails?.email : ""
+  const [email, setEmail] = useState( ""
   );
   const [address, setAddress] = useState("");
   const [medicine, setMedicin] = useState("");
@@ -43,8 +40,16 @@ const OrderMedicine = () => {
   const [medicArr, setMedicArr] = useState([]);
   const [prescriptionImg, setprescriptionImg] = useState("");
   const navigate = useRouter();
-  const [formDatas, setFormDatas] = useState(null);
 
+  useEffect(()=>{
+    if(auth){
+      setName(`${auth?.firstName} ${auth?.lastName}` || "");
+      setEmail(auth?.email || "");
+      setNumber(auth?.phone || "");
+    }
+  },[auth])
+
+  
   //add Medicine
   const handleAddMedic = () => {
     const medicineQuantityData = [medicine, quantity];
@@ -69,12 +74,7 @@ const OrderMedicine = () => {
       medicines: JSON.stringify(medicArr),
     };
 
-    Object.keys(fields).forEach((key) => {
-      formData.append(key, fields[key]);
-      setFormDatas((prev) => ({ ...prev, [key]: fields[key] }));
-    });
-
-    console.log(formDatas);
+    Object.keys(fields).forEach((key) => formData.append(key, fields[key]));
 
     try {
       setLoader(true);
@@ -102,7 +102,40 @@ const OrderMedicine = () => {
             },
           }
         );
-        navigate.push("/");
+
+        const uploaded_prescription = json_data?.prescription
+          ? json_data?.prescription
+          : "Link not found";
+
+// console.log("uploaded_prescription", fields);
+
+        setLoader(true);
+         const send_mail_admin = await sendEmails(
+           admin_mails, 
+           "Medicine Order",
+           mailBodyMedicine({
+            ...fields , prescription: uploaded_prescription
+           }, "Medicine Order")
+         )
+
+         const send_mail_client = await sendEmails(
+           auth?.email,
+           "Medicine Order",
+           mailBodyMedicine({
+            ...fields , prescription: uploaded_prescription
+           }, "Medicine Order")
+          )
+          setLoader(false);
+
+         if(send_mail_admin.messageId && send_mail_client.messageId){
+          toast.success(
+            "Email sent successfully",
+          )
+          
+          navigate.push("/");
+         }
+
+
       } else {
         toast.error("Something went wrong! Please try again later.", {
           duration: 3000,
@@ -266,16 +299,17 @@ const OrderMedicine = () => {
         </div>
         <div className="mt-4 pb-20">
           <button
-            className={`border border-blue px-6 py-2 md:px-12 md:py-4 rounded float-left mt-3 flex items-center gap-2 ${
-              medicArr.length === 0 && prescriptionImg === ""
-                ? "bg-white text-black"
+          
+            className={`btn_primary ${
+              !prescriptionImg || loader || !address
+                ? "bg-white text-black border"
                 : "bg-blue text-white"
             }`}
             onClick={orderMedicine}
-            disabled={medicArr.length === 0 && prescriptionImg === ""}
+            disabled={!prescriptionImg || loader || !address}
           >
            {
-             loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Order Now"
+             loader ? <Loader className="animate-spin" stroke={loader ? "black" : "white"} fill={loader ? "black" : "white"} /> : "Order Now"
            }
           </button>
         </div>

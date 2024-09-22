@@ -58,14 +58,14 @@ const MedicalRecords = () => {
           },
         });
 
-        const uploadImage = passport ?  await uploadToImgbb(passport) : "Image not found"; ;
+        const uploadDoc = data?.passport ?  data?.passport : "Link not found"; ;
         
         setLoader(true);
-        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadImage}));
+        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}, "Medical Records"));
         setLoader(false);
 
         setLoader(true);
-        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadImage}));
+        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}, "Medical Records"));
         setLoader(false);
 
         if (send_admin_mails.messageId && send_client_mails.messageId) {
@@ -168,10 +168,10 @@ const MedicalRecords = () => {
           <button
             disabled={loader || !name || !passport || !hnNum || !caseSummary}
             type="submit"
-            className="bg-blue mt-6 text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1"
+            className={`${loader || !name || !passport || !hnNum || !caseSummary ? "bg-white text-black border" : "bg-blue text-white"} btn_primary`}
           >
            {
-            loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"
+            loader ? <Loader className="animate-spin" stroke={loader ? "black" : "white"} fill={loader ? "black" : "white"} /> : "Submit"
            }
           </button>
         </form>

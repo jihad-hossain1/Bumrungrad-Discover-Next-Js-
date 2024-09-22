@@ -102,17 +102,17 @@ const VisaProcessing = () => {
               // image upload
                 setLoader(true);
                 const passportUpload = passport
-                    ? await uploadToImgbb(passport)
-                    : "Image Link not provided";
+                    ? data?.passport
+                    : "Link not provided";
                 const medicalReport1Upload = medicalReport1
-                    ? await uploadToImgbb(medicalReport1)
-                    : "Image Link not provided";
+                    ? data?.medicalReport1
+                    : "Link not provided";
                 const medicalReport2Upload = medicalReport2
-                    ? await uploadToImgbb(medicalReport2)
-                    : "Image Link not provided";
+                    ?data?.medicalReport2
+                    : "Link not provided";
                 const invitationLetterUpload = invitationLetter 
-                    ? await uploadToImgbb(invitationLetter) 
-                    : "Image Link not provided";
+                    ? data?.invitationLetter
+                    : "Link not provided";
                 setLoader(false);
 
                 // send email to admin
@@ -154,7 +154,7 @@ const VisaProcessing = () => {
                 // show message to user
                 if (mailRes.messageId && mailRes2.messageId) {
                     toast.success("Request Sent. We will get back to you soon");
-                    navigate.push("/my-profile");
+                    navigate.push("/");
                 } else {
                     setLoader(false);
                     toast.error("Something went wrong, please try again");
@@ -483,7 +483,8 @@ const VisaProcessing = () => {
                         <div className='flex justify-center gap-2'>
                             <button
                                 onClick={handleBookVisa}
-                                className={`flex items-center gap-1 mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
+                                className={`btn_primary ${
+                                    loader ||
                                     firstname === "" ||
                                     lastName === "" ||
                                     citizenship === "" ||
@@ -492,8 +493,8 @@ const VisaProcessing = () => {
                                     phone === "" ||
                                     dob === "" ||
                                     (passport === "" && driveLink1 === "")
-                                        ? "bg-white text-blue"
-                                        : "text-white"
+                                        ? "bg-white text-blue border"
+                                        : "text-white bg-blue border-none"
                                 }`}
                                 disabled={
                                     loader ||
@@ -507,7 +508,7 @@ const VisaProcessing = () => {
                                     (passport === "" && driveLink1 === "")
                                 }
                             >
-                                { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Book Visa"}
+                                { loader ? <Loader className="animate-spin" stroke={loader ? "black" : "white"} fill={loader ? "black" : "white"} /> : "Book Visa"}
                             </button>
                         </div>
                     </section>

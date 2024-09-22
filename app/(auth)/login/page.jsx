@@ -10,6 +10,7 @@ import Image from 'next/image'
 import useAuth from '@/helpers/hooks/useAuth'
 import toast from 'react-hot-toast'
 import { userTokenSet } from '@/helpers/lib/usertoken'
+import Loader from '@/components/ui/loader'
 
 export default function Login() {
   const {setIsAdd} = useAuth()
@@ -142,19 +143,15 @@ export default function Login() {
         </div>
         <div className="mt-5">
           <button
-            className={`flex justify-center items-center gap-2 w-full lg:w-[200px] mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
-              !isFormValid ? 'bg-white text-blue' : 'text-white'
+            className={`btn_primary ${
+              !isFormValid || loader ? 'bg-white text-blue border' : 'bg-blue text-white'
             }`}
-            disabled={!isFormValid}
+            disabled={!isFormValid || loader}
             onClick={handleLogin}
           >
-            Login
-            {loader && (
-              <div className="flex gap-1 ml-2">
-                <div className="h-3 w-3 shadow bg-white rounded-full"></div>
-                <div className="h-3 w-3 shadow bg-white rounded-full animate-bounce"></div>
-              </div>
-            )}
+           {
+            loader ? <Loader className="animate-spin"  /> : 'Login'
+           }
           </button>
         </div>
         <p className="mt-5">

@@ -66,7 +66,7 @@ const AirtTcket = () => {
                     },
                 );
                 setLoader(true);
-                const docImage = passport  ?  await uploadToImgbb(passport) : "No Image found";
+                const docImage = data?.doc  ?  data?.doc : "No doc found";
                 setLoader(false);
 
                 setLoader(true);
@@ -203,9 +203,9 @@ const AirtTcket = () => {
                         <button
                             disabled={loader}
                             type='submit'
-                            className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
+                            className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
                         >
-                            { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"}
+                            { loader ? <Loader className="animate-spin" stroke="black" fill="black" /> : "Submit"}
                         </button>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
   
   .rdp-button {
     font-size: 1rem;
-    color: blue;
+    color: rgb(5, 5, 90);
     border-radius: 50%;
   }
   
@@ -26,5 +26,7 @@
   .rdp-caption_label {
     color: rgb(9, 9, 9);
     font-size: 1.2rem;
+    padding-left: 20px;
   }
   
+
