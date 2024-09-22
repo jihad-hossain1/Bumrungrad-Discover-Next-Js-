@@ -39,22 +39,20 @@ const AirPickup = () => {
 
     setLoader(false)
     const resjson = await response.json()
+    // console.log("🚀 ~ orderAirPickup ~ resjson:", resjson)
 
     if(resjson.status === 200){
       toast.success('Airport Transfer sent! Our support team will contact you soon.')
 
-      setLoader(true)
-      const uploadImage = airTicketFile ? await uploadToImgbb(airTicketFile) : 'No Image found'
-      const uploadImage2 = appointmentfile ? await uploadToImgbb(appointmentfile) : 'No Image found'
-
-      setLoader(false)
+      const uploadImage = resjson?.appointment_file ? resjson?.appointment_file : 'No file found'
+      const uploadImage2 = resjson?.air_ticket_file ? resjson?.air_ticket_file : 'No file found'
 
       setLoader(true)
       const send_mails = await sendEmails(
         admin_mails,
         `Airport Transfer`,
         comapanyMailBody({
-          name: `${auth?.firstname} ${auth?.lastname}`,
+          name: `${auth?.firstName} ${auth?.lastName}`,
           email: auth?.email,
           ...fields,
           air_ticket_file: uploadImage,
@@ -62,8 +60,22 @@ const AirPickup = () => {
         },'Airport Transfer')
       )
       setLoader(false)
+      
+      setLoader(true)
+      const send_mail_client = await sendEmails(
+        auth?.email,
+        `Airport Transfer`,
+        comapanyMailBody({
+          name: `${auth?.firstName} ${auth?.lastName}`,
+          email: auth?.email,
+          ...fields,
+          air_ticket_file: uploadImage,
+          appointment_file: uploadImage
+        },'Airport Transfer')
+      )
+      setLoader(false)
 
-      if(send_mails.messageId){
+      if(send_mails.messageId && send_mail_client.messageId){
         toast.success('Airport Transfer sent! Our support team will contact you soon.')
         form.reset()
         window.location.reload()
@@ -114,9 +126,9 @@ const AirPickup = () => {
         <button
         disabled={loader}
           type='submit'
-          className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
+          className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
         >
-          { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : 'Submit'}
+          { loader ? <Loader className="animate-spin" stroke="black" fill="black" /> : 'Submit'}
         </button>
       </form>
     </div>

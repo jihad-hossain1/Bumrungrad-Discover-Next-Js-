@@ -154,7 +154,7 @@ const VisaProcessing = () => {
                 // show message to user
                 if (mailRes.messageId && mailRes2.messageId) {
                     toast.success("Request Sent. We will get back to you soon");
-                    navigate.push("/my-profile");
+                    navigate.push("/");
                 } else {
                     setLoader(false);
                     toast.error("Something went wrong, please try again");

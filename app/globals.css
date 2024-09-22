@@ -12,7 +12,7 @@ body {
 
 
 .btn_primary {
-  @apply mt-6 justify-center w-[100px] py-2  rounded flex items-center gap-1;
+  @apply mt-6 justify-center w-[150px] py-2 px-4  rounded flex items-center gap-1 text-nowrap;
 }
 
 .card {
