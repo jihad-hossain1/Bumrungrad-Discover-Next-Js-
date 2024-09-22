@@ -12,6 +12,7 @@ import { admin_mails } from "@/constant";
 import useAuth from "@/helpers/hooks/useAuth";
 import { uploadToImgbb } from "@/helpers/fileUpload";
 import Loader from "../ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const AirtTcket = () => {
     const {auth} = useAuth()
@@ -55,16 +56,7 @@ const AirtTcket = () => {
             setLoader(false);
 
             if (response.ok && data.status === 200) {
-                toast.success(
-                    "Air Ticket request sent! Our support team will contact you soon.",
-                    {
-                        duration: 4000,
-                        style: {
-                            padding: "20px",
-                            color: "green",
-                        },
-                    },
-                );
+                
                 setLoader(true);
                 const docImage = data?.doc  ?  data?.doc : "No doc found";
                 setLoader(false);
@@ -73,7 +65,7 @@ const AirtTcket = () => {
                 const sendMail = await sendEmails(
                     admin_mails,
                    `Air Ticket - ${auth?.email}`,
-                    comapanyMailBody({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage},"Air Ticket Request"),
+                    comapanyMailBody(formatKeys({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage}),"Air Ticket Request"),
                 );
                 setLoader(false);
 
@@ -81,7 +73,7 @@ const AirtTcket = () => {
                 const sendMail2 = await sendEmails(
                   auth?.email,
                   `Air Ticket`,
-                  comapanyMailBody({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage},"Air Ticket Request"),
+                  comapanyMailBody(formatKeys({name: `${auth?.firstName} ${auth?.lastName}`, email: auth?.email, ...fields, doc: docImage}),"Air Ticket Request"),
                 )
                 setLoader(false);
 

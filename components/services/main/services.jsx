@@ -30,17 +30,28 @@ export default function Services({ handaleOpen, getData }) {
   const router = useRouter();
 
 const handleClick = (s, i, id) => {
+  // If the 'pageTo' property exists, navigate to that page
   if (s?.pageTo) {
-    router.push(s.pageTo);
-  } else {
-    if (!auth) {
-      router.push('/login');
-      // return;
-    }
+    return router.push(s.pageTo);
+  }
+
+  // Handle specific case for "Language Interpreter"
+  if (s?.name === "Language Interpreter") {
     handaleOpen(id);
     getData(s);
+    return;
   }
+
+  // If the user is not authenticated, redirect to login
+  if (!auth) {
+    return router.push('/login');
+  }
+
+  // Default case: handle opening and data fetching
+  handaleOpen(id);
+  getData(s);
 };
+
 
 
   return (

@@ -10,6 +10,7 @@ import useAuth from '@/helpers/hooks/useAuth'
 import { sendEmails } from '@/helpers/mail/sendMail'
 import { admin_mails } from '@/constant'
 import { comapanyMailBody } from '@/helpers/mail/mailbody'
+import { formatKeys } from '@/helpers/objectKeyFormat'
 
 
 const AirPickup = () => {
@@ -42,7 +43,7 @@ const AirPickup = () => {
     // console.log("🚀 ~ orderAirPickup ~ resjson:", resjson)
 
     if(resjson.status === 200){
-      toast.success('Airport Transfer sent! Our support team will contact you soon.')
+      // toast.success('Airport Transfer sent! Our support team will contact you soon.')
 
       const uploadImage = resjson?.appointment_file ? resjson?.appointment_file : 'No file found'
       const uploadImage2 = resjson?.air_ticket_file ? resjson?.air_ticket_file : 'No file found'
@@ -51,13 +52,13 @@ const AirPickup = () => {
       const send_mails = await sendEmails(
         admin_mails,
         `Airport Transfer`,
-        comapanyMailBody({
+        comapanyMailBody(formatKeys({
           name: `${auth?.firstName} ${auth?.lastName}`,
           email: auth?.email,
           ...fields,
           air_ticket_file: uploadImage,
           appointment_file: uploadImage2
-        },'Airport Transfer')
+        }),'Airport Transfer')
       )
       setLoader(false)
       
@@ -65,13 +66,13 @@ const AirPickup = () => {
       const send_mail_client = await sendEmails(
         auth?.email,
         `Airport Transfer`,
-        comapanyMailBody({
+        comapanyMailBody(formatKeys({
           name: `${auth?.firstName} ${auth?.lastName}`,
           email: auth?.email,
           ...fields,
           air_ticket_file: uploadImage,
           appointment_file: uploadImage
-        },'Airport Transfer')
+        }),'Airport Transfer')
       )
       setLoader(false)
 

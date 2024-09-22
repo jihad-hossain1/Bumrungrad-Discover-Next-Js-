@@ -8,6 +8,8 @@ import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import toast from "react-hot-toast";
 import { comapanyMailBody, mailBody } from "@/helpers/mail/mailbody";
+import { formatKeys } from "@/helpers/objectKeyFormat";
+import Loader from "@/components/ui/loader";
 
 export default function CheckUp() {
     // const auth = JSON.parse(localStorage.getItem('User_Details'))
@@ -134,10 +136,7 @@ export default function CheckUp() {
             };
 
             // Append all fields to FormData
-            Object.entries(fields).forEach(([key, value]) => {
-                formData.append(key, value);
-                setFormDatas((prev) => ({ ...prev, [key]: value }));
-            });
+            Object.entries(fields).forEach(([key, value]) =>formData.append(key, value));
 
             // Send POST request
             setLoader(true);
@@ -152,13 +151,13 @@ export default function CheckUp() {
             const data = await response.json();
 
             if (data.status === 200) {
-                toast.success("Check Up Request Placed");
+                // toast.success("Check Up Request Placed");
 
                 setLoader(true);
                 const mailResponse = await sendEmails(
                     admin_mails,
                     "Check Up Request Placed",
-                    comapanyMailBody(fields),
+                    comapanyMailBody(formatKeys(fields), "Check Up Request Placed"),
                 );
                 setLoader(false);
 
@@ -166,7 +165,7 @@ export default function CheckUp() {
                 const clientMailResponse = await sendEmails(
                     fields.email,
                     "Check Up Request Placed",
-                    comapanyMailBody(fields),
+                    comapanyMailBody(formatKeys(fields), "Check Up Request Placed"),
                 );
                 setLoader(false);
 
@@ -465,7 +464,7 @@ export default function CheckUp() {
                                             email === "" ||
                                             phone === "" ||
                                             nationality === ""
-                                                ? "bg-cream text-blue"
+                                                ? "bg-cream text-blue border"
                                                 : "bg-blue text-white "
                                         }`}
                                         disabled={
@@ -477,7 +476,7 @@ export default function CheckUp() {
                                             nationality === ""
                                         }
                                     >
-                                        {loader ? "Loading..." : "Submit"}
+                                        {loader ? <Loader stroke={'black'} color="black" className='animate-spin' /> : "Submit"}
                                     </button>
                                 </div>
                             </div>
