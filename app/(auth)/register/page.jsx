@@ -14,6 +14,7 @@ import Link from "next/link";
 import { AiFillEye } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Loader from "@/components/ui/loader";
 
 export default function Register() {
     const navigate = useRouter();
@@ -311,7 +312,8 @@ export default function Register() {
                 </section>
                 <div className='flex justify-center'>
                     <button
-                        className={`flex justify-center items-center gap-2 mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
+                        className={`btn_primary ${
+                            loader ||
                             firstname === "" ||
                             lastName === "" ||
                             citizenship === "" ||
@@ -319,10 +321,11 @@ export default function Register() {
                             pataientEmail === "" ||
                             phone === "" ||
                             dob === ""
-                                ? "bg-white text-blue"
-                                : "text-white"
+                                ? "bg-white text-blue border"
+                                : "text-white bg-blue border"
                         }`}
                         disabled={
+                            loader ||
                             firstname === "" ||
                             lastName === "" ||
                             citizenship === "" ||
@@ -333,13 +336,9 @@ export default function Register() {
                         }
                         onClick={handaleRegister}
                     >
-                        Register
-                        {loader && (
-                            <div className='flex gap-1'>
-                                <div className='h-2 w-2 shadow bg-white rounded-full'></div>
-                                <div className='h-2 w-2 shadow bg-white rounded-full animate-bounce'></div>
-                            </div>
-                        )}
+                       {
+                        loader ? <Loader className="animate-spin" stroke="black" color="black"  /> : "Register"
+                       }
                     </button>
                 </div>
                 <p className='mt-4 text-center'>

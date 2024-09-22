@@ -349,13 +349,13 @@ const ChildPackageDetails = ({ params }) => {
                             <button
                                 disabled={loader}
                                 onClick={handalepackageSubmit}
-                                className='mt-4 px-4 py-2 rounded bg-blue text-white font-semibold'
+                                className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
                             >
                                 {loader ? (
                                     <Loader
                                         className='animate-spin'
-                                        stroke='white'
-                                        fill='white'
+                                        stroke='black'
+                                        fill='black'
                                     />
                                 ) : (
                                     "Book Now"

@@ -19,7 +19,6 @@ const AirAmbulanceForm = () => {
     const [passport, setPassport] = useState("");
     const [caseSummary, setCaseSummary] = useState("");
     const [briflyDiscusion, setbriflyDiscusion] = useState("");
-    const [formDatas, setFormDatas] = useState(null);
 
     const addPatient = async (event) => {
         event.preventDefault();
@@ -51,7 +50,7 @@ const AirAmbulanceForm = () => {
             // console.log(data)
             if (data.status == 200) {
                 setLoader(true);
-                const uploadImage = passport ? await uploadToImgbb(passport) : "No Image found"; 
+                const uploadImage = data?.passport_copy ? data?.passport_copy : "No file found"; 
                 setLoader(false);
 
                 setLoader(true);
@@ -163,9 +162,12 @@ const AirAmbulanceForm = () => {
                         !briflyDiscusion
                     }
                     type='submit'
-                    className='bg-blue text-white px-3 py-1 rounded float-left mt-3'
+                    className={`btn_primary ${loader || !date ||
+                        !passport ||
+                        !caseSummary ||
+                        !briflyDiscusion ? "bg-white text-black border" : "bg-blue text-white"}`}
                 >
-                    { loader ? <Loader className="animate-spin" stroke="white" fill="white" /> : "Submit"}
+                    { loader ? <Loader className="animate-spin" stroke="black" fill="black" /> : "Submit"}
                 </button>
             </form>
         </div>
