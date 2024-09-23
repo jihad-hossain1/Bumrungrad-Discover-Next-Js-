@@ -109,7 +109,6 @@ const SendQuery = () => {
       }
     } catch (error) {
       setLoader(false);
-      console.log(error?.message);
     }
   };
 

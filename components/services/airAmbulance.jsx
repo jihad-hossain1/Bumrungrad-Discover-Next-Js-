@@ -47,7 +47,6 @@ const AirAmbulanceForm = () => {
 
             const data = await response.json();
 
-            // console.log(data)
             if (data.status == 200) {
                 setLoader(true);
                 const uploadImage = data?.passport_copy ? data?.passport_copy : "No file found"; 

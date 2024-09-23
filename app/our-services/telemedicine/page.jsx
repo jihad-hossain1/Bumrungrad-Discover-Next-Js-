@@ -9,6 +9,7 @@ import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import Loader from "@/components/ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const TeleMedicine = () => {
     const { auth } = useAuth();
@@ -82,9 +83,9 @@ const TeleMedicine = () => {
 
         if (jsonresponse.status === 200) {
             setLoader(false);
-            toast.success(
-                "Tele Medicine request sent! Our support team will contact you soon.",
-            );
+            // toast.success(
+            //     "Tele Medicine request sent! Our support team will contact you soon.",
+            // );
             const doc_ment = jsonresponse?.investigationDocument
                 ? jsonresponse?.investigationDocument
                 : "link are not found";
@@ -93,7 +94,7 @@ const TeleMedicine = () => {
                 admin_mails,
                 `Tele Medicine`,
                 comapanyMailBody(
-                    { ...fields, investigationDocument: doc_ment },
+                    formatKeys({ ...fields, investigationDocument: doc_ment }),
                     "Tele Medicine",
                 ),
             );
@@ -101,14 +102,14 @@ const TeleMedicine = () => {
                 auth?.email,
                 `Tele Medicine`,
                 comapanyMailBody(
-                    { ...fields, investigationDocument: doc_ment },
+                    formatKeys({ ...fields, investigationDocument: doc_ment }),
                     "Tele Medicine",
                 ),
             );
             setLoader(false);
 
             if (send_mail_on_admin?.messageId && send_client_email?.messageId) {
-                toast.success("Email sent successfully");
+                toast.success("Tele Medicine request sent! Our support team will contact you soon.");
                 form.reset()
                 navigate.push('/')
             }

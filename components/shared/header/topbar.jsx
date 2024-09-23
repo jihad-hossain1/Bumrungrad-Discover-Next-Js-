@@ -57,7 +57,6 @@ const Topbar = () => {
             const response = await fetch("/api/auth/logout");
 
             const data = await response.json();
-            console.log("🚀 ~ handleSingnOut ~ data:", data)
 
             if (data.success) {
                 toast.success("Logout Successful");

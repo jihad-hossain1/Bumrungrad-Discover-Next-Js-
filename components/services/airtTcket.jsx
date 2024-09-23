@@ -10,13 +10,11 @@ import { sendEmails } from "@/helpers/mail/sendMail";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import { admin_mails } from "@/constant";
 import useAuth from "@/helpers/hooks/useAuth";
-import { uploadToImgbb } from "@/helpers/fileUpload";
 import Loader from "../ui/loader";
 import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const AirtTcket = () => {
     const {auth} = useAuth()
-    // console.log("🚀 ~ AirtTcket ~ auth:", auth)
     const [loader, setLoader] = useState();
     //Input field states
     const [flydate, setFlydate] = useState("");

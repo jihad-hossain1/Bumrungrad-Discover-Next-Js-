@@ -40,7 +40,6 @@ const AirPickup = () => {
 
     setLoader(false)
     const resjson = await response.json()
-    // console.log("🚀 ~ orderAirPickup ~ resjson:", resjson)
 
     if(resjson.status === 200){
       // toast.success('Airport Transfer sent! Our support team will contact you soon.')
