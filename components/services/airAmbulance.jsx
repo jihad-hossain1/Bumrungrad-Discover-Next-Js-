@@ -8,8 +8,8 @@ import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
 import useAuth from "@/helpers/hooks/useAuth";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
-import { uploadToImgbb } from "@/helpers/fileUpload";
 import Loader from "../ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const AirAmbulanceForm = () => {
     const { auth } = useAuth();
@@ -47,7 +47,6 @@ const AirAmbulanceForm = () => {
 
             const data = await response.json();
 
-            // console.log(data)
             if (data.status == 200) {
                 setLoader(true);
                 const uploadImage = data?.passport_copy ? data?.passport_copy : "No file found"; 
@@ -57,14 +56,14 @@ const AirAmbulanceForm = () => {
                 const send_mails = await sendEmails(
                     admin_mails,
                     `Air Ambulance Request`,
-                    comapanyMailBody({
+                    comapanyMailBody(formatKeys({
                         name: `${auth?.firstName} ${auth?.lastName}`,
                         email: auth?.email,
                         date: date,
                         passport_copy: uploadImage,
                         summary: caseSummary,
                         description: briflyDiscusion,
-                    },"Air Ambulance Request"),
+                    }),"Air Ambulance Request"),
                 );
                 setLoader(false);
 
@@ -72,14 +71,14 @@ const AirAmbulanceForm = () => {
                 const send_mail_client = await sendEmails(
                     auth?.email,
                     `Air Ambulance Request`,
-                    comapanyMailBody({
+                    comapanyMailBody(formatKeys({
                         name: `${auth?.firstName} ${auth?.lastName}`,
                         email: auth?.email,
                         date: date,
                         passport_copy: uploadImage,
                         summary: caseSummary,
                         description: briflyDiscusion,
-                    },"Air Ambulance Request"),
+                    }),"Air Ambulance Request"),
                 );
 
                 setLoader(false);

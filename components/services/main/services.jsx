@@ -20,6 +20,7 @@ import languageImage from '@/public/assets/service_logo/bro.png'
 import accommodation from '@/public/assets/service_logo/bro2.png'
 import hospitalAdmission from '@/public/assets/service_logo/bro5.png'
 import Arrival from "../arrival";
+import LangugeInterpreter from "../languge";
 
 
 
@@ -29,17 +30,28 @@ export default function Services({ handaleOpen, getData }) {
   const router = useRouter();
 
 const handleClick = (s, i, id) => {
+  // If the 'pageTo' property exists, navigate to that page
   if (s?.pageTo) {
-    router.push(s.pageTo);
-  } else {
-    if (!auth) {
-      router.push('/login');
-      // return;
-    }
+    return router.push(s.pageTo);
+  }
+
+  // Handle specific case for "Language Interpreter"
+  if (s?.name === "Language Interpreter") {
     handaleOpen(id);
     getData(s);
+    return;
   }
+
+  // If the user is not authenticated, redirect to login
+  if (!auth) {
+    return router.push('/login');
+  }
+
+  // Default case: handle opening and data fetching
+  handaleOpen(id);
+  getData(s);
 };
+
 
 
   return (
@@ -165,7 +177,7 @@ const services = [
   {
     name: "Language Interpreter",
     img: languageImage,
-    form: <UpComming />,
+    form: <LangugeInterpreter />,
     alt: "Bumrungrad International Hospital",
     description:
       "Our language interpreters are here to make your conversations seamless and stress-free. We ensure accurate and easy communication every time.",

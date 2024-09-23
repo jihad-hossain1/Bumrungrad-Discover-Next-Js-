@@ -8,7 +8,9 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import { admin_mails } from "@/constant";
-import { mailBody } from "@/helpers/mail/mailbody";
+import { comapanyMailBody, mailBody } from "@/helpers/mail/mailbody";
+import Loader from "@/components/ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 // import { useNavigate } from 'react-router-dom'
 
 const SendQuery = () => {
@@ -26,7 +28,6 @@ const SendQuery = () => {
   const [gender, setGender] = useState("");
   const [citizenship, setCitizenship] = useState("");
   const [country, setCountry] = useState("");
-  const [formDatas, setFormDatas] = useState(null);
 
   //phoneNumberSelect
   const handleChange = (newValue) => {
@@ -57,10 +58,7 @@ const SendQuery = () => {
     };
 
 
-    Object.entries(fields).forEach(([key, value]) => {
-      formData.append(key, value);
-      setFormDatas((prev) => ({ ...prev, [key]: value }));
-    });
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value));
 
     try {
       setLoader(true);
@@ -86,11 +84,12 @@ const SendQuery = () => {
       }
 
       if (get_response.status === 200) {
+        const formateObj = formatKeys(fields);
         setLoader(true);
         const send_admin_mail = await sendEmails(
           admin_mails,
           `Query Request - ${email}`,
-          mailBody(formDatas)
+          comapanyMailBody(formateObj,"Query Request")
         );
         setLoader(false);
 
@@ -105,19 +104,17 @@ const SendQuery = () => {
             }
           );
           form.reset();
-          setFormDatas(null);
           navigate.push("/");
         }
       }
     } catch (error) {
       setLoader(false);
-      console.log(error?.message);
     }
   };
 
   return (
     <section className="md:container md:mx-auto">
-      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 text-center">
+      <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-blue my-5 ">
         Left Us Your Query !
       </h1>
       <div className="md mb-14">
@@ -299,17 +296,13 @@ const SendQuery = () => {
                 <button
                 disabled={loader}
                   type="submit"
-                  className="bg-blue text-white px-6 py-2 md:px-12 md:py-4 rounded flex items-center gap-1"
+                  className={`${
+                    loader
+                      ? "bg-white text-black border $"
+                      : "bg-blue text-white border-blue"
+                  } btn_primary `}
                 >
-                  {" "}
-                  Send Query
-                  {loader && (
-                    <div className="flex gap-0.5">
-                      <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-                      <div className="h-2 w-2 rounded-full bg-white shadow animate-bounce"></div>
-                      <div className="h-2 w-2 rounded-full bg-white shadow"></div>
-                    </div>
-                  )}
+                  {loader ? <Loader color={'black'} stroke="black" className='animate-spin' /> : "Submit"}
                 </button>
               </div>
             </form>

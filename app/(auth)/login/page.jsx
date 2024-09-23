@@ -56,7 +56,7 @@ export default function Login() {
           JSON.stringify(data?.msg?.user_details)
         )
         const setTokenOnServer = await userTokenSet(data?.msg?.token)
-        console.log("🚀 ~ handleLogin ~ setTokenOnServer:", setTokenOnServer)
+
         if(setTokenOnServer.success == "success") {
        toast.success('Login Successful ✌️',{
         duration: 5000,

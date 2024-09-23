@@ -10,6 +10,7 @@ import { admin_mails } from "@/constant";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import Loader from "@/components/ui/loader";
 import { uploadToImgbb } from "@/helpers/fileUpload";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 
 const MedicalRecords = () => {
@@ -50,27 +51,27 @@ const MedicalRecords = () => {
       const data = await response.json();
 
       if (data.status == 200) {
-        toast.success("Medical record request sent!", {
-          position: "top-center",
-          duration: 4000,
-          style: {
-            color: "green",
-          },
-        });
+        // toast.success("Medical record request sent!", {
+        //   position: "top-center",
+        //   duration: 4000,
+        //   style: {
+        //     color: "green",
+        //   },
+        // });
 
         const uploadDoc = data?.passport ?  data?.passport : "Link not found"; ;
         
         setLoader(true);
-        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}, "Medical Records"));
+        const send_admin_mails = await sendEmails(admin_mails,`Medical Records - ${auth?.email}`, comapanyMailBody(formatKeys({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}), "Medical Records"));
         setLoader(false);
 
         setLoader(true);
-        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, comapanyMailBody({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}, "Medical Records"));
+        const send_client_mails = await sendEmails(auth?.email,`Medical Records`, comapanyMailBody(formatKeys({name: auth?.firstName, email: auth?.email, hnNum: hnNum, case_summary: caseSummary, passport: uploadDoc}), "Medical Records"));
         setLoader(false);
 
         if (send_admin_mails.messageId && send_client_mails.messageId) {
           toast.success(
-          "Mail sent Ok.",{
+          "Medical record request sent",{
             position: "top-center",
             duration: 4000,
             style: {
@@ -113,13 +114,13 @@ const MedicalRecords = () => {
   },[userDetails])
   return (
     <>
-      <div className="md:my-10 md:container md:mx-auto lg:w-1/2 shadow-xl rounded-xl py-10 md:py-12 md:px-10 lg:px-16">
+      <div className="md:my-10 container md:max-w-[600px] md:mx-auto lg:w-1/2  mx-5 shadow-xl rounded-xl p-5 md:p-10 ">
         <h1 className="text-center capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
           Medical Records
         </h1>
         <form
           onSubmit={addPatient}
-          className="mt-3 mb-2 md:w-full max-w-screen-lg pb-8 px-5"
+          className="mt-3 mb-2 w-full"
         >
           <div className="mb-2 flex flex-col">
             <div>
