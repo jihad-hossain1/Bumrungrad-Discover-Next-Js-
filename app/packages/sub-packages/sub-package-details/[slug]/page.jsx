@@ -18,7 +18,8 @@ import Loader from "@/components/ui/loader";
 import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const ChildPackageDetails = ({ params }) => {
-    const [loader, setLoader] = useState();
+    const [loader, setLoader] = useState(false);
+    const [postloader, setPostLoader] = useState(false);
     const router = useRouter();
     const { auth } = useAuth();
 
@@ -67,7 +68,7 @@ const ChildPackageDetails = ({ params }) => {
 
         Object.keys(fields).forEach((key) => formData.append(key, fields[key]));
 
-        setLoader(true);
+        setPostLoader(true);
         const response = await fetch(
             "https://api.discoverinternationalmedicalservice.com/api/add/package/booking",
             {
@@ -75,12 +76,12 @@ const ChildPackageDetails = ({ params }) => {
                 body: formData,
             },
         );
-        setLoader(false);
+        setPostLoader(false);
 
         const data = await response.json();
 
         if (data.status === 200) {
-            setLoader(true);
+            setPostLoader(true);
             const sendEmailsResponse = await sendEmails(
                 admin_mails,
                 "New Package Booking",
@@ -94,8 +95,8 @@ const ChildPackageDetails = ({ params }) => {
                 ),
             );
 
-            setLoader(false);
-            setLoader(true);
+            setPostLoader(false);
+            setPostLoader(true);
             const sendEmailsResponse2 = await sendEmails(
                 auth?.email,
                 "New Package Booking",
@@ -108,16 +109,16 @@ const ChildPackageDetails = ({ params }) => {
                     "New Package Booking",
                 ),
             );
-            setLoader(false);
+            setPostLoader(false);
             if (
                 sendEmailsResponse?.messageId &&
                 sendEmailsResponse2?.messageId
             ) {
                 toast.success("Package booking placed! Our support team will contact you soon.");
-                // router.push("/");
+                router.push("/");
             }
         } else {
-            setLoader(false);
+            setPostLoader(false);
             toast.error("Something went wrong");
         }
     };
@@ -137,6 +138,7 @@ const ChildPackageDetails = ({ params }) => {
                 setLoader(false);
             });
     }, [params.slug]);
+    
     return (
         <div>
             <section className='mx-5 md:container md:mx-auto py-10'>
@@ -352,15 +354,15 @@ const ChildPackageDetails = ({ params }) => {
                                 />
                             </div>
                             <button
-                                disabled={loader}
+                                disabled={postloader}
                                 onClick={handalepackageSubmit}
                                 className={`btn_primary ${
-                                    loader
+                                    postloader
                                         ? "bg-white text-black border"
                                         : "bg-blue text-white"
                                 }`}
                             >
-                                {loader ? (
+                                {postloader ? (
                                     <Loader
                                         className='animate-spin'
                                         stroke='black'
