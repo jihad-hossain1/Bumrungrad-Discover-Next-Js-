@@ -203,7 +203,7 @@ export default function CheckUp() {
                     <div className='flex justify-center mx-10 items-center'>
                         <button
                             className={`px-4 py-2 shadow rounded-full border border-blue font-semibold text-xl ${
-                                stepper1 ? "bg-blue text-white" : "bg-cream"
+                                (stepper1 || stepper2) ? "bg-blue text-white" : "bg-white"
                             }`}
                         >
                             1
@@ -215,7 +215,7 @@ export default function CheckUp() {
                         ></div>
                         <button
                             className={`px-4 py-2 shadow rounded-full border border-blue font-semibold text-xl ${
-                                stepper2 ? "bg-blue text-white" : "bg-cream"
+                                stepper2 ? "bg-blue text-white" : "bg-white"
                             }`}
                         >
                             2
@@ -343,7 +343,7 @@ export default function CheckUp() {
                                             appoinMentDate === "" ||
                                             appoinMentTime === "" ||
                                             healtePackage === ""
-                                                ? "bg-cream text-blue"
+                                                ? "bg-white text-blue"
                                                 : "bg-blue text-white "
                                         }`}
                                         disabled={
@@ -444,9 +444,9 @@ export default function CheckUp() {
                                 />
                             </div>
                             <div>
-                                <div className='flex justify-center'>
+                                <div className='flex justify-center gap-5'>
                                     <button
-                                        className={`mt-5 px-4 py-2 rounded font-semibold bg-blue border border-blue ${
+                                        className={`mt-5 py-2 w-[150px] justify-center items-center flex rounded font-semibold bg-blue border border-blue ${
                                             stepper2
                                                 ? "bg-blue text-white "
                                                 : "bg-cream text-blue"
@@ -458,13 +458,14 @@ export default function CheckUp() {
 
                                     <button
                                         onClick={handaleDataSubmit}
-                                        className={`mt-5 px-4 py-2 ml-10 bg-transparent border border-blue text-white rounded  hover:bg-white hover:text-blue font-semibold duration-300 ease-linear ${
+                                        className={`mt-5  bg-transparent py-2 justify-center flex items-center border border-blue text-white rounded w-[150px]  hover:bg-white hover:text-blue font-semibold duration-300 ease-linear ${
+                                           loader ||
                                             patientName === "" ||
                                             gender === "" ||
                                             email === "" ||
                                             phone === "" ||
                                             nationality === ""
-                                                ? "bg-cream text-blue border"
+                                                ? "bg-white text-blue border"
                                                 : "bg-blue text-white "
                                         }`}
                                         disabled={

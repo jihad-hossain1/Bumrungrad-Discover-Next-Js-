@@ -5,7 +5,6 @@ import { TextField } from '@mui/material'
 import { useState } from 'react'
 import Loader from '../ui/loader'
 import toast from 'react-hot-toast'
-import { uploadToImgbb } from '@/helpers/fileUpload'
 import useAuth from '@/helpers/hooks/useAuth'
 import { sendEmails } from '@/helpers/mail/sendMail'
 import { admin_mails } from '@/constant'
@@ -26,8 +25,8 @@ const AirPickup = () => {
     const formData = new FormData()
    
     const fields = {
-      appointment_file: appointmentfile,
-      air_ticket_file: airTicketFile,
+      appointment: appointmentfile,
+      air_ticket: airTicketFile,
       passenger: passenger
     }
     Object.keys(fields).forEach((key) => formData.append(key, fields[key]))
@@ -40,12 +39,13 @@ const AirPickup = () => {
 
     setLoader(false)
     const resjson = await response.json()
+    // console.log("🚀 ~ orderAirPickup ~ resjson:", resjson)
 
     if(resjson.status === 200){
       // toast.success('Airport Transfer sent! Our support team will contact you soon.')
 
-      const uploadImage = resjson?.appointment_file ? resjson?.appointment_file : 'No file found'
-      const uploadImage2 = resjson?.air_ticket_file ? resjson?.air_ticket_file : 'No file found'
+      const uploadImage = resjson?.appointment ? resjson?.appointment : 'No file found'
+      const uploadImage2 = resjson?.air_ticket ? resjson?.air_ticket : 'No file found'
 
       setLoader(true)
       const send_mails = await sendEmails(
@@ -55,8 +55,8 @@ const AirPickup = () => {
           name: `${auth?.firstName} ${auth?.lastName}`,
           email: auth?.email,
           ...fields,
-          air_ticket_file: uploadImage,
-          appointment_file: uploadImage2
+          air_ticket: uploadImage,
+          appointment: uploadImage2
         }),'Airport Transfer')
       )
       setLoader(false)
@@ -69,8 +69,8 @@ const AirPickup = () => {
           name: `${auth?.firstName} ${auth?.lastName}`,
           email: auth?.email,
           ...fields,
-          air_ticket_file: uploadImage,
-          appointment_file: uploadImage
+          air_ticket: uploadImage,
+          appointment: uploadImage
         }),'Airport Transfer')
       )
       setLoader(false)
