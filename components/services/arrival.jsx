@@ -20,26 +20,10 @@ const Arrival = () => {
         "message": "",
     });
 
-        // filed validation
-        const handleValidation = (fields) => {
-            let isValid = true;
-            Object.keys(fields).forEach((key) => {
-                if (!fields[key]) {
-                    SetErrors((prev) => ({
-                        ...prev,
-                        [key]: "This field is required",
-                    }));
-                    isValid = false;
-                }
-            });
-            return isValid;
-        };
-
+       
     const handleSubmit = async () => {
         try {
-            if (!handleValidation(formData)) {
-                return;
-            }
+           
 
             setLoader(true);
             SetErrors(null);
@@ -86,7 +70,6 @@ const Arrival = () => {
 
            
         } catch (error) {
-            console.log(error);
         }
     };
     return (
@@ -99,6 +82,7 @@ const Arrival = () => {
                         value={formData["passport copy"]}
                         placeholder='Passport Copy'
                         fullWidth
+                        required
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
@@ -106,16 +90,13 @@ const Arrival = () => {
                             })
                         }
                     />
-                    {errors && errors["passport copy"] && (
-                        <p className='text-red text-sm'>
-                            {errors["passport copy"]}
-                        </p>
-                    )}
+                   
                 </div>
                 <div>
                     <TextField
                         id='outlined-multiline-flexible 1'
                         label='Case Summary'
+                        required
                         value={formData["case summary"]}
                         placeholder='Case Summary'
                         fullWidth
@@ -127,11 +108,6 @@ const Arrival = () => {
                         }
                     />
 
-                    {errors && errors["case summary"] && (
-                        <p className='text-red text-sm'>
-                            {errors["case summary"]}
-                        </p>
-                    )}
                 </div>
                 <div>
                     <TextField
@@ -140,6 +116,7 @@ const Arrival = () => {
                         value={formData["admission date"]}
                         placeholder='Admission Date'
                         fullWidth
+                        required
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
@@ -148,11 +125,6 @@ const Arrival = () => {
                         }
                     />
 
-                    {errors && errors["admission date"] && (
-                        <p className='text-red text-sm'>
-                            {errors["admission date"]}
-                        </p>
-                    )}
                 </div>
                 <div>
                     <TextField
@@ -161,6 +133,9 @@ const Arrival = () => {
                         value={formData["message"]}
                         placeholder='Message'
                         fullWidth
+                        multiline
+                        rows={4}
+                        required
                         onChange={(e) =>
                             setFormData({
                                 ...formData,
@@ -169,15 +144,13 @@ const Arrival = () => {
                         }
                     />
 
-                    {errors && errors["message"] && (
-                        <p className='text-red text-sm'>{errors["message"]}</p>
-                    )}
+                    
                 </div>
 
                 <button
                     type='button'
-                    disabled={loader}
-                    className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
+                    disabled={loader || !formData["passport copy"] || !formData["case summary"] || !formData["admission date"]}
+                    className={`btn_primary ${loader || !formData["message"] || !formData["passport copy"] || !formData["case summary"] || !formData["admission date"] ? "bg-white text-black border" : "bg-blue text-white"}`}
                     onClick={handleSubmit}
                 >
                     {loader ? <Loader className='animate-spin' fill='black' stroke='black' /> : "Submit"}

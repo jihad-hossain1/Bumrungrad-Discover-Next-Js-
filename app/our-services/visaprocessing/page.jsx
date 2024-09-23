@@ -17,6 +17,7 @@ import { admin_mails } from "@/constant";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import { uploadToImgbb } from "@/helpers/fileUpload";
 import Loader from "@/components/ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const VisaProcessing = () => {
     const { auth } = useAuth();
@@ -97,72 +98,66 @@ const VisaProcessing = () => {
         const data = await res.json();
 
         if (data.status === 200) {
-            toast.success("Please your email or spam box!");
-            try {
-              // image upload
-                setLoader(true);
-                const passportUpload = passport
-                    ? data?.passport
-                    : "Link not provided";
-                const medicalReport1Upload = medicalReport1
-                    ? data?.medicalReport1
-                    : "Link not provided";
-                const medicalReport2Upload = medicalReport2
-                    ?data?.medicalReport2
-                    : "Link not provided";
-                const invitationLetterUpload = invitationLetter 
-                    ? data?.invitationLetter
-                    : "Link not provided";
-                setLoader(false);
+            // image upload
+            setLoader(true);
+            const passportUpload = passport
+                ? data?.passport
+                : "Link not provided";
+            const medicalReport1Upload = medicalReport1
+                ? data?.medicalReport1
+                : "Link not provided";
+            const medicalReport2Upload = medicalReport2
+                ?data?.medicalReport2
+                : "Link not provided";
+            const invitationLetterUpload = invitationLetter 
+                ? data?.invitationLetter
+                : "Link not provided";
+            setLoader(false);
 
-                // send email to admin
-                setLoader(true);
-                const mailRes = await sendEmails(
-                    admin_mails,
-                    `Visa Processing Request- ${auth?.email}`,
-                    comapanyMailBody(
-                        {
-                            ...fields,
-                            oldPataint: fields.oldPataint ? "Yes" : "New",
-                            passport: passportUpload,
-                            medicalReport1: medicalReport1Upload,
-                            medicalReport2: medicalReport2Upload,
-                            invitationLetter: invitationLetterUpload
-                        },
-                        "Visa Processing",
-                    ),
-                );
+            // send email to admin
+            setLoader(true);
+            const mailRes = await sendEmails(
+                admin_mails,
+                `Visa Processing Request- ${auth?.email}`,
+                comapanyMailBody(
+                    formatKeys({
+                        ...fields,
+                        oldPataint: fields.oldPataint ? "Yes" : "New",
+                        passport: passportUpload,
+                        medicalReport1: medicalReport1Upload,
+                        medicalReport2: medicalReport2Upload,
+                        invitationLetter: invitationLetterUpload
+                    }),
+                    "Visa Processing",
+                ),
+            );
+            setLoader(false);
+            // send email to patient
+            setLoader(true);
+            const mailRes2 = await sendEmails(
+                auth?.email,
+                `Visa Processing Request- ${auth?.email}`,
+                comapanyMailBody(
+                    formatKeys({
+                        ...fields,
+                        oldPataint: fields.oldPataint ? "Yes" : "New",
+                        passport: passportUpload,
+                        medicalReport1: medicalReport1Upload,
+                        medicalReport2: medicalReport2Upload,
+                        invitationLetter: invitationLetterUpload
+                    }),
+                    "Visa Processing",
+                ),
+            );
+            setLoader(false);
+            // show message to user
+            if (mailRes.messageId && mailRes2.messageId) {
+                toast.success("Request Sent. We will get back to you soon");
+                navigate.push("/");
+            } else {
                 setLoader(false);
-                // send email to patient
-                setLoader(true);
-                const mailRes2 = await sendEmails(
-                    auth?.email,
-                    `Visa Processing Request- ${auth?.email}`,
-                    comapanyMailBody(
-                        {
-                            ...fields,
-                            oldPataint: fields.oldPataint ? "Yes" : "New",
-                            passport: passportUpload,
-                            medicalReport1: medicalReport1Upload,
-                            medicalReport2: medicalReport2Upload,
-                            invitationLetter: invitationLetterUpload
-                        },
-                        "Visa Processing",
-                    ),
-                );
-                setLoader(false);
-                // show message to user
-                if (mailRes.messageId && mailRes2.messageId) {
-                    toast.success("Request Sent. We will get back to you soon");
-                    navigate.push("/");
-                } else {
-                    setLoader(false);
-                    toast.error("Something went wrong, please try again");
-                    //  return;
-                }
-            } catch (error) {
-                setLoader(false);
-                console.error(error);
+                toast.error("Something went wrong, please try again");
+                //  return;
             }
         } else {
             setLoader(false);
