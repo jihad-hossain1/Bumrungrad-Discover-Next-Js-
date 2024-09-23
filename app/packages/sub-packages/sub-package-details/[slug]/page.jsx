@@ -15,11 +15,13 @@ import { admin_mails } from "@/constant";
 import { comapanyMailBody } from "@/helpers/mail/mailbody";
 import { sendEmails } from "@/helpers/mail/sendMail";
 import Loader from "@/components/ui/loader";
+import { formatKeys } from "@/helpers/objectKeyFormat";
 
 const ChildPackageDetails = ({ params }) => {
     const [loader, setLoader] = useState();
     const router = useRouter();
     const { auth } = useAuth();
+
     const [childDetailsPackage, setChildDetailsPackage] = useState({});
 
     const [packageName, setPackageName] = useState("");
@@ -30,6 +32,15 @@ const ChildPackageDetails = ({ params }) => {
     const [email, setPhoneEmail] = useState("");
     ///modal function
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+        if (auth) {
+            setPatientName(`${auth?.firstName} ${auth?.lastName}` || "");
+            setHnNumber(auth?.hnNumber || "");
+            setPhoneNumber(auth?.phone || "");
+            setPhoneEmail(auth?.email || "");
+        }
+    }, [auth]);
 
     const handleClickOpen = (data) => {
         setOpen(true);
@@ -67,22 +78,18 @@ const ChildPackageDetails = ({ params }) => {
         setLoader(false);
 
         const data = await response.json();
-        console.log("🚀 ~ handalepackageSubmit ~ data:", data);
-        if (data.status === 200) {
-            toast.success(
-                "Package booking placed! Our support team will contact you soon.",
-            );
 
+        if (data.status === 200) {
             setLoader(true);
             const sendEmailsResponse = await sendEmails(
                 admin_mails,
                 "New Package Booking",
                 comapanyMailBody(
-                    {
+                    formatKeys({
                         name: `${auth?.firstName} ${auth?.lastName}`,
                         user_email: auth?.email,
                         ...fields,
-                    },
+                    }),
                     "New Package Booking",
                 ),
             );
@@ -93,11 +100,11 @@ const ChildPackageDetails = ({ params }) => {
                 auth?.email,
                 "New Package Booking",
                 comapanyMailBody(
-                    {
-                        name: `${auth?.firstName} ${auth?.lastName}`,
-                        user_email: auth?.email,
-                        ...fields,
-                    },
+                   formatKeys({
+                    name: `${auth?.firstName} ${auth?.lastName}`,
+                    user_email: auth?.email,
+                    ...fields,
+                }),
                     "New Package Booking",
                 ),
             );
@@ -106,8 +113,8 @@ const ChildPackageDetails = ({ params }) => {
                 sendEmailsResponse?.messageId &&
                 sendEmailsResponse2?.messageId
             ) {
-                toast.success("You will receive an email 🚑");
-                router.push("/");
+                toast.success("Package booking placed! Our support team will contact you soon.");
+                // router.push("/");
             }
         } else {
             setLoader(false);
@@ -132,7 +139,6 @@ const ChildPackageDetails = ({ params }) => {
     }, [params.slug]);
     return (
         <div>
-            {" "}
             <section className='mx-5 md:container md:mx-auto py-10'>
                 {loader ? (
                     <div>
@@ -192,10 +198,9 @@ const ChildPackageDetails = ({ params }) => {
                                 </h5>
                                 <div className='mt-5 grid md:grid-cols-2 lg:grid-cols-1 gap-2.5'>
                                     <h5 className='text-[18px] md:text-[24px] font-semibold'>
-                                        {" "}
                                         <span className='text-blue'>
                                             Price:
-                                        </span>{" "}
+                                        </span>
                                         {childDetailsPackage?.price} THB
                                     </h5>
                                     {childDetailsPackage?.shift1 && (
@@ -214,7 +219,7 @@ const ChildPackageDetails = ({ params }) => {
 
                                     <h5 className='text-[18px] md:text-[24px]'>
                                         <span className='text-blue font-semibold'>
-                                            Location: <br />{" "}
+                                            Location: <br />
                                         </span>
                                         {childDetailsPackage?.location}.
                                     </h5>
@@ -242,7 +247,6 @@ const ChildPackageDetails = ({ params }) => {
                 >
                     <DialogTitle id='alert-dialog-title'>
                         <div className='flex justify-between relative'>
-                            {" "}
                             <h1 className='font-semibold'>Package Booking</h1>
                             <button
                                 onClick={handleClose}
@@ -256,7 +260,6 @@ const ChildPackageDetails = ({ params }) => {
                     <DialogContent>
                         <div className='p-4'>
                             <div>
-                                {" "}
                                 <p className='mb-1.5 font-semibold text-blue'>
                                     Package Name
                                 </p>
@@ -270,7 +273,6 @@ const ChildPackageDetails = ({ params }) => {
                                 />
                             </div>
                             <div>
-                                {" "}
                                 <p className='mb-1.5 font-semibold text-blue'>
                                     Package Price
                                 </p>
@@ -285,7 +287,6 @@ const ChildPackageDetails = ({ params }) => {
                                 />
                             </div>
                             <div>
-                                {" "}
                                 <p className='my-2.5 font-semibold text-blue'>
                                     Patient Name
                                 </p>
@@ -294,13 +295,13 @@ const ChildPackageDetails = ({ params }) => {
                                     placeholder=' Enter Patient Name'
                                     variant='outlined'
                                     fullWidth
+                                    value={patientName}
                                     onChange={(e) =>
                                         setPatientName(e.target.value)
                                     }
                                 />
                             </div>
                             <div>
-                                {" "}
                                 <p className='my-2.5 font-semibold text-blue'>
                                     HN Number
                                 </p>
@@ -308,19 +309,22 @@ const ChildPackageDetails = ({ params }) => {
                                     id='outlined-basic'
                                     placeholder=' Enter HN Number'
                                     variant='outlined'
+                                    required
                                     fullWidth
+                                    value={hnNumber}
                                     onChange={(e) =>
                                         setHnNumber(e.target.value)
                                     }
                                 />
                             </div>
                             <div>
-                                {" "}
                                 <p className='my-2.5 font-semibold text-blue'>
                                     Whatsapp Number
                                 </p>
                                 <TextField
-                                    type='number'
+                                    type='text'
+                                    required
+                                    value={phoneNumber}
                                     id='outlined-basic'
                                     placeholder='Enter Whatsapp Number'
                                     variant='outlined'
@@ -331,11 +335,12 @@ const ChildPackageDetails = ({ params }) => {
                                 />
                             </div>
                             <div>
-                                {" "}
                                 <p className='my-2.5 font-semibold text-blue'>
                                     Email
                                 </p>
                                 <TextField
+                                    required
+                                    value={email}
                                     type='email'
                                     id='outlined-basic'
                                     placeholder='Enter Email'
@@ -349,7 +354,11 @@ const ChildPackageDetails = ({ params }) => {
                             <button
                                 disabled={loader}
                                 onClick={handalepackageSubmit}
-                                className={`btn_primary ${loader ? "bg-white text-black border" : "bg-blue text-white"}`}
+                                className={`btn_primary ${
+                                    loader
+                                        ? "bg-white text-black border"
+                                        : "bg-blue text-white"
+                                }`}
                             >
                                 {loader ? (
                                     <Loader

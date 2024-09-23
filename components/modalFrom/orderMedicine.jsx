@@ -152,7 +152,7 @@ const OrderMedicine = () => {
         </div>
       ) : (
         <div>
-          <div className='flex flex-col gap-y-4 md:flex-row md:justify-between md:items-center mt-5'>
+          <div className='flex flex-col gap-y-4 md:flex-row  md:items-center mt-5'>
             <div>
               <TextField
                 label='Medicine Name'
