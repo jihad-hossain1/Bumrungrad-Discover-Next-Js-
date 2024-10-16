@@ -62,9 +62,9 @@ const handleClick = (s, i, id) => {
             Our Services
           </h2>
         ) : (
-          <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue">
-        Our Complete Services for Bangladeshi Patients <br /> at Bumrungrad
-        International Hospital
+          <h2 className="capitalize text-xl md:text-2xl lg:text-3xl font-bold text-blue text-center">
+        Our Complete Services for Patients at
+        Bumrungrad International Hospital
       </h2>
         )
       }
@@ -169,7 +169,7 @@ const services = [
   {
     name: "Thai Local Accommodation",
     img: accommodation,
-    pageTo: "http://wa.me/+8801847284864",
+    pageTo: "http://wa.me/+66948382910",
     alt: "Bumrungrad International Hospital",
     description:
       "We offer your airport pick-up and drop-off is simple and relaxed. From the airport to your Thai accommodation, we make every step of your journey comfortable.",
